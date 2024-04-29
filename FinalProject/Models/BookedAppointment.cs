@@ -4,7 +4,7 @@ namespace FinalProject.Models
 {
     public class BookedAppointment
     {
-        public int Doctor_Id { get; set; }
+        public int DoctorId { get; set; }
         public int PatientId {  get; set; }
 
         public DateTime DateTime { get; set; }

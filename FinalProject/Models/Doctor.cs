@@ -8,7 +8,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime Date { get; set; }
-        public string Medical_License_no{ get; set;}
+        public string Medical_License_no { get; set;}
         public int UserId { get; set; }
         public User User { get; set; }
         public int DeprtId { get; set; }
