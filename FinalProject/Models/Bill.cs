@@ -7,5 +7,6 @@
         public DateTime Date { get; set;}
         public int PatientId { get; set; }
         public Patient Patient { get; set;}
+        public ICollection<BillItems> BillItems { get; set; }
     }
 }
