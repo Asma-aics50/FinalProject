@@ -1,8 +1,11 @@
-﻿namespace FinalProject.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FinalProject.Models
 {
     public class Doctor
     {
         public int Id { get; set; }
+        [Required]
         public string Specialization { get; set; }
         public double Salary { get; set; }
         public DateTime StartDate { get; set; }

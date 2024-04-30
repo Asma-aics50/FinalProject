@@ -1,9 +1,12 @@
-﻿namespace FinalProject.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FinalProject.Models
 {
     public class Employee
     {
         public int Id { get; set; }
         public double Salary { get; set; }
+        [Required]
         public string Specialization { get; set; }
         public int DeptId { get; set; }
         public Department Department { get; set; }
