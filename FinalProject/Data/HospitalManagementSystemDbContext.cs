@@ -1,6 +1,7 @@
 ﻿using FinalProject.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using FinalProject.ViewModels;
 namespace FinalProject.Data
 {
     public class HospitalManagementSystemDbContext : IdentityDbContext<ApplicationUser>
@@ -76,5 +77,7 @@ namespace FinalProject.Data
 
 
         }
+        public DbSet<FinalProject.ViewModels.CreateRoleViewModel> CreateRoleViewModel { get; set; } = default!;
+        public DbSet<FinalProject.ViewModels.CreateAccountViewModel> RegistrationByAdminViewModel { get; set; } = default!;
     }
 }

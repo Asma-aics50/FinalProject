@@ -1,5 +1,7 @@
 using FinalProject.Data;
+using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.Repositry;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,14 @@ builder.Services.AddControllersWithViews();
 var config = builder.Configuration;
 
 builder.Services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<HospitalManagementSystemDbContext>();
+
+
+
+
 builder.Services.AddDbContext<HospitalManagementSystemDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
+builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
+builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepositry>();
 
 var app = builder.Build();
 
