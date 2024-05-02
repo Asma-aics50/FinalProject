@@ -77,7 +77,6 @@ namespace FinalProject.Data
 
 
         }
-        public DbSet<FinalProject.ViewModels.CreateRoleViewModel> CreateRoleViewModel { get; set; } = default!;
-        public DbSet<FinalProject.ViewModels.CreateAccountViewModel> RegistrationByAdminViewModel { get; set; } = default!;
+       
     }
 }

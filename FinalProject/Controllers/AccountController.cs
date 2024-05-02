@@ -77,7 +77,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-
+        //Authorize admin
 
         public async Task<IActionResult> CreateAccount(CreateAccountViewModel userVM)
         {
@@ -136,6 +136,44 @@ namespace FinalProject.Controllers
 
             return View();
         }
+
+        //Login
+        [HttpGet]
+       public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+       public async Task<IActionResult> LogIn(LogInViewModel userVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByNameAsync(userVm.UserName);
+                if (user != null)
+                {
+                    bool check = await userManager.CheckPasswordAsync(user, userVm.Password);
+                    if (check)
+                    {
+                        await signIn.SignInAsync(user, userVm.RememberMe);
+                        return RedirectToAction("Index", "Home");
+                
+                    }
+                }
+
+                //
+
+                ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");
+
+
+            }
+            else
+            {
+                ModelState.AddModelError("invalidUserNameOrPassword", "Invalid Username or Password");
+            }
+            return View();
+        }
+
     }
 
 
