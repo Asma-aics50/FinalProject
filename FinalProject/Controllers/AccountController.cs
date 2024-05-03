@@ -60,12 +60,14 @@ namespace FinalProject.Controllers
                 };
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
-                //await userManager.AddToRoleAsync(user, "User");
 
-                if (result.Succeeded)
+                 if (result.Succeeded)
                 {
+
+                    await userManager.AddToRoleAsync(user, "Patient");
                     await signIn.SignInAsync(user, false);
                     Patient patient=new Patient() { UserId=user.Id };
+                    
                     patientRepositry.Create(patient);                    
                     return RedirectToAction("Index", "Home");
 
@@ -96,6 +98,7 @@ namespace FinalProject.Controllers
 
                 ApplicationUser user = new ApplicationUser()
                 {
+
                     UserName = userVM.UserName,
                     Email = userVM.Email, //Allow null
                     PasswordHash = userVM.Password,
@@ -109,25 +112,30 @@ namespace FinalProject.Controllers
 
 
 
-                    await userManager.AddToRoleAsync(user,userVM.Role);
+                    await userManager.AddToRoleAsync(user,"Patient");
                 if (result.Succeeded)
                 {
-
-                    if (userVM.Role == "Patient")
-                    {
-
                         Patient patient = new Patient() { UserId = user.Id };
                         patientRepositry.Create(patient);
-                    }
-
-                    return RedirectToAction("Index", "Home");
-
+                        return RedirectToAction("Index", "Home");
                 }
                 return View();
             }
 
             return View();
         }
+
+
+        //create Doctors account // for admin
+        [HttpGet]
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateDoctorAccount()
+        {
+            return View();
+        }
+
+
 
         //Login
         [HttpGet]
@@ -176,7 +184,6 @@ namespace FinalProject.Controllers
             await signIn.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
-
 
 
         }
