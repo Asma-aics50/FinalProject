@@ -6,6 +6,7 @@ using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 
 namespace FinalProject.Controllers
@@ -149,7 +150,9 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(userVm.UserName);
+
+                var username = new EmailAddressAttribute().IsValid(userVm.UserName) ? new MailAddress(userVm.UserName).User : userVm.UserName; 
+                var user = await userManager.FindByNameAsync(username);
                 if (user != null)
                 {
                     bool check = await userManager.CheckPasswordAsync(user, userVm.Password);
@@ -160,7 +163,7 @@ namespace FinalProject.Controllers
                 
                     }
                 }
-
+                
                 //
 
                 ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");

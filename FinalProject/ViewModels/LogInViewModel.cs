@@ -6,6 +6,7 @@ namespace FinalProject.ViewModels
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name="Email or UserName")]
         public string UserName { get; set; }
 
         [Required]
