@@ -34,11 +34,16 @@ namespace FinalProject.Controllers
             }
 
 
-        [HttpGet]
+        
+
+        // for patient
+        [HttpGet] 
         public IActionResult Registration()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
         public async Task<IActionResult> Registration(RegistrationViewModel userVM)
         {
@@ -71,16 +76,20 @@ namespace FinalProject.Controllers
             return View();
         }
 
+        //Authorize admin
         [HttpGet]
 
-        public IActionResult CreateAccount()
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreatePatientAccount()
         {
             return View();
         }
 
-        //Authorize admin
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> CreateAccount(CreateAccountViewModel userVM)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreatePatientAccount(CreateAccountViewModel userVM)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +97,7 @@ namespace FinalProject.Controllers
                 ApplicationUser user = new ApplicationUser()
                 {
                     UserName = userVM.UserName,
-                    Email = userVM.Email,
+                    Email = userVM.Email, //Allow null
                     PasswordHash = userVM.Password,
                     FirstName = userVM.FirstName,
                     LastName = userVM.LastName,
@@ -111,24 +120,6 @@ namespace FinalProject.Controllers
                         patientRepositry.Create(patient);
                     }
 
-                    //else if (userVM.Role == "Doctor")
-                    //{
-
-
-                    //    Doctor doctor = new Doctor() { UserId = user.Id };
-                    //    doctorRepositry.Create(doctor);
-
-                    //}
-
-                    //else if (userVM.Role == "Employee"|| userVM.Role== "Admin")
-                    //{
-                     
-                    //    Employee employee = new Employee() { UserId = user.Id,Specialization=null };
-
-                    //    //employeeRepositry.Create(employee);
-
-                    //}
-
                     return RedirectToAction("Index", "Home");
 
                 }
@@ -146,7 +137,9 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-       public async Task<IActionResult> LogIn(LogInViewModel userVm)
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> LogIn(LogInViewModel userVm)
         {
             if (ModelState.IsValid)
             {
@@ -183,6 +176,7 @@ namespace FinalProject.Controllers
             await signIn.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+
 
 
         }
