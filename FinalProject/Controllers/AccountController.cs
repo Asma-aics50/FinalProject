@@ -177,6 +177,15 @@ namespace FinalProject.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> Logout()
+        {
+            await signIn.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+
+
+        }
     }
 
 
