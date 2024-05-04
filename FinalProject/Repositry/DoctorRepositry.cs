@@ -49,9 +49,9 @@ namespace FinalProject.Repositry
             var doctor = GetById(_doctor.Id);
             if(doctor != null )
             {
-                doctor.DeprtId = _doctor.DeprtId;
-                doctor.EndDate = _doctor.EndDate;
-                doctor.StartDate=_doctor.StartDate;
+                doctor.DepartmentId = _doctor.DepartmentId;
+                doctor.ShiftStartTime = _doctor.ShiftStartTime;
+                doctor.ShiftEndTime=_doctor.ShiftEndTime;
                 context.SaveChanges();
             }
 

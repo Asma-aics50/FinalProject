@@ -1,18 +1,18 @@
-﻿@model FinalProject.ViewModels.CreateEmployeeAccountViewModel
+﻿@model FinalProject.ViewModels.CreateDoctorAccountViewModel
 
 @{
-    ViewData["Title"] = "CreateEmployeeAccount";
-
+    ViewData["Title"] = "CreateDoctorAccount";
     SelectList DeprtmentsList = new SelectList(ViewBag.Departments, "Id", "Name");
-}
- 
 
-<h1>Employee Information</h1>
+    Layout = "_AdminLayout";
+}
+
+<h1>Doctor Information</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateEmployeeAccount">
+        <form asp-action="CreateDoctorAccount">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" type="date"/>
+                <input asp-for="BirthDate" class="form-control" type="date" />
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,21 +63,10 @@
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                
-                <select asp-for="Role" class="form-control">
-                    <option value="Admin">Admin</option>
-                    <option value="Employee">employee</option>
-                </select>
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Specialization" class="control-label"></label>
                 <input asp-for="Specialization" class="form-control" />
                 <span asp-validation-for="Specialization" class="text-danger"></span>
             </div>
-           
-
             <div class="form-group">
                 <label asp-for="DeptId"></label>
                 <select asp-for="DeptId" class="form-control" asp-items="DeprtmentsList" placeholder="Enter Department "></select>
@@ -90,15 +79,26 @@
                 <input asp-for="Salary" class="form-control" />
                 <span asp-validation-for="Salary" class="text-danger"></span>
             </div>
-
-                       <div class="form-group">
+            <div class="form-group">
+                <label asp-for="ShiftStartTime" class="control-label"></label>
+                <input asp-for="ShiftStartTime" class="form-control" min="0" max="23" />
+                <span asp-validation-for="ShiftStartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShiftEndTime" class="control-label"></label>
+                <input asp-for="ShiftEndTime" class="form-control" min="0" max="23" />
+                <span asp-validation-for="ShiftEndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Medical_License_no" class="control-label"></label>
+                <input asp-for="Medical_License_no" class="form-control" />
+                <span asp-validation-for="Medical_License_no" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

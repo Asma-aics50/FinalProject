@@ -186,9 +186,59 @@ namespace FinalProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateDoctorAccount()
         {
+            ViewData["Departments"] = context.Departments.ToList();
             return View();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateDoctorAccount(CreateDoctorAccountViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ApplicationUser user = new ApplicationUser()
+                {
+
+                    UserName = userVM.UserName,
+                    Email = userVM.Email, //Allow null
+                    PasswordHash = userVM.Password,
+                    FirstName = userVM.FirstName,
+                    LastName = userVM.LastName,
+                    Gender = userVM.Gender.ToString(),
+                    BirthDate = userVM.BirthDate
+                };
+
+                var result = await userManager.CreateAsync(user, userVM.Password);
+
+
+
+                await userManager.AddToRoleAsync(user, "Doctor");
+
+                if (result.Succeeded)
+                {
+
+                    Doctor doctor = new Doctor() { UserId = user.Id,
+                        DepartmentId = userVM.DeptId,
+                        Salary = userVM.Salary, 
+                        Specialization = userVM.Specialization ,
+                        ShiftEndTime=userVM.ShiftEndTime,
+                        ShiftStartTime=userVM.ShiftStartTime,
+                        Medical_License_no=userVM.Medical_License_no
+
+                    };
+                    doctorRepositry.Create(doctor);
+                    return RedirectToAction("Index", "Doctor"); // change to dashboord
+                }
+                return View();
+            }
+
+
+            return View();
+        }
 
 
         //Login

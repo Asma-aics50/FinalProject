@@ -8,16 +8,15 @@ namespace FinalProject.Models
         [Required]
         public string Specialization { get; set; }
         public double Salary { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime Date { get; set; }
+        public int ShiftStartTime { get; set; }
+        public int ShiftEndTime { get; set; } 
         public string Medical_License_no { get; set;}
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-        public int DeprtId { get; set; }
+        public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        List<Patient> patients { get; set; }
-        List<PatientHistory> PatientHistories { get; set; }
+        List<Patient>? Patients { get; set; }
+        List<PatientHistory>? PatientHistories { get; set; }
 
 
 
