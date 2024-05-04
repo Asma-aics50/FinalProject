@@ -152,7 +152,7 @@ namespace FinalProject.Controllers
             if (ModelState.IsValid)
             {
 
-                var username = new EmailAddressAttribute().IsValid(userVm.UserName) ? new MailAddress(userVm.UserName).User : userVm.UserName; 
+                var username = new EmailAddressAttribute().IsValid(userVm.UserName) ? new MailAddress(userVm.UserName).User : userVm.UserName;
                 var user = await userManager.FindByNameAsync(username);
                 if (user != null)
                 {
@@ -160,25 +160,30 @@ namespace FinalProject.Controllers
                     if (check)
                     {
                         await signIn.SignInAsync(user, userVm.RememberMe);
-                        return RedirectToAction("Index", "Home");
-                
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index", "Doctor");
+                        }
+
+                        return RedirectToAction("Index","Home" );
+                       
                     }
+
+                    //
+
+                    ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");
+
                 }
-                
-                //
-
-                ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");
-
-
+                else
+                {
+                    ModelState.AddModelError("invalidUserNameOrPassword", "Invalid Username or Password");
+                }
             }
-            else
-            {
-                ModelState.AddModelError("invalidUserNameOrPassword", "Invalid Username or Password");
-            }
-            return View();
+                return View();
         }
 
 
+        
         public async Task<IActionResult> Logout()
         {
             await signIn.SignOutAsync();
