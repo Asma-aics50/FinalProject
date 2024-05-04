@@ -19,13 +19,17 @@ namespace FinalProject.Controllers
             IPatientRepositry patientRepositry;
             IDoctorRepositry doctorRepositry;
             IEmployeeRepositry employeeRepositry;
+        HospitalManagementSystemDbContext context;
 
-            public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signIn,
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signIn,
                 IPatientRepositry patientRepositry,
                 IDoctorRepositry doctorRepositry,
-                IEmployeeRepositry employeeRepositry
+                IEmployeeRepositry employeeRepositry,
+            HospitalManagementSystemDbContext context
              )
             {
+            this.context = context;
                 this.userManager = userManager;
                 this.signIn = signIn;
                 this.patientRepositry= patientRepositry;
@@ -118,6 +122,56 @@ namespace FinalProject.Controllers
                         Patient patient = new Patient() { UserId = user.Id };
                         patientRepositry.Create(patient);
                         return RedirectToAction("Index", "Home");
+                }
+                return View();
+            }
+
+            return View();
+        }
+        //Authorize admin
+        [HttpGet]
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateEmployeeAccount()
+        {
+            ViewData["Departments"] = context.Departments.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateEmployeeAccount(CreateEmployeeAccountViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ApplicationUser user = new ApplicationUser()
+                {
+
+                    UserName = userVM.UserName,
+                    Email = userVM.Email, //Allow null
+                    PasswordHash = userVM.Password,
+                    FirstName = userVM.FirstName,
+                    LastName = userVM.LastName,
+                    Gender = userVM.Gender.ToString(),
+                    BirthDate = userVM.BirthDate
+                };
+
+                var result = await userManager.CreateAsync(user, userVM.Password);
+
+
+
+                await userManager.AddToRoleAsync(user,userVM.Role);
+
+                if (result.Succeeded)
+                {
+
+                    Employee employee = new Employee() { UserId = user.Id,DepartmentId=userVM.DeptId,Salary=userVM.Salary, Specialization=userVM.Specialization };
+                    employeeRepositry.Create(employee);
+                    return RedirectToAction("Index", "Doctor"); // change to dashboord
                 }
                 return View();
             }

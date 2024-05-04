@@ -76,6 +76,7 @@ namespace FinalProject.Data
                 .HasForeignKey(pre => pre.PatientHistoryId);
 
 
+
         }
        
     }

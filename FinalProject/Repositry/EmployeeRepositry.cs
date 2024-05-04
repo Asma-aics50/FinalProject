@@ -15,6 +15,7 @@ namespace FinalProject.Repositry
 
         public void Create(Employee employee)
         {
+           
             context.Employees.Add(employee);
             context.SaveChanges();
 
@@ -51,7 +52,7 @@ namespace FinalProject.Repositry
             {
                 employee.Salary = _employee.Salary;
                 employee.Specialization=_employee.Specialization;
-                employee.DeptId= _employee.DeptId;
+                employee.DepartmentId= _employee.DepartmentId;
                
                 context.SaveChanges();
                 

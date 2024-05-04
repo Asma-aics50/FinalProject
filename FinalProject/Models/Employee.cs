@@ -8,7 +8,7 @@ namespace FinalProject.Models
         public double Salary { get; set; }
         [Required]
         public string Specialization { get; set; }
-        public int DeptId { get; set; }
+        public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public string UserId { get; set; }    
         public ApplicationUser User { get; set; }  
