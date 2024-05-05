@@ -61,6 +61,7 @@ namespace FinalProject.Controllers
                     FirstName=userVM.FirstName,
                     LastName=userVM.LastName ,
                     Gender=userVM.Gender.ToString()
+                    
                 };
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
@@ -109,7 +110,8 @@ namespace FinalProject.Controllers
                     FirstName = userVM.FirstName,
                     LastName = userVM.LastName,
                     Gender = userVM.Gender.ToString(),
-                    BirthDate=userVM.BirthDate
+                    BirthDate=userVM.BirthDate,
+                    PhoneNumber = userVM.Phone
                 };
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
@@ -157,7 +159,9 @@ namespace FinalProject.Controllers
                     FirstName = userVM.FirstName,
                     LastName = userVM.LastName,
                     Gender = userVM.Gender.ToString(),
-                    BirthDate = userVM.BirthDate
+                    BirthDate = userVM.BirthDate,
+                    PhoneNumber = userVM.Phone
+                    
                 };
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
@@ -183,7 +187,7 @@ namespace FinalProject.Controllers
         //create Doctors account // for admin
         [HttpGet]
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult CreateDoctorAccount()
         {
             ViewData["Departments"] = context.Departments.ToList();
@@ -194,7 +198,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateDoctorAccount(CreateDoctorAccountViewModel userVM)
         {
             if (ModelState.IsValid)
@@ -209,7 +213,8 @@ namespace FinalProject.Controllers
                     FirstName = userVM.FirstName,
                     LastName = userVM.LastName,
                     Gender = userVM.Gender.ToString(),
-                    BirthDate = userVM.BirthDate
+                    BirthDate = userVM.BirthDate,
+                    PhoneNumber = userVM.Phone
                 };
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
@@ -228,7 +233,6 @@ namespace FinalProject.Controllers
                         ShiftEndTime=userVM.ShiftEndTime,
                         ShiftStartTime=userVM.ShiftStartTime,
                         Medical_License_no=userVM.Medical_License_no
-
                     };
                     doctorRepositry.Create(doctor);
                     return RedirectToAction("Index", "Doctor"); // change to dashboord
@@ -239,7 +243,6 @@ namespace FinalProject.Controllers
 
             return View();
         }
-
 
         //Login
         [HttpGet]

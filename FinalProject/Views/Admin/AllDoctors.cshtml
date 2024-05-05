@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FinalProject.ViewModels.AllDoctorsViewModel>
+
+@{
+    ViewData["Title"] = "AllDoctors";
+    Layout = "_AdminLayout";
+}
+
+
+<a class ="btn btn-success btn-lg" role="button"  asp-action="CreateDoctorAccount" asp-controller="Account">
+    <i class="bi bi-person-add"></i>
+    Add new doctor
+
+</a>
+
+<h1>AllDoctors</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="row">Id</th>
+            <td> Name</td>
+            <td>Phone Number</td>
+            <td>Email</td>
+            <td>Shift start Time</td>
+            <td>Shift End Time</td>
+            <td>Department</td>
+            <td>Actions</td>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => doctor.Id)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.Name)
+                </td>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.ShiftStartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.ShiftEndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => doctor.Department)
+                </td>
+                <td>
+                   <a asp-action="DoctorDetails" asp-controller="Admin" asp-route-id="@doctor.Id">
+                       <i class="bi bi-eye"></i>
+                       </a>
+                </td>
+             
+            </tr>
+
+}
+
+       </tbody>
+</table>
+

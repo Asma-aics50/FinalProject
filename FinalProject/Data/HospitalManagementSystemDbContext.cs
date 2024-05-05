@@ -79,6 +79,7 @@ namespace FinalProject.Data
 
         }
         public DbSet<FinalProject.ViewModels.CreateDoctorAccountViewModel> CreateDoctorAccountViewModel { get; set; } = default!;
+        public DbSet<FinalProject.ViewModels.AllDoctorsViewModel> AllDoctorsViewModel { get; set; } = default!;
        
     }
 }
