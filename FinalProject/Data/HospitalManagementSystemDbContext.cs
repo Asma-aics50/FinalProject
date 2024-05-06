@@ -76,10 +76,9 @@ namespace FinalProject.Data
                 .HasForeignKey(pre => pre.PatientHistoryId);
 
 
+            modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
 
         }
-        public DbSet<FinalProject.ViewModels.CreateDoctorAccountViewModel> CreateDoctorAccountViewModel { get; set; } = default!;
-        public DbSet<FinalProject.ViewModels.AllDoctorsViewModel> AllDoctorsViewModel { get; set; } = default!;
        
     }
 }
