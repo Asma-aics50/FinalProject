@@ -63,12 +63,14 @@
                         Doctors
                     </a>
                 </li>
+
                 <li>
-                    <a href="#" class="nav-link link-body-emphasis">
+                    <a  asp-action ="AllPatients" asp-controller="Admin" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
                         Patients
                     </a>
                 </li>
+
                 <li>
                     <a href="#" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" /></svg>
@@ -108,7 +110,7 @@
 
         <div class="flex-grow-1">
 
-            <div  style="margin-left:5%">
+            <div  style="margin:5%;margin-top:2%;">
             @RenderBody()
             </div>
     </div>

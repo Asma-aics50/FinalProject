@@ -1,13 +1,17 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
-using FinalProject.Repositry;
+using FinalProject.Services;
 using FinalProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Controllers
+
 {
+    [Authorize(Roles = "Admin")]
+
     public class AdminController : Controller
     {
         IPatientRepositry patientRepositry;
@@ -41,12 +45,16 @@ namespace FinalProject.Controllers
             return View(doctorsVM);
         }
 
-        //
-         public IActionResult DoctorDetails(int id)
-         {
-            return View();
+        public IActionResult AllPatients()
+        {
 
-         }
+            List<AllPatientViewModel> patientsVM = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToAllPatientsVM).ToList();
+
+            return View(patientsVM);
+        }
+
+
+
 
 
 

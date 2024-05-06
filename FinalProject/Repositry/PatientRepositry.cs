@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -45,6 +46,11 @@ namespace FinalProject.Repositry
         public void Update(Patient patient)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Patient> GetAll_Patients_User()
+        {
+            return context.Patients.Include(e=>e.User).ToList();
         }
     }
 }

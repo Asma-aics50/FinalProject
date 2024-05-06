@@ -11,7 +11,6 @@ namespace FinalProject.IRepositry
         public Patient GetById(int id);
         public List<Patient> GetAll();
         public void Delete(int id);
-
-
+        public List<Patient> GetAll_Patients_User();
     }
 }
