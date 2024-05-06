@@ -37,7 +37,7 @@ namespace FinalProject.Repositry
 
         public void Update(BillItems _billitem)
         {
-            var billitems = Get(_billitem.id);
+            //var billitems = Get(_billitem.id);
         }
 
         List<BillItems> IBillItemRepositry.GetAll()

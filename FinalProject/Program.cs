@@ -20,6 +20,7 @@ builder.Services.AddDbContext<HospitalManagementSystemDbContext>(options => opti
 builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
 builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
 builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepositry>();
+builder.Services.AddScoped<IBookedAppointmentsRepositry, BookedAppointmentRepositry>();
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -32,7 +33,6 @@ namespace FinalProject.Repositry
             return context.BookedAppointments.ToList();
 
         }
-
         public BookedAppointment GetById(int id)
         {
             return context.BookedAppointments.Find(id);
@@ -50,5 +50,11 @@ namespace FinalProject.Repositry
                 context.SaveChanges();
             }
         }
+        public List<BookedAppointment> GetAllAppointments_Patient_Doctor()
+        {
+            return context.BookedAppointments.Include(e=>e.Doctor).Include(e=>e.Patient).ToList();
+
+        }
+
     }
 }

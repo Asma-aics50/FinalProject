@@ -79,6 +79,7 @@ namespace FinalProject.Data
             modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
 
         }
+        public DbSet<FinalProject.ViewModels.AllPatientsAppointmentViewModel> AllPatientsAppointmentViewModel { get; set; } = default!;
        
     }
 }

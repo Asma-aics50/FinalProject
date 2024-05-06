@@ -10,5 +10,6 @@ namespace FinalProject.IRepositry
         public BookedAppointment GetById(int id);
         public List<BookedAppointment> GetAll();
 
+        public List<BookedAppointment> GetAllAppointments_Patient_Doctor();
     }
 }

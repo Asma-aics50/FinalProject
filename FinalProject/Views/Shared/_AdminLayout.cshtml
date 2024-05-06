@@ -58,14 +58,14 @@
                 </li> 
                
                 <li>
-                    <a asp-action ="AllDoctors" asp-controller="Admin" class="nav-link link-body-emphasis">
+                    <a asp-action ="AllDoctors" asp-controller="Doctor" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
                         Doctors
                     </a>
                 </li>
 
                 <li>
-                    <a  asp-action ="AllPatients" asp-controller="Admin" class="nav-link link-body-emphasis">
+                    <a  asp-action ="AllPatients" asp-controller="Patient" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
                         Patients
                     </a>
@@ -77,12 +77,13 @@
                         Employee
                     </a>
                 </li>
-              @*   <li>
-                    <a href="#" class="nav-link link-body-emphasis">
+                <a asp-action="AllPatientsAppointment" asp-controller="Appointment" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                        Products
+                    Patient Appointment
                     </a>
                 </li>
+              @*
+                  <li>
                 <li>
                     <a href="#" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle" /></svg>

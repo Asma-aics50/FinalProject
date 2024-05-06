@@ -33,5 +33,16 @@ namespace FinalProject.Services
 
             };
         }
+        public static AllPatientsAppointmentViewModel MapToAllPatientsAppointmentVM(BookedAppointment appointment)
+        {
+            return new AllPatientsAppointmentViewModel
+            {
+               Id=appointment.Id,
+               DoctorName = $"{appointment.Doctor.User.FirstName} {appointment.Doctor.User.LastName}",
+               PatientName = $"{appointment.Patient.User.FirstName} {appointment.Patient.User.LastName}",
+               DateTime=appointment.DateTime,
+               AppointmentStatues=appointment.AppointmentStatues
+            };
+        }
     }
 }
