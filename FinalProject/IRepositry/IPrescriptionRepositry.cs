@@ -7,7 +7,7 @@ namespace FinalProject.IRepositry
         public void Create(Prescription prescription);
         public void Update(Prescription prescription);
         public void Delete(int patient_id, int drug_id);
-        //public Prescription GetById(Prescription prescription);
+        
         public Prescription GetById(int patient_id , int drug_id);
         public List<Prescription> GetAll();
 

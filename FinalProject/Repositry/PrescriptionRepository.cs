@@ -44,7 +44,12 @@ namespace FinalProject.Repositry
             var pres = GetById (prescription.PatientHistoryId,prescription.DrugId);
             if (pres != null)
             {
-                pres.
+                pres.NoOfTimes= prescription.NoOfTimes;
+                pres.Duration = prescription.Duration;  
+                pres.Quantity = prescription.Quantity;  
+                pres.DrugId = prescription.DrugId;  
+                pres.PatientHistoryId = prescription.PatientHistoryId;
+                context.SaveChanges();
             }
         }
     }
