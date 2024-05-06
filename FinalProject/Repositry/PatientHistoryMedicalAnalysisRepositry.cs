@@ -18,9 +18,9 @@ namespace FinalProject.Repositry
             context.SaveChanges();
         }
 
-        public void Delete(int patientHistoryId, int medicalAnaylsisId)
+        public void Delete(int id)
         {
-            var phma = GetById( patientHistoryId, medicalAnaylsisId);
+            var phma = GetById(id);
             if (phma != null) 
             { 
                 context.Remove(phma);
@@ -33,22 +33,14 @@ namespace FinalProject.Repositry
             return context.PatientHistoryMedicalAnalyses.ToList();
         }
 
-        public PatientHistoryMedicalAnalysis GetById(int patientHistoryId, int medicalAnaylsisId)
+        public PatientHistoryMedicalAnalysis GetById(int id)
         {
-            return context.Set<PatientHistoryMedicalAnalysis>().SingleOrDefault(e=>e.MedicalAnaylsisId ==medicalAnaylsisId&&e.PatientHistoryId ==patientHistoryId);
+            return context.PatientHistoryMedicalAnalyses.Find(id);
         }
 
         public void Update(PatientHistoryMedicalAnalysis _patientHistoryMedicalAnalysis)
         {
-            var phma = GetById(_patientHistoryMedicalAnalysis.PatientHistoryId ,_patientHistoryMedicalAnalysis.MedicalAnaylsisId);
-            if (phma != null) 
-            {
-                phma.DateTime = _patientHistoryMedicalAnalysis.DateTime;
-                phma.Result = _patientHistoryMedicalAnalysis.Result;    
-                phma.PatientHistoryId=_patientHistoryMedicalAnalysis.PatientHistoryId;
-                phma.MedicalAnaylsisId = _patientHistoryMedicalAnalysis.MedicalAnaylsisId;
-                context.SaveChanges();
-            }
+            var phma = GetById(_patientHistoryMedicalAnalysis.id);
         }
     }
 }
