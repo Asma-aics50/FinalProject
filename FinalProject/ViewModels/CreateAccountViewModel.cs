@@ -30,11 +30,7 @@ namespace FinalProject.ViewModels
 
         [Phone]
         public string  Phone { get; set; }
-        [Required]
-        public string  Role { get; set; }
-
-
-
+       
 
     }
 }
