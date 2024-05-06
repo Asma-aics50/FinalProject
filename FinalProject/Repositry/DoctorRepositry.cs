@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -57,5 +58,12 @@ namespace FinalProject.Repositry
 
 
         }
+
+        List<Doctor> IDoctorRepositry.GetAll_Departments_User()
+        {
+
+            return context.Doctors.Include(e=>e.User).Include(e=>e.Department).ToList();
+        }
+    
     }
 }

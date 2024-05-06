@@ -41,11 +41,12 @@ namespace FinalProject.Repositry
 
         public void Update(Prescription prescription)
         {
-            var pres = GetById (prescription.PatientHistoryId,prescription.DrugId);
-            if (pres != null)
-            {
-                pres.
-            }
+        //    var pres = GetById (prescription.PatientHistoryId,prescription.DrugId);
+        //    if (pres != null)
+        //    {
+        //        pres.
+        //    }
+        //
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FinalProject.Repositry
 
         public void Update(PatientHistoryMedicalAnalysis _patientHistoryMedicalAnalysis)
         {
-            var phma = GetById(_patientHistoryMedicalAnalysis.id);
+            //var phma = GetById(_patientHistoryMedicalAnalysis.id);
         }
     }
 }

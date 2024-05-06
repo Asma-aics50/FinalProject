@@ -12,5 +12,8 @@ namespace FinalProject.IRepositry
         public void Delete(int id);
 
 
+        public List<Doctor> GetAll_Departments_User();
+
+
     }
 }
