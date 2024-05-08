@@ -127,6 +127,7 @@ namespace FinalProject.Controllers
                 }
                 return View();
             }
+            
 
             return View();
         }
@@ -203,7 +204,6 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 ApplicationUser user = new ApplicationUser()
                 {
 
@@ -241,7 +241,7 @@ namespace FinalProject.Controllers
             }
 
 
-            return View();
+            return View(ModelState);
         }
 
         //Login
@@ -267,6 +267,7 @@ namespace FinalProject.Controllers
                     if (check)
                     {
                         await signIn.SignInAsync(user, userVm.RememberMe);
+
                         if (User.IsInRole("Admin"))
                         {
                             return RedirectToAction("Index", "Doctor");

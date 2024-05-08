@@ -1,0 +1,52 @@
+﻿@using FinalProject.Data.Enum
+@model FinalProject.ViewModels.Appointment.CreateEditAppointmentViewModel
+@{
+    ViewData["Title"] = "Create New Appointment";
+    Layout = "_AdminLayout";
+
+    SelectList DoctorsList = new SelectList(ViewBag.Doctors, "Id", "Name");
+    SelectList PatientsList = new SelectList(ViewBag.Patients, "Id", "Name");
+
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="DoctorId" class="form-label mt-4"></label>
+                <select asp-for="DoctorId" class="form-select" asp-items="DoctorsList"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientId" class="form-label mt-4"></label>
+
+                <select asp-for="PatientId" class="form-select" asp-items="PatientsList"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime" class="form-label mt-4"></label>
+                <input asp-for="DateTime" class="form-control" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppointmentStatues" class="form-label mt-4"></label>
+                <select asp-for="AppointmentStatues" class="form-select" placeholder="Select status">
+                    <option value="@AppointmentStatues.Pending">@AppointmentStatues.Pending
+                        </option>
+                    <option value="@AppointmentStatues.confirmed">@AppointmentStatues.confirmed</option>
+                    <option value="@AppointmentStatues.Done">@AppointmentStatues.Done</option>
+                    <option value="@AppointmentStatues.Cancelled">@AppointmentStatues.Cancelled</option>
+                
+                </select>
+                <span asp-validation-for="AppointmentStatues" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

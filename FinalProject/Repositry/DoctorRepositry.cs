@@ -58,11 +58,15 @@ namespace FinalProject.Repositry
 
 
         }
-
         List<Doctor> IDoctorRepositry.GetAll_Departments_User()
         {
 
             return context.Doctors.Include(e=>e.User).Include(e=>e.Department).ToList();
+        }
+        public List<Doctor> GetAll_User()
+        {
+
+            return context.Doctors.Include(e => e.User).ToList();
         }
     
     }

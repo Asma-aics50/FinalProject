@@ -52,7 +52,7 @@ namespace FinalProject.Repositry
         }
         public List<BookedAppointment> GetAllAppointments_Patient_Doctor()
         {
-            return context.BookedAppointments.Include(e=>e.Doctor).Include(e=>e.Patient).ToList();
+            return context.BookedAppointments.Include(e=>e.Doctor.User).Include(e=>e.Patient.User).ToList();
 
         }
 

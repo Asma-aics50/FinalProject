@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.ViewModels;
+using FinalProject.ViewModels.Appointment;
 namespace FinalProject.Data
 {
     public class HospitalManagementSystemDbContext : IdentityDbContext<ApplicationUser>
@@ -79,7 +80,6 @@ namespace FinalProject.Data
             modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
 
         }
-        public DbSet<FinalProject.ViewModels.AllPatientsAppointmentViewModel> AllPatientsAppointmentViewModel { get; set; } = default!;
        
     }
 }

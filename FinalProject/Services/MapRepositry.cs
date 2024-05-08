@@ -1,5 +1,7 @@
-﻿using FinalProject.Models;
+﻿using FinalProject.Data.Enum;
+using FinalProject.Models;
 using FinalProject.ViewModels;
+using FinalProject.ViewModels.Appointment;
 using System.Numerics;
 
 namespace FinalProject.Services
@@ -41,7 +43,36 @@ namespace FinalProject.Services
                DoctorName = $"{appointment.Doctor.User.FirstName} {appointment.Doctor.User.LastName}",
                PatientName = $"{appointment.Patient.User.FirstName} {appointment.Patient.User.LastName}",
                DateTime=appointment.DateTime,
-               AppointmentStatues=appointment.AppointmentStatues
+               AppointmentStatus = (AppointmentStatues)appointment.AppointmentStatues,
+
+            };
+        }
+        public static ForDoctorsListViewModel MapToCreateAppointmentDoctors(Doctor doctor)
+        {
+            return new ForDoctorsListViewModel
+            {
+               Id=doctor.Id,
+               Name = $"{doctor.User.FirstName} {doctor.User.LastName}",
+              
+            };
+        } 
+        public static ForPatientsListViewModel MapToCreateAppointmentPatients(Patient patient)
+        {
+            return new ForPatientsListViewModel
+            {
+               Id=patient.Id,
+               Name = $"{patient.User.FirstName} {patient.User.LastName}",
+              
+            };
+        } 
+        public static BookedAppointment MapToBookedAppointment(CreateEditAppointmentViewModel appointmentVM)
+        {
+            return new BookedAppointment
+            {
+                DoctorId=appointmentVM.DoctorId,
+                PatientId=appointmentVM.PatientId,
+                DateTime=appointmentVM.DateTime,
+                AppointmentStatues=appointmentVM.AppointmentStatues              
             };
         }
     }

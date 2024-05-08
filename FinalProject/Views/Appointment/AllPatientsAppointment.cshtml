@@ -4,7 +4,7 @@
     ViewData["Title"] = "AllPatientsAppointment";
     Layout = "_AdminLayout";
 }
-<a class="btn btn-success btn-lg" role="button" asp-action="Appointment" asp-controller="Create">
+<a class="btn btn-success btn-lg" role="button" asp-action="Create" asp-controller="Appointment">
     <i class="bi bi-person-add"></i>
     Add new Appointment
 
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppointmentStatues)
+                @Html.DisplayFor(modelItem => item.AppointmentStatus)
             </td>
                 <td>
                     <a asp-action="Details" asp-controller="Appointment" asp-route-id="@item.Id">

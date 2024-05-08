@@ -10,6 +10,6 @@ namespace FinalProject.ViewModels
       
         public DateTime DateTime { get; set; }
 
-        public AppointmentStatues AppointmentStatues { get; set; }
+        public AppointmentStatues AppointmentStatus { get; set; }
     }
 }
