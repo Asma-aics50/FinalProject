@@ -80,6 +80,7 @@ namespace FinalProject.Data
             modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
 
         }
+        public DbSet<FinalProject.ViewModels.Appointment.CreateEditAppointmentViewModel> CreateEditAppointmentViewModel { get; set; } = default!;
        
     }
 }

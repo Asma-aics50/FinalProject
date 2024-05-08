@@ -69,10 +69,21 @@ namespace FinalProject.Services
         {
             return new BookedAppointment
             {
+                Id=appointmentVM.Id,
                 DoctorId=appointmentVM.DoctorId,
                 PatientId=appointmentVM.PatientId,
                 DateTime=appointmentVM.DateTime,
                 AppointmentStatues=appointmentVM.AppointmentStatues              
+            };
+        } public static CreateEditAppointmentViewModel MapToCreateEditAppointmentVM(BookedAppointment appointment)
+        {
+            return new CreateEditAppointmentViewModel
+            {
+                Id=appointment.Id,
+                DoctorId=appointment.DoctorId,
+                PatientId=appointment.PatientId,
+                DateTime=appointment.DateTime,
+                AppointmentStatues=appointment.AppointmentStatues              
             };
         }
     }

@@ -56,5 +56,9 @@ namespace FinalProject.Repositry
 
         }
 
+       BookedAppointment IBookedAppointmentsRepositry.GetOne_Doctor_Patient(int id)
+        {
+            return context.BookedAppointments.Include(e => e.Patient).Include(e => e.Doctor).Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }

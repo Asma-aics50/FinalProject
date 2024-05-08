@@ -76,6 +76,35 @@ namespace FinalProject.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Doctors = doctorRepositry.GetAll_User().Select(MapRepositry.MapToCreateAppointmentDoctors).ToList();
+            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+
+            var appointmentVM = MapRepositry.MapToCreateEditAppointmentVM(bookedAppointmentsRepositry.GetOne_Doctor_Patient(id));
+            
+               return View(appointmentVM);
+        }
+        [Authorize(Roles="Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit( CreateEditAppointmentViewModel appointmentVM)
+        {
+            if(ModelState.IsValid)
+            {
+                var appointment =MapRepositry.MapToBookedAppointment(appointmentVM);
+
+                bookedAppointmentsRepositry.Update(appointment);
+                return RedirectToAction("AllPatientsAppointment");
+
+            }
+            ViewBag.Doctors = doctorRepositry.GetAll_User().Select(MapRepositry.MapToCreateAppointmentDoctors).ToList();
+            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+            return View();
+        }
+
 
     }
 }
