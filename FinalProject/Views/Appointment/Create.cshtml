@@ -8,8 +8,15 @@
     SelectList PatientsList = new SelectList(ViewBag.Patients, "Id", "Name");
 
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a asp-action="AllPatientsAppointment" asp-controller="Appointment">Appointments</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add new appointment</li>
+    </ol>
+</nav>
 
-<hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
