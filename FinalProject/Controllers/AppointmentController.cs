@@ -11,41 +11,41 @@ namespace FinalProject.Controllers
 {
     public class AppointmentController : Controller
     {
-            IPatientRepositry patientRepositry;
-            IDoctorRepositry doctorRepositry;
-            IEmployeeRepositry employeeRepositry;
-            IBookedAppointmentsRepositry bookedAppointmentsRepositry; 
-            
-            public AppointmentController(
+        IPatientRepositry patientRepositry;
+        IDoctorRepositry doctorRepositry;
+        IEmployeeRepositry employeeRepositry;
+        IBookedAppointmentsRepositry bookedAppointmentsRepositry;
 
-            IPatientRepositry patientRepositry,
-              IDoctorRepositry doctorRepositry,
-              IEmployeeRepositry employeeRepositry,
-              IBookedAppointmentsRepositry bookedAppointmentsRepositry
-           
-            )
-           {
+        public AppointmentController(
+
+        IPatientRepositry patientRepositry,
+          IDoctorRepositry doctorRepositry,
+          IEmployeeRepositry employeeRepositry,
+          IBookedAppointmentsRepositry bookedAppointmentsRepositry
+
+        )
+        {
             this.patientRepositry = patientRepositry;
-                this.doctorRepositry = doctorRepositry;
-                this.employeeRepositry = employeeRepositry;
-                this.bookedAppointmentsRepositry = bookedAppointmentsRepositry;
-            }
+            this.doctorRepositry = doctorRepositry;
+            this.employeeRepositry = employeeRepositry;
+            this.bookedAppointmentsRepositry = bookedAppointmentsRepositry;
+        }
 
-            [Authorize(Roles = "Admin")]
-            public IActionResult AllPatientsAppointment()
-            {
+        [Authorize(Roles = "Admin")]
+        public IActionResult AllPatientsAppointment()
+        {
 
-                 List<AllPatientsAppointmentViewModel> AllPatientsAppointmentVM = bookedAppointmentsRepositry.GetAllAppointments_Patient_Doctor().
-                Select(MapRepositry.MapToAllPatientsAppointmentVM).ToList();
+            List<AllPatientsAppointmentViewModel> AllPatientsAppointmentVM = bookedAppointmentsRepositry.GetAllAppointments_Patient_Doctor().
+           Select(MapRepositry.MapToAllPatientsAppointmentVM).ToList();
 
-              return View(AllPatientsAppointmentVM);
-            }
-        
+            return View(AllPatientsAppointmentVM);
+        }
 
-            [Authorize(Roles = "Admin")]
-            [HttpGet]   
-            public IActionResult Create()
-            {
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Create()
+        {
 
             ViewBag.Doctors = doctorRepositry.GetAll_User().Select(MapRepositry.MapToCreateAppointmentDoctors).ToList();
             ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
@@ -53,15 +53,15 @@ namespace FinalProject.Controllers
             return View();
 
         }
-             [Authorize(Roles = "Admin")]
-             [ValidateAntiForgeryToken]
-             [HttpPost]   
-            public IActionResult Create( CreateEditAppointmentViewModel appointmentVM)
-            {
-            if(ModelState.IsValid)
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult Create(CreateEditAppointmentViewModel appointmentVM)
+        {
+            if (ModelState.IsValid)
             {
                 //Map
-                BookedAppointment appointment=MapRepositry.MapToBookedAppointment(appointmentVM);
+                BookedAppointment appointment = MapRepositry.MapToBookedAppointment(appointmentVM);
 
                 //Create
                 bookedAppointmentsRepositry.Create(appointment);
@@ -84,17 +84,17 @@ namespace FinalProject.Controllers
             ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
 
             var appointmentVM = MapRepositry.MapToCreateEditAppointmentVM(bookedAppointmentsRepositry.GetOne_Doctor_Patient(id));
-            
-               return View(appointmentVM);
+
+            return View(appointmentVM);
         }
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit( CreateEditAppointmentViewModel appointmentVM)
+        public IActionResult Edit(CreateEditAppointmentViewModel appointmentVM)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var appointment =MapRepositry.MapToBookedAppointment(appointmentVM);
+                var appointment = MapRepositry.MapToBookedAppointment(appointmentVM);
 
                 bookedAppointmentsRepositry.Update(appointment);
                 return RedirectToAction("AllPatientsAppointment");
@@ -105,6 +105,12 @@ namespace FinalProject.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
+       
+        public IActionResult Delete(int id)
+        {
+            bookedAppointmentsRepositry.Delete(id);
+            return RedirectToAction("AllPatientsAppointment");
+        }
     }
 }
