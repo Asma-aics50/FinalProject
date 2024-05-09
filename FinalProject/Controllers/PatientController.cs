@@ -22,7 +22,7 @@ namespace FinalProject.Controllers
 
 
         [Authorize(Roles = "Admin")]
-            public IActionResult AllPatients()
+        public IActionResult AllPatients()
         {
 
             List<AllPatientViewModel> patientsVM = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToAllPatientsVM).ToList();

@@ -31,6 +31,10 @@ namespace FinalProject.Controllers
         {
 
             List<AllDoctorsViewModel> doctorsVM = doctorRepositry.GetAll_Departments_User().Select(MapRepositry.MapToAllDoctorVM).ToList();
+            if (User.IsInRole("Doctor"))
+                ViewBag.Layout = "_DoctorLayout";
+            else if (User.IsInRole("Admin"))
+                ViewBag.Layout = "_AdminLayout";
 
 
             return View(doctorsVM);
