@@ -15,30 +15,30 @@ namespace FinalProject.Controllers
 
     public class AdminController : Controller
     {
-              IPatientRepositry patientRepositry;
-              IDoctorRepositry doctorRepositry;
-              IEmployeeRepositry employeeRepositry;
-              IBookedAppointmentsRepositry bookedAppointmentsRepositry;
-        public AdminController(
-              IPatientRepositry patientRepositry,
-              IDoctorRepositry doctorRepositry,
-              IEmployeeRepositry employeeRepositry,
-              IBookedAppointmentsRepositry bookedAppointmentsRepositry
-           )
-        {
-            this.patientRepositry = patientRepositry;
-            this.doctorRepositry = doctorRepositry;
-            this.employeeRepositry = employeeRepositry;
-            this.bookedAppointmentsRepositry= bookedAppointmentsRepositry;
-        }
+        //      IPatientRepositry patientRepositry;
+        //      IDoctorRepositry doctorRepositry;
+        //      IEmployeeRepositry employeeRepositry;
+        //      IBookedAppointmentsRepositry bookedAppointmentsRepositry;
+        //public AdminController(
+        //      IPatientRepositry patientRepositry,
+        //      IDoctorRepositry doctorRepositry,
+        //      IEmployeeRepositry employeeRepositry,
+        //      IBookedAppointmentsRepositry bookedAppointmentsRepositry
+        //   )
+        //{
+        //    this.patientRepositry = patientRepositry;
+        //    this.doctorRepositry = doctorRepositry;
+        //    this.employeeRepositry = employeeRepositry;
+        //    this.bookedAppointmentsRepositry= bookedAppointmentsRepositry;
+        //}
 
-        public IActionResult Index()
-        {
-            ViewData["DoctorsNum"]=doctorRepositry.GetAll().ToList().Count();
-            ViewData["PatientsNum"]=patientRepositry.GetAll().ToList().Count();
+        //public IActionResult Index()
+        //{
+        //    ViewData["DoctorsNum"]=doctorRepositry.GetAll().ToList().Count();
+        //    ViewData["PatientsNum"]=patientRepositry.GetAll().ToList().Count();
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
        
