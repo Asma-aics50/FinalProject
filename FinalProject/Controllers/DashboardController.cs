@@ -27,15 +27,13 @@ namespace FinalProject.Controllers
             {
                 ViewData["DoctorsNum"] = doctorRepositry.GetAll().ToList().Count();
                 ViewData["PatientsNum"] = patientRepositry.GetAll().ToList().Count();
-
                 return View();
-        
+
             }
             public IActionResult DoctorIndex()
             {
                 ViewData["DoctorsNum"] = doctorRepositry.GetAll().ToList().Count();
                 ViewData["PatientsNum"] = patientRepositry.GetAll().ToList().Count();
-
                 return View();
             }
         }

@@ -24,6 +24,8 @@ builder.Services.AddScoped<IBookedAppointmentsRepositry, BookedAppointmentReposi
 builder.Services.AddScoped<IPatientHistoryRepositry, PatientHistoryRepositry>();
 builder.Services.AddScoped<IDrugRepositry, DrugRepositry>();
 builder.Services.AddScoped<IPrescriptionRepositry, PrescriptionRepository>();
+builder.Services.AddScoped<IMedicalAnalysisRepositry, MedicalAnalysisRepositry>();
+builder.Services.AddScoped<IPatientHistoryMedicalAnalysisRepository, PatientHistoryMedicalAnalysisRepositry>();
 
 var app = builder.Build();
 

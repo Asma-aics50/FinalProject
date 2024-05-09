@@ -24,7 +24,6 @@ namespace FinalProject.ViewModels.Prescreption
         [Display (Name ="Patient Name")]
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
-       
 
 
 

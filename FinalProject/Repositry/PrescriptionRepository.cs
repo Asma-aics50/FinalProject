@@ -15,8 +15,13 @@ namespace FinalProject.Repositry
 
         public void Create(Prescription prescription)
         {
-            context.Add(prescription);
-            context.SaveChanges();
+
+            Prescription check = GetById(prescription.PatientHistoryId, prescription.DrugId);
+            if (check == null)
+            {
+                context.Add(prescription);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(int patient_id, int drug_id)

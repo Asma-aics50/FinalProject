@@ -24,19 +24,22 @@ namespace FinalProject.Controllers
         UserManager<ApplicationUser> userManager;
         IDrugRepositry drugRepositry;
         IPrescriptionRepositry prescriptionRepository;
+        IMedicalAnalysisRepositry medicalAnalysisRepositry;
+        IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis;
         public PrescreptionController(
 
         IPatientRepositry patientRepositry,
           IDoctorRepositry doctorRepositry,
           IEmployeeRepositry employeeRepositry,
           IBookedAppointmentsRepositry bookedAppointmentsRepositry,
-             IPatientHistoryRepositry patientHistoryRepositry,
-                     UserManager<ApplicationUser> userManager,
+           IPatientHistoryRepositry patientHistoryRepositry,
+          UserManager<ApplicationUser> userManager,
         IDrugRepositry drugRepositry ,
+        IPrescriptionRepositry prescriptionRepository,
 
-        IPrescriptionRepositry prescriptionRepository
-
-
+        IMedicalAnalysisRepositry medicalAnalysisRepositry,
+            IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis
+        
         )
         {
             this.patientRepositry = patientRepositry;
@@ -46,14 +49,14 @@ namespace FinalProject.Controllers
             this.patientHistoryRepositry = patientHistoryRepositry;    
             this.userManager= userManager;
             this.drugRepositry=drugRepositry;
-            this.prescriptionRepository= prescriptionRepository;    
-       }
+            this.prescriptionRepository= prescriptionRepository;
+            this.medicalAnalysisRepositry = medicalAnalysisRepositry;
+            this.patientHistoryMedicalAnalysis = patientHistoryMedicalAnalysis;
+        }
 
         [HttpGet]
         public IActionResult Index()
         {
-
-
             return View(patientHistoryRepositry.GetAll());
         }
         [HttpGet]
@@ -62,6 +65,7 @@ namespace FinalProject.Controllers
 
             ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
             ViewBag.Drugs = drugRepositry.GetAll().ToList();
+            ViewBag.Analysis = medicalAnalysisRepositry.GetAll().ToList();
 
             return View();
         }
@@ -75,7 +79,7 @@ namespace FinalProject.Controllers
         }
         [HttpPost]
             //public IActionResult Create(CreateViewModel prescreptionVM,/*string[] instructionInput,int [] drugSelect*/)
-            public IActionResult Create(CreateViewModel prescreptionVM, int[] drugSelectList,string[] instructions)
+            public IActionResult Create(CreateViewModel prescreptionVM, int[] drugSelectList,string[] instructions,int[] medicalAnalysisList)
             {
             if(ModelState.IsValid)
             {
@@ -86,16 +90,15 @@ namespace FinalProject.Controllers
 
                 PatientHistory patientHistory = MapRepositry.MapToPatientHistory(prescreptionVM);
 
-
                 //1-2create patientHistory
 
                 patientHistoryRepositry.Create(patientHistory);
 
                 //2- add prescreption
 
+                    int patienthistoryId = patientHistoryRepositry.FindByPatientIdAndDate(patientHistory.CreatedAt, patientHistory.PatientId).Id;
                 if (drugSelectList.Count() > 0)
                 {
-                    int patienthistoryId = patientHistoryRepositry.FindByPatientIdAndDate(patientHistory.CreatedAt, patientHistory.PatientId).Id;
 
                     for (int i = 0; i < drugSelectList.Count(); i++)
                     {
@@ -109,16 +112,33 @@ namespace FinalProject.Controllers
                     
                     }
                 }
-                //3- add medical analysis
 
-                
+        
+                if (medicalAnalysisList.Count() > 0)
+                {
+                    for (int i = 0; i < medicalAnalysisList.Count(); i++)
+                    {
+                        PatientHistoryMedicalAnalysis item = new PatientHistoryMedicalAnalysis()
+                        {
+
+                            PatientHistoryId = patienthistoryId,
+                            MedicalAnaylsisId = medicalAnalysisList[i],
+                            DateTime = patientHistory.CreatedAt,
+                            Result = ""
+
+                        };
+
+                        patientHistoryMedicalAnalysis.Create(item);
+
+                    }
+                }
+
                 //4- create appointemnt
-                if(prescreptionVM.ReExaminatoinDate!=null)
+                if (prescreptionVM.ReExaminatoinDate!=null)
                 {
                     BookedAppointment bookedAppointment = MapRepositry.MapToAutoBookedAppointment(prescreptionVM);
                     bookedAppointmentsRepositry.Create(bookedAppointment);
-
-                    
+                                    
                 }
 
                 //5- redirect

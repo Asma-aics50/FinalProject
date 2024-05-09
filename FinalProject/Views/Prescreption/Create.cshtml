@@ -6,6 +6,8 @@
 
     SelectList PatientsList = new SelectList(ViewBag.Patients, "Id", "Name");
     SelectList DrugsList = new SelectList(ViewBag.Drugs, "Id", "Name");
+    SelectList AnalysisList = new SelectList(ViewBag.Analysis, "Id", "Name");
+
 }
 
 <nav aria-label="breadcrumb">
@@ -15,7 +17,6 @@
         <li class="breadcrumb-item active" aria-current="page">Add new Prescreption</li>
     </ol>
 </nav>
-
 
 <div class="row">
     <div class="col-md-4">
@@ -78,6 +79,21 @@
             <!-- Add button to add more fields -->
             <button type="button" class="btn btn-primary mt-4" id="addFieldsBtn">Add</button>
 
+
+            @* Medical analsis *@
+             <div id="analysisFieldsContainer">
+
+                <div class="form-group">
+                    <label for="AnalysisList">Medical Analysis</label>
+                    <select class="form-control  form-select" name="medicalAnalysisList[]" asp-items="AnalysisList">
+                    </select>
+                </div>
+              
+            </div>
+
+            <!-- Add button to add more fields -->
+            <button type="button" class="btn btn-primary mt-4" id="addanylysisFieldsBtn">Add</button>
+
             <div class="form-group">
                 
                 <input type="submit" value="Create" class="btn btn-primary mt-4" />
@@ -98,6 +114,16 @@
             
             fieldsContainer.appendChild(newFields);
             fieldsContainer.appendChild(newFields1);
+
+        });
+
+        document.getElementById('addanylysisFieldsBtn').addEventListener('click', function () {
+
+            var fieldsContainer = document.getElementById('analysisFieldsContainer');
+
+            var newFields = fieldsContainer.children[0].cloneNode(true);
+            
+            fieldsContainer.appendChild(newFields);
 
         });
     </script>

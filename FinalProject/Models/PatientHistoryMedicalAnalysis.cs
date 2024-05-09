@@ -4,6 +4,7 @@ namespace FinalProject.Models
 {
     public class PatientHistoryMedicalAnalysis
     {
+
         public int PatientHistoryId { get; set; }
         public int MedicalAnaylsisId { get; set; }
         [Required]
