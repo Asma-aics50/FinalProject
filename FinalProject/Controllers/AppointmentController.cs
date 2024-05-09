@@ -6,6 +6,7 @@ using FinalProject.ViewModels.Appointment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers
 {
@@ -36,6 +37,17 @@ namespace FinalProject.Controllers
         {
 
             List<AllPatientsAppointmentViewModel> AllPatientsAppointmentVM = bookedAppointmentsRepositry.GetAllAppointments_Patient_Doctor().
+           Select(MapRepositry.MapToAllPatientsAppointmentVM).ToList();
+
+            return View(AllPatientsAppointmentVM);
+        }
+        [Authorize(Roles = "Doctor")]
+        public IActionResult FindAppointmentsByDoctor( )
+        {
+            string doctorUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int doctorId = doctorRepositry.FindByUserId(doctorUserId).Id;
+
+            List<AllPatientsAppointmentViewModel> AllPatientsAppointmentVM = bookedAppointmentsRepositry.GetAllAppointmentsByDoctorId_Patient_Doctor(doctorId).
            Select(MapRepositry.MapToAllPatientsAppointmentVM).ToList();
 
             return View(AllPatientsAppointmentVM);

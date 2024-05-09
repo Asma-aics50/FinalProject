@@ -94,7 +94,6 @@ namespace FinalProject.Controllers
                 {
                     int patienthistoryId = patientHistoryRepositry.FindByPatientIdAndDate(patientHistory.CreatedAt, patientHistory.PatientId).Id;
 
-
                     for (int i = 0; i < drugSelectList.Count(); i++)
                     {
                         Prescription prescriptionItem = new Prescription()
