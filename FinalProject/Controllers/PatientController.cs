@@ -4,6 +4,7 @@ using FinalProject.Services;
 using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers
 {
@@ -28,6 +29,7 @@ namespace FinalProject.Controllers
 
             return View(patientsVM);
         }
+       
 
     }
 }

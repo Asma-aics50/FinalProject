@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 
 namespace FinalProject.Repositry
@@ -38,6 +39,12 @@ namespace FinalProject.Repositry
         {
             return context.PatientHistories.FirstOrDefault(e=>e.CreatedAt==createdAt && e.PatientId==patientId);
          }
+       List< PatientHistory >IPatientHistoryRepositry.FindePatinetByDoctor(int doctorId)
+        {
+
+            return context.PatientHistories.Include(e=>e.Patient).Include(e=>e.Patient.User).Where(e => e.DoctorId == doctorId).ToList();
+        
+        }
 
         List<PatientHistory> IPatientHistoryRepositry.GetAll()
         {

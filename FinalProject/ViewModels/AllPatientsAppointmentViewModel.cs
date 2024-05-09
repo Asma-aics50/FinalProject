@@ -9,7 +9,6 @@ namespace FinalProject.ViewModels
         public string PatientName{ get; set; }
       
         public DateTime DateTime { get; set; }
-
         public AppointmentStatues AppointmentStatus { get; set; }
     }
 }

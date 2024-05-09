@@ -3,6 +3,7 @@ using FinalProject.Models;
 using FinalProject.Repositry;
 using FinalProject.ViewModels;
 using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.PatientHistory;
 using FinalProject.ViewModels.Prescreption;
 using System.Numerics;
 
@@ -121,6 +122,19 @@ namespace FinalProject.Services
                           CreatedAt = DateTime.Now,
                           DoctorId = PatienthistoryVM.DoctorId
                       };
+
+        }
+        public static PatientHistoryViewModel MapToPatientHistoryVM(PatientHistory patienthistory)
+        {
+            return new PatientHistoryViewModel()
+             {
+                Id=patienthistory.Id,
+                Problem=patienthistory.Problem,
+                DoctorId=patienthistory.DoctorId,
+                PatientId=patienthistory.PatientId,
+                PatientEmail=patienthistory.Patient.User.Email,
+                PatientName=$"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+             };
 
         }
     }

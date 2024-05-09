@@ -53,7 +53,6 @@ namespace FinalProject.Controllers
             return View(AllPatientsAppointmentVM);
         }
 
-
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()

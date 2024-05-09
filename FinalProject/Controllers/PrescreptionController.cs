@@ -3,7 +3,9 @@ using FinalProject.IRepositry;
 using FinalProject.Models;
 using FinalProject.Repositry;
 using FinalProject.Services;
+using FinalProject.ViewModels.PatientHistory;
 using FinalProject.ViewModels.Prescreption;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +68,7 @@ namespace FinalProject.Controllers
 
         private async Task<string> GetCurrentUserIdAsync()
         {
+
             var user = await userManager.GetUserAsync(HttpContext.User);
 
             return await userManager.GetUserIdAsync(user);
@@ -126,6 +129,20 @@ namespace FinalProject.Controllers
             ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
             
             return View();
+        }
+
+        [Authorize(Roles = "Doctor")]
+      
+        public IActionResult DoctorCaseStudies()
+        {
+            string doctorUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            int doctorId = doctorRepositry.FindByUserId(doctorUserId).Id;
+
+            List<PatientHistoryViewModel> patientHistorVMs = patientHistoryRepositry.FindePatinetByDoctor(doctorId).Select(MapRepositry.MapToPatientHistoryVM).ToList();
+
+            return View(patientHistorVMs);
+
         }
     }
 }
