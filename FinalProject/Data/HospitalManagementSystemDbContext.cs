@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.ViewModels;
 using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.Prescreption;
 namespace FinalProject.Data
 {
     public class HospitalManagementSystemDbContext : IdentityDbContext<ApplicationUser>
@@ -78,9 +79,20 @@ namespace FinalProject.Data
 
 
             modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
+            modelBuilder.Entity<BookedAppointment>()
+          .HasOne(ba => ba.Patient)
+          .WithMany(p => p.BookedAppointments)
+          .HasForeignKey(ba => ba.PatientId)
+          .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<PatientHistory>().Property(e => e.ReExaminatoinDate).IsRequired(false);
+            //modelBuilder.Entity<PatientHistory>().Property(e => e.Weight).IsRequired(false);
+            //modelBuilder.Entity<PatientHistory>().Property(e => e.Height).IsRequired(false);
+            modelBuilder.Entity<PatientHistory>().Property(e => e.BloodPressure).IsRequired(false);
+            modelBuilder.Entity<PatientHistory>().Property(e => e.Note).IsRequired(false);
+
 
         }
-        public DbSet<FinalProject.ViewModels.Appointment.CreateEditAppointmentViewModel> CreateEditAppointmentViewModel { get; set; } = default!;
-       
+
     }
 }

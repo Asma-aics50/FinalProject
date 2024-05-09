@@ -1,0 +1,105 @@
+﻿@model FinalProject.ViewModels.Prescreption.CreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_DoctorLayout";
+
+    SelectList PatientsList = new SelectList(ViewBag.Patients, "Id", "Name");
+    SelectList DrugsList = new SelectList(ViewBag.Drugs, "Id", "Name");
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Prescreption">Prescreption</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add new Prescreption</li>
+    </ol>
+</nav>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+  
+            <div class="form-group">
+                <label asp-for="PatientId" class="form-label mt-4"></label>
+
+                <select asp-for="PatientId" class="form-select" asp-items="PatientsList"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Problem" class="col-form-label col-form-label-lg mt-4"></label>
+                <input asp-for="Problem" class="form-select" />
+                <span asp-validation-for="Problem" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReExaminatoinDate" class="control-label form-label mt-4"></label>
+                <input asp-for="ReExaminatoinDate" class="form-select" />
+                <span asp-validation-for="ReExaminatoinDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label form-label mt-4"></label>
+                <input asp-for="Weight" class="form-select" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label form-label mt-4"></label>
+                <input asp-for="Height" class="form-select" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodPressure" class="control-label form-label mt-4"></label>
+                <input asp-for="BloodPressure" class="form-select" />
+                <span asp-validation-for="BloodPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label form-label mt-4"></label>
+                <input asp-for="Note" class="form-select" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+           
+             <div id="fieldsContainer">
+                <!-- Initial fields -->
+                <div class="form-group">
+                    <label for="drugSelectList">Drug</label>
+                    <select class="form-control  form-select" name="drugSelectList[]" asp-items="DrugsList">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="instructions">Instructions</label>
+                    <input type="text" class="form-control form-select" name="instructions[]" required>
+                </div>
+            </div>
+
+            <!-- Add button to add more fields -->
+            <button type="button" class="btn btn-primary mt-4" id="addFieldsBtn">Add</button>
+
+            <div class="form-group">
+                
+                <input type="submit" value="Create" class="btn btn-primary mt-4" />
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById('addFieldsBtn').addEventListener('click', function () {
+          
+            var fieldsContainer = document.getElementById('fieldsContainer');
+
+            
+            var newFields = fieldsContainer.children[0].cloneNode(true);
+            var newFields1 = fieldsContainer.children[1].cloneNode(true);
+            
+            fieldsContainer.appendChild(newFields);
+            fieldsContainer.appendChild(newFields1);
+
+        });
+    </script>
+}

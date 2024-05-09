@@ -1,7 +1,9 @@
 ﻿using FinalProject.Data.Enum;
 using FinalProject.Models;
+using FinalProject.Repositry;
 using FinalProject.ViewModels;
 using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.Prescreption;
 using System.Numerics;
 
 namespace FinalProject.Services
@@ -75,7 +77,26 @@ namespace FinalProject.Services
                 DateTime=appointmentVM.DateTime,
                 AppointmentStatues=appointmentVM.AppointmentStatues              
             };
-        } public static CreateEditAppointmentViewModel MapToCreateEditAppointmentVM(BookedAppointment appointment)
+        }
+        public static BookedAppointment MapToAutoBookedAppointment(CreateViewModel prescreptionVM)
+        {
+            return new BookedAppointment
+            {
+
+                DoctorId = prescreptionVM.DoctorId,
+                PatientId = prescreptionVM.PatientId,
+                DateTime = (DateTime)prescreptionVM.ReExaminatoinDate,
+                AppointmentStatues = AppointmentStatues.confirmed,
+
+            };
+        }
+
+
+
+
+    
+        
+        public static CreateEditAppointmentViewModel MapToCreateEditAppointmentVM(BookedAppointment appointment)
         {
             return new CreateEditAppointmentViewModel
             {
@@ -85,6 +106,22 @@ namespace FinalProject.Services
                 DateTime=appointment.DateTime,
                 AppointmentStatues=appointment.AppointmentStatues              
             };
+        }
+        public static PatientHistory MapToPatientHistory(CreateViewModel PatienthistoryVM)
+        {
+            return new PatientHistory()
+                      {
+                          PatientId = PatienthistoryVM.PatientId,
+                          Problem = PatienthistoryVM.Problem,
+                          ReExaminatoinDate = PatienthistoryVM.ReExaminatoinDate,
+                          Height = PatienthistoryVM.Height,
+                          Weight = PatienthistoryVM.Weight,
+                          BloodPressure = PatienthistoryVM.BloodPressure,
+                          Note = PatienthistoryVM.Note,
+                          CreatedAt = DateTime.Now,
+                          DoctorId = PatienthistoryVM.DoctorId
+                      };
+
         }
     }
 }

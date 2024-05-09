@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Prescreptions";
+    Layout = "_DoctorLayout";
+
+  }
+
+ <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Prescreptions</li>
+        </ol>
+    </nav>
+
+<div class="d-flex justify-content-end mb-3">
+    <div>
+        <a class="btn btn-success btn-lg" role="button" asp-action="Create" asp-controller="Prescreption">
+            <i class="bi bi-person-add"></i>
+            Add new Prescreption
+        </a>
+    </div>
+</div>
+
+
+<h1>@Model.Count</h1>

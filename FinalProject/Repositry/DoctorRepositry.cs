@@ -68,6 +68,10 @@ namespace FinalProject.Repositry
 
             return context.Doctors.Include(e => e.User).ToList();
         }
-    
+
+        Doctor IDoctorRepositry.FindByUserId(string id)
+        {
+            return context.Doctors.FirstOrDefault(e => e.UserId == id);
+        }
     }
 }

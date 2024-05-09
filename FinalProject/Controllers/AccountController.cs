@@ -282,6 +282,7 @@ namespace FinalProject.Controllers
                     ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");
 
                 }
+
                 else
                 {
                     ModelState.AddModelError("invalidUserNameOrPassword", "Invalid Username or Password");

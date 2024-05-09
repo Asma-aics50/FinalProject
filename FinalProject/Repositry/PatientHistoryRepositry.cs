@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using NuGet.Protocol;
 
 namespace FinalProject.Repositry
 {
@@ -33,6 +34,11 @@ namespace FinalProject.Repositry
             }
         }
 
+        PatientHistory IPatientHistoryRepositry.FindByPatientIdAndDate(DateTime createdAt, int patientId)
+        {
+            return context.PatientHistories.FirstOrDefault(e=>e.CreatedAt==createdAt && e.PatientId==patientId);
+         }
+
         List<PatientHistory> IPatientHistoryRepositry.GetAll()
         {
             return context.PatientHistories.ToList();
@@ -45,7 +51,7 @@ namespace FinalProject.Repositry
             if(patienthistory != null)
             {
                 patienthistory.Problem = _patientHistory.Problem;
-                patienthistory.DateTime = _patientHistory.DateTime;
+                patienthistory.CreatedAt = _patientHistory.CreatedAt;
                 patienthistory.DoctorId = _patientHistory.DoctorId;
                 patienthistory.PatientId = _patientHistory.PatientId;
                 context.SaveChanges();
