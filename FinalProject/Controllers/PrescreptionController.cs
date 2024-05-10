@@ -96,11 +96,11 @@ namespace FinalProject.Controllers
 
                 //2- add prescreption
 
-                    int patienthistoryId = patientHistoryRepositry.FindByPatientIdAndDate(patientHistory.CreatedAt, patientHistory.PatientId).Id;
+                int patienthistoryId = patientHistoryRepositry.FindByPatientIdAndDate(patientHistory.CreatedAt, patientHistory.PatientId).Id;
                 if (drugSelectList.Count() > 0)
                 {
 
-                    for (int i = 0; i < drugSelectList.Count(); i++)
+                    for (int i = 0; i < drugSelectList.Count(); i++) 
                     {
                         Prescription prescriptionItem = new Prescription()
                         {
