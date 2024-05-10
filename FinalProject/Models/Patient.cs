@@ -13,8 +13,10 @@ namespace FinalProject.Models
         //public List<Doctor> Doctors { get; set; }
         
        
+        public List<DoctorPatient> DoctorPatients { get; set; }
         public List<PatientHistory> PatientHistory { get; set; }
         public List<BookedAppointment> BookedAppointments { get; set; }
+
         
         public List<Bill> Bills { get; set; }  
         

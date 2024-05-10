@@ -26,6 +26,7 @@ namespace FinalProject.Controllers
         IPrescriptionRepositry prescriptionRepository;
         IMedicalAnalysisRepositry medicalAnalysisRepositry;
         IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis;
+        IDoctorPatientRepositry doctorPatientRepositry;
         public PrescreptionController(
 
         IPatientRepositry patientRepositry,
@@ -38,8 +39,9 @@ namespace FinalProject.Controllers
         IPrescriptionRepositry prescriptionRepository,
 
         IMedicalAnalysisRepositry medicalAnalysisRepositry,
-            IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis
-        
+            IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis,
+            IDoctorPatientRepositry doctorPatientRepositry
+
         )
         {
             this.patientRepositry = patientRepositry;
@@ -52,6 +54,7 @@ namespace FinalProject.Controllers
             this.prescriptionRepository= prescriptionRepository;
             this.medicalAnalysisRepositry = medicalAnalysisRepositry;
             this.patientHistoryMedicalAnalysis = patientHistoryMedicalAnalysis;
+            this.doctorPatientRepositry = doctorPatientRepositry;
         }
 
         [HttpGet]
@@ -81,18 +84,31 @@ namespace FinalProject.Controllers
             //public IActionResult Create(CreateViewModel prescreptionVM,/*string[] instructionInput,int [] drugSelect*/)
             public IActionResult Create(CreateViewModel prescreptionVM, int[] drugSelectList,string[] instructions,int[] medicalAnalysisList)
             {
+            
             if(ModelState.IsValid)
             {
+
+                
+                prescreptionVM.DoctorId = doctorRepositry.FindByUserId(GetCurrentUserIdAsync().Result).Id;
+
+
                 //1-Add patient history
                 //1-1 map
 
-                prescreptionVM.DoctorId = doctorRepositry.FindByUserId(GetCurrentUserIdAsync().Result).Id;
-
                 PatientHistory patientHistory = MapRepositry.MapToPatientHistory(prescreptionVM);
+               
+
+                //Add Doctor-Patient Rel
+
+                DoctorPatient newDoctorPatient= new DoctorPatient { DoctorId = prescreptionVM.DoctorId, PatientId = prescreptionVM.PatientId, CreatedAt = DateTime.Now };
+                doctorPatientRepositry.Create(newDoctorPatient);
+
+
 
                 //1-2create patientHistory
 
                 patientHistoryRepositry.Create(patientHistory);
+
 
                 //2- add prescreption
 
@@ -123,9 +139,8 @@ namespace FinalProject.Controllers
 
                             PatientHistoryId = patienthistoryId,
                             MedicalAnaylsisId = medicalAnalysisList[i],
-                            DateTime = patientHistory.CreatedAt,
-                            Result = ""
-
+                            DateTime = patientHistory.CreatedAt
+                           
                         };
 
                         patientHistoryMedicalAnalysis.Create(item);
@@ -146,7 +161,8 @@ namespace FinalProject.Controllers
 
             }
 
-            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+
+                ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
             
             return View();
         }

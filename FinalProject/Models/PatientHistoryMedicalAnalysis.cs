@@ -9,7 +9,7 @@ namespace FinalProject.Models
         public int MedicalAnaylsisId { get; set; }
         [Required]
         public DateTime DateTime { get; set; }
-        public string Result {  get; set; }
+        public string ?Result {  get; set; }
 
         public PatientHistory PatientHistory { get; set; }
         public MedicalAnaylsis MedicalAnaylsis { get; set; }

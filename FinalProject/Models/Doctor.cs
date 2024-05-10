@@ -17,6 +17,7 @@ namespace FinalProject.Models
         public Department Department { get; set; }
         //public List<Patient>? Patients { get; set; }
         public List<PatientHistory>? PatientHistories { get; set; }
+        public List<DoctorPatient> DoctorPatients { get; set; }
         public List<BookedAppointment> BookedAppointments { get; set; }
 
 
