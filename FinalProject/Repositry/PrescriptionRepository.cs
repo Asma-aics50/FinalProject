@@ -2,6 +2,7 @@
 using FinalProject.IRepositry;
 using FinalProject.Migrations;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -37,6 +38,10 @@ namespace FinalProject.Repositry
         public List<Prescription> GetAll()
         {
             return context.Prescriptions.ToList();
+        }
+        public List<Prescription> GetAll_DrugByPatientHistoryId(int patientHistoyId)
+        {
+            return context.Prescriptions.Include(e=>e.Drug).Where(e=>e.PatientHistoryId==patientHistoyId).ToList();
         }
 
         public Prescription GetById(int patient_id, int drug_id)

@@ -12,5 +12,7 @@ namespace FinalProject.IRepositry
         public PatientHistory FindByPatientIdAndDate(DateTime createdAt,int patientId);
         public List<PatientHistory> FindePatinetByDoctor(int doctorId);
 
+        public PatientHistory Find_Patinet_UsrById(int id);
+
     }
 }

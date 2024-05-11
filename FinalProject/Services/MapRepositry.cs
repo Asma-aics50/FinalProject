@@ -149,5 +149,54 @@ namespace FinalProject.Services
              };
 
         }
+        public static PrescreptionDetailsViewModel MapToPrescreptionDetailsVM(PatientHistory patienthistory)
+        {
+            return new PrescreptionDetailsViewModel()
+            {
+                //patient
+
+                PatientId = patienthistory.PatientId,
+                Email = patienthistory.Patient.User.Email,
+                PatientName = $"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+                PhoneNumber = patienthistory.Patient.User.PhoneNumber,
+                BirthDate=patienthistory.Patient.User.BirthDate,            
+                //Problem
+                PatientHistoryId=patienthistory.Id,
+                Problem = patienthistory.Problem,
+                Weight=patienthistory.Weight,
+                Height=patienthistory.Height,
+                BloodPressure=patienthistory.BloodPressure,
+                ReExaminatoinDate=patienthistory.ReExaminatoinDate,
+                CreatedAt=patienthistory.CreatedAt,
+                Note=patienthistory.Note
+                
+
+            };
+
+        }
+
+        public static AnalysisViewModel MapToAnalysisVM(PatientHistoryMedicalAnalysis patientHistoryAnalysis)
+        {
+            return new AnalysisViewModel()
+            {
+                Id=patientHistoryAnalysis.MedicalAnaylsis.Id,
+                Name=patientHistoryAnalysis.MedicalAnaylsis.Name,
+                Result=patientHistoryAnalysis.Result
+                
+            };
+
+        }
+        public static DrugViewModel MapToDrugVM(Prescription prescription)
+        {
+            return new DrugViewModel()
+            {
+                Id=prescription.Drug.Id,
+                Name=prescription.Drug.Name,
+                Instructions=prescription.DrugInstruction
+                
+            };
+
+        }
+
     }
 }

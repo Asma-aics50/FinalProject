@@ -100,6 +100,7 @@ namespace FinalProject.Data
              
 
         }
+        public DbSet<FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel> PrescreptionDetailsViewModel { get; set; } = default!;
 
     }
 }

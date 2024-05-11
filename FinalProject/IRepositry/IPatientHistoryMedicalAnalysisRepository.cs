@@ -10,5 +10,7 @@ namespace FinalProject.IRepositry
         public PatientHistoryMedicalAnalysis GetById(int id);
         public List<PatientHistoryMedicalAnalysis> GetAll();
 
+        public List<PatientHistoryMedicalAnalysis> GetAll_AnalysisByPatientHistoryId(int patientHistoryId);
+
     }
 }

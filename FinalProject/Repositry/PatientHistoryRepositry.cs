@@ -45,6 +45,12 @@ namespace FinalProject.Repositry
             return context.PatientHistories.Include(e=>e.Patient).Include(e=>e.Patient.User).Where(e => e.DoctorId == doctorId).ToList();
         
         }
+         public  PatientHistory Find_Patinet_UsrById(int id)
+        {
+
+            return context.PatientHistories.Include(e => e.Patient).Include(e => e.Patient.User).FirstOrDefault(e => e.Id == id);
+        
+        }
 
         List<PatientHistory> IPatientHistoryRepositry.GetAll()
         {

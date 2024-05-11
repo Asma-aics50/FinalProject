@@ -25,7 +25,7 @@ namespace FinalProject.Controllers
         IDrugRepositry drugRepositry;
         IPrescriptionRepositry prescriptionRepository;
         IMedicalAnalysisRepositry medicalAnalysisRepositry;
-        IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis;
+        IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysisrRepositry;
         IDoctorPatientRepositry doctorPatientRepositry;
         public PrescreptionController(
 
@@ -39,7 +39,7 @@ namespace FinalProject.Controllers
         IPrescriptionRepositry prescriptionRepository,
 
         IMedicalAnalysisRepositry medicalAnalysisRepositry,
-            IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysis,
+            IPatientHistoryMedicalAnalysisRepository patientHistoryMedicalAnalysisrRepositry,
             IDoctorPatientRepositry doctorPatientRepositry
 
         )
@@ -53,7 +53,7 @@ namespace FinalProject.Controllers
             this.drugRepositry=drugRepositry;
             this.prescriptionRepository= prescriptionRepository;
             this.medicalAnalysisRepositry = medicalAnalysisRepositry;
-            this.patientHistoryMedicalAnalysis = patientHistoryMedicalAnalysis;
+            this.patientHistoryMedicalAnalysisrRepositry = patientHistoryMedicalAnalysisrRepositry;
             this.doctorPatientRepositry = doctorPatientRepositry;
         }
 
@@ -143,7 +143,7 @@ namespace FinalProject.Controllers
                            
                         };
 
-                        patientHistoryMedicalAnalysis.Create(item);
+                        patientHistoryMedicalAnalysisrRepositry.Create(item);
 
                     }
                 }
@@ -178,6 +178,37 @@ namespace FinalProject.Controllers
             List<PatientHistoryViewModel> patientHistorVMs = patientHistoryRepositry.FindePatinetByDoctor(doctorId).Select(MapRepositry.MapToPatientHistoryVM).ToList();
 
             return View(patientHistorVMs);
+
+        }
+    
+
+        public IActionResult PrescreptionDetails(int id)
+        {
+
+            //patienHistory
+
+             
+            PatientHistory patientHistory= patientHistoryRepositry.Find_Patinet_UsrById(id);
+
+            //Drugs
+
+            List<Prescription> prescriptions = prescriptionRepository.GetAll_DrugByPatientHistoryId(id);
+
+            //MEdical Analysis
+            List<PatientHistoryMedicalAnalysis> analysis = patientHistoryMedicalAnalysisrRepositry.GetAll_AnalysisByPatientHistoryId(id);
+
+            //Map
+
+            PrescreptionDetailsViewModel prescreptionDetailsVM=MapRepositry.MapToPrescreptionDetailsVM(patientHistory);
+
+
+            ViewData["Analysis"] = analysis.Select(MapRepositry.MapToAnalysisVM).ToList();
+            ViewData["Drugs"]=prescriptions.Select(MapRepositry.MapToDrugVM).ToList();
+
+            //Return
+
+            return View(prescreptionDetailsVM);
+
 
         }
     }
