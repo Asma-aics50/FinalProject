@@ -38,6 +38,18 @@ namespace FinalProject.Services
 
             };
         }
+        public static AllPatientViewModel MapToAllPatientsVM(DoctorPatient doctorPatient)
+        {
+            return new AllPatientViewModel
+            {
+                Id = doctorPatient.Patient.Id,
+                Name = $"{doctorPatient.Patient.User.FirstName} {doctorPatient.Patient.User.LastName}",
+                PhoneNumber = doctorPatient.Patient.User.PhoneNumber,
+                Email = doctorPatient.Patient.User.Email,
+
+
+            };
+        }
         public static AllPatientsAppointmentViewModel MapToAllPatientsAppointmentVM(BookedAppointment appointment)
         {
             return new AllPatientsAppointmentViewModel

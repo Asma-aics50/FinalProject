@@ -7,6 +7,8 @@ namespace FinalProject.IRepositry
         public void Create(DoctorPatient doctorPatient);
         public DoctorPatient FindById(DoctorPatient doctorPatient);
 
+        public List<DoctorPatient> FindePatinetByDoctor(int doctorId);
+
 
     }
 }
