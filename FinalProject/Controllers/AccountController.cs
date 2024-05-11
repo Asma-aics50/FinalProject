@@ -86,7 +86,7 @@ namespace FinalProject.Controllers
         //Authorize admin
         [HttpGet]
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult CreatePatientAccount()
         {
             return View();
@@ -95,7 +95,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreatePatientAccount(CreateAccountViewModel userVM)
         {
             if (ModelState.IsValid)
@@ -133,7 +133,7 @@ namespace FinalProject.Controllers
         //Authorize admin
         [HttpGet]
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult CreateEmployeeAccount()
         {
             ViewData["Departments"] = context.Departments.ToList();
@@ -142,7 +142,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
 
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateEmployeeAccount(CreateEmployeeAccountViewModel userVM)

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProject.Controllers
 
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
 
     public class AdminController : Controller
     {
