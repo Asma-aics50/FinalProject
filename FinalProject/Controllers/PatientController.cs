@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
         }
 
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
             public IActionResult AllPatients()
         {
 

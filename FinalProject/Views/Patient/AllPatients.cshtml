@@ -54,13 +54,13 @@
                     @Html.DisplayFor(modelItem => patient.Email)
                 </td>
                  <td>
-                    <a asp-action="PatientDetails" asp-controller="Patient" asp-route-id="@patient.Id">
+                    <a asp-action="PatientDetails" asp-controller="Admin" asp-route-id="@patient.Id">
                         <i class="bi bi-eye"></i>
-                    </a>
-                    <a asp-action="EditPatient" asp-controller="Patient" asp-route-id="@patient.Id">
+                    </a> 
+                    <a asp-action="EditPatient" asp-controller="Admin" asp-route-id="@patient.Id">
                         <i class="bi bi-pencil-square"></i>
-                    </a>
-                    <a asp-action="DeletePatient" asp-controller="Patient" asp-route-id="@patient.Id">
+                    </a> 
+                    <a asp-action="DeletePatient" asp-controller="Admin" asp-route-id="@patient.Id">
                         <i class="bi bi-trash"></i>
                     </a>
                 </td>
