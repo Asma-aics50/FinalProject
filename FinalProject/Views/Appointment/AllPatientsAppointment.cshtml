@@ -4,19 +4,20 @@
     ViewData["Title"] = "AllPatientsAppointment";
     Layout = "_AdminLayout";
 }
-<a class="btn btn-success btn-lg" role="button" asp-action="Appointment" asp-controller="Create">
-    <i class="bi bi-person-add"></i>
-    Add new Appointment
 
-</a>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+        </ol>
+    </nav>
 
-
-
-
-<div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
-
-    <div class="card-body">
-        <h2 class="card-title">All Appointments</h2>
+<div class="d-flex justify-content-end mb-3">
+    <div>
+        <a class="btn btn-success btn-lg" role="button" asp-action="Create" asp-controller="Appointment">
+            <i class="bi bi-person-add"></i>
+            Add new Appointment
+        </a>
     </div>
 </div>
 
@@ -52,17 +53,19 @@
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppointmentStatues)
+                @Html.DisplayFor(modelItem => item.AppointmentStatus)
             </td>
                 <td>
                     <a asp-action="Details" asp-controller="Appointment" asp-route-id="@item.Id">
-                        <i class="bi bi-eye"></i>
+                        <i style="height:30px;width:30px; " class="bi bi-eye"></i>
                     </a>
 
                     <a asp-action="Edit" asp-controller="Appointment" asp-route-id="@item.Id">
                         <i class="bi bi-pencil-square"></i>
                     </a>
-                    <a asp-action="Delete" asp-controller="Appointment" asp-route-id="@item.Id">
+                     <a href="#" class="delete-item" data-id="@item.Id ">
+      
+                    @* <a  asp-action="Delete" asp-controller="Appointment" asp-route-id="@item.Id"  class="delete-btn"> *@
                         <i class="bi bi-trash"></i>
                     </a>
                 </td>
@@ -70,3 +73,60 @@
 }
     </tbody>
 </table>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" id="close-modal-1" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this appointment ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-danger confirm-delete" id="Delete" data-dismiss="modal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    // Select all elements with the class containing "delete" (assuming your class name includes "delete")
+    const deleteLinks = document.querySelectorAll('.delete-item');
+
+    deleteLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default navigation
+
+            // Get item ID from the data-id attribute
+            const itemId = this.dataset.id;
+
+            // Logic to show the modal with the captured ID
+            console.log(itemId);
+            console.log(itemId)
+            $("#itemId").val(itemId);
+            $("#deleteModal").data("itemId", itemId); // Set ID as data attribute on modal button
+            $("#deleteModal").modal("show");      //     Show the modal
+
+            document.getElementById("Delete").href ="/Appointment/Delete?id=" + itemId;
+
+        });
+    });
+
+    // Close modal using close buttons
+    const closeButtons = document.querySelectorAll('.close, .btn-secondary'); // Select both close buttons
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.classList.remove('show'); // Hide the modal using Bootstrap class
+        });
+    });
+</script>

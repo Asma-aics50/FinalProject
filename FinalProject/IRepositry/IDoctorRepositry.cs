@@ -14,6 +14,10 @@ namespace FinalProject.IRepositry
 
         public List<Doctor> GetAll_Departments_User();
 
+        public List<Doctor> GetAll_User();
+
+
+        public Doctor FindByUserId(string id);
 
     }
 }

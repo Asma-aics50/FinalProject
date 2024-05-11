@@ -46,6 +46,7 @@ namespace FinalProject.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -127,6 +128,7 @@ namespace FinalProject.Controllers
                 }
                 return View();
             }
+            
 
             return View();
         }
@@ -144,7 +146,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateEmployeeAccount(CreateEmployeeAccountViewModel userVM)
         {
             if (ModelState.IsValid)
@@ -179,15 +181,17 @@ namespace FinalProject.Controllers
                 }
                 return View();
             }
+            ViewData["Departments"] = context.Departments.ToList();
 
             return View();
         }
 
 
         //create Doctors account // for admin
+        
         [HttpGet]
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Doctor")]
         public IActionResult CreateDoctorAccount()
         {
             ViewData["Departments"] = context.Departments.ToList();
@@ -198,12 +202,11 @@ namespace FinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Doctor")]
         public async Task<IActionResult> CreateDoctorAccount(CreateDoctorAccountViewModel userVM)
         {
             if (ModelState.IsValid)
             {
-
                 ApplicationUser user = new ApplicationUser()
                 {
 
@@ -267,6 +270,7 @@ namespace FinalProject.Controllers
                     if (check)
                     {
                         await signIn.SignInAsync(user, userVm.RememberMe);
+
                         if (User.IsInRole("Admin"))
                         {
                             return RedirectToAction("Index", "Doctor");
@@ -281,6 +285,7 @@ namespace FinalProject.Controllers
                     ModelState.AddModelError("notValidPasswordOrEmail", "Invalid Username or Password");
 
                 }
+
                 else
                 {
                     ModelState.AddModelError("invalidUserNameOrPassword", "Invalid Username or Password");

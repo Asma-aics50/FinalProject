@@ -8,11 +8,17 @@ namespace FinalProject.Models
         public int DrugId { get; set; }
 
         [Required]
-        public int Quantity { get; set; }
-        public int NoOfTimes { get; set; }
-        [Required]
-        public string Duration { get; set; }
+        //public int Quantity { get; set; }
+        //public int NoOfTimes { get; set; }
 
+
+        //[Required]
+        //public string Duration { get; set; }
+
+
+
+        public string DrugInstruction { get; set; }
+        
         public PatientHistory PatientHistory { get; set; }
         public Drug Drug { get; set; }
     }

@@ -10,11 +10,16 @@ namespace FinalProject.Models
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-        public List<Doctor> Doctors { get; set; }
+        //public List<Doctor> Doctors { get; set; }
         
        
+        public List<DoctorPatient> DoctorPatients { get; set; }
         public List<PatientHistory> PatientHistory { get; set; }
-        public List<Bill> Bills { get; set; }   
+        public List<BookedAppointment> BookedAppointments { get; set; }
+
+        
+        public List<Bill> Bills { get; set; }  
+        
 
     }
 }

@@ -1,5 +1,10 @@
-﻿using FinalProject.Models;
+﻿using FinalProject.Data.Enum;
+using FinalProject.Models;
+using FinalProject.Repositry;
 using FinalProject.ViewModels;
+using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.PatientHistory;
+using FinalProject.ViewModels.Prescreption;
 using System.Numerics;
 
 namespace FinalProject.Services
@@ -33,6 +38,18 @@ namespace FinalProject.Services
 
             };
         }
+        public static AllPatientViewModel MapToAllPatientsVM(DoctorPatient doctorPatient)
+        {
+            return new AllPatientViewModel
+            {
+                Id = doctorPatient.Patient.Id,
+                Name = $"{doctorPatient.Patient.User.FirstName} {doctorPatient.Patient.User.LastName}",
+                PhoneNumber = doctorPatient.Patient.User.PhoneNumber,
+                Email = doctorPatient.Patient.User.Email,
+
+
+            };
+        }
         public static AllPatientsAppointmentViewModel MapToAllPatientsAppointmentVM(BookedAppointment appointment)
         {
             return new AllPatientsAppointmentViewModel
@@ -41,8 +58,145 @@ namespace FinalProject.Services
                DoctorName = $"{appointment.Doctor.User.FirstName} {appointment.Doctor.User.LastName}",
                PatientName = $"{appointment.Patient.User.FirstName} {appointment.Patient.User.LastName}",
                DateTime=appointment.DateTime,
-               AppointmentStatues=appointment.AppointmentStatues
+               AppointmentStatus = (AppointmentStatues)appointment.AppointmentStatues,
+
             };
         }
+        public static ForDoctorsListViewModel MapToCreateAppointmentDoctors(Doctor doctor)
+        {
+            return new ForDoctorsListViewModel
+            {
+               Id=doctor.Id,
+               Name = $"{doctor.User.FirstName} {doctor.User.LastName}",
+              
+            };
+        } 
+        public static ForPatientsListViewModel MapToCreateAppointmentPatients(Patient patient)
+        {
+            return new ForPatientsListViewModel
+            {
+               Id=patient.Id,
+               Name = $"{patient.User.FirstName} {patient.User.LastName}",
+              
+            };
+        } 
+        public static BookedAppointment MapToBookedAppointment(CreateEditAppointmentViewModel appointmentVM)
+        {
+            return new BookedAppointment
+            {
+                Id=appointmentVM.Id,
+                DoctorId=appointmentVM.DoctorId,
+                PatientId=appointmentVM.PatientId,
+                DateTime=appointmentVM.DateTime,
+                AppointmentStatues=appointmentVM.AppointmentStatues              
+            };
+        }
+        public static BookedAppointment MapToAutoBookedAppointment(CreateViewModel prescreptionVM)
+        {
+            return new BookedAppointment
+            {
+
+                DoctorId = prescreptionVM.DoctorId,
+                PatientId = prescreptionVM.PatientId,
+                DateTime = (DateTime)prescreptionVM.ReExaminatoinDate,
+                AppointmentStatues = AppointmentStatues.confirmed,
+
+            };
+        }
+
+
+
+
+    
+        
+        public static CreateEditAppointmentViewModel MapToCreateEditAppointmentVM(BookedAppointment appointment)
+        {
+            return new CreateEditAppointmentViewModel
+            {
+                Id=appointment.Id,
+                DoctorId=appointment.DoctorId,
+                PatientId=appointment.PatientId,
+                DateTime=appointment.DateTime,
+                AppointmentStatues=appointment.AppointmentStatues              
+            };
+        }
+        public static PatientHistory MapToPatientHistory(CreateViewModel PatienthistoryVM)
+        {
+            return new PatientHistory()
+                      {
+                          PatientId = PatienthistoryVM.PatientId,
+                          Problem = PatienthistoryVM.Problem,
+                          ReExaminatoinDate = PatienthistoryVM.ReExaminatoinDate,
+                          Height = PatienthistoryVM.Height,
+                          Weight = PatienthistoryVM.Weight,
+                          BloodPressure = PatienthistoryVM.BloodPressure,
+                          Note = PatienthistoryVM.Note,
+                          CreatedAt = DateTime.Now,
+                          DoctorId = PatienthistoryVM.DoctorId
+                      };
+
+        }
+        public static PatientHistoryViewModel MapToPatientHistoryVM(PatientHistory patienthistory)
+        {
+            return new PatientHistoryViewModel()
+             {
+                Id=patienthistory.Id,
+                Problem=patienthistory.Problem,
+                DoctorId=patienthistory.DoctorId,
+                PatientId=patienthistory.PatientId,
+                PatientEmail=patienthistory.Patient.User.Email,
+                PatientName=$"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+             };
+
+        }
+        public static PrescreptionDetailsViewModel MapToPrescreptionDetailsVM(PatientHistory patienthistory)
+        {
+            return new PrescreptionDetailsViewModel()
+            {
+                //patient
+
+                PatientId = patienthistory.PatientId,
+                Email = patienthistory.Patient.User.Email,
+                PatientName = $"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+                PhoneNumber = patienthistory.Patient.User.PhoneNumber,
+                BirthDate=patienthistory.Patient.User.BirthDate,            
+                //Problem
+                PatientHistoryId=patienthistory.Id,
+                Problem = patienthistory.Problem,
+                Weight=patienthistory.Weight,
+                Height=patienthistory.Height,
+                BloodPressure=patienthistory.BloodPressure,
+                ReExaminatoinDate=patienthistory.ReExaminatoinDate,
+                CreatedAt=patienthistory.CreatedAt,
+                Note=patienthistory.Note
+                
+
+            };
+
+        }
+
+        public static AnalysisViewModel MapToAnalysisVM(PatientHistoryMedicalAnalysis patientHistoryAnalysis)
+        {
+            return new AnalysisViewModel()
+            {
+                Id=patientHistoryAnalysis.MedicalAnaylsis.Id,
+                Name=patientHistoryAnalysis.MedicalAnaylsis.Name,
+                Result=patientHistoryAnalysis.Result
+                
+            };
+
+        }
+        public static DrugViewModel MapToDrugVM(Prescription prescription)
+        {
+            return new DrugViewModel()
+            {
+                Id=prescription.Drug.Id,
+                Name=prescription.Drug.Name,
+                Instructions=prescription.DrugInstruction
+                
+            };
+
+        }
+
     }
 }

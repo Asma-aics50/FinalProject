@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.ViewModels;
+using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.Prescreption;
 namespace FinalProject.Data
 {
     public class HospitalManagementSystemDbContext : IdentityDbContext<ApplicationUser>
@@ -23,8 +25,8 @@ namespace FinalProject.Data
         public DbSet<Company> Companys { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<BillItems> BillItems { get; set; }
-
-
+        public DbSet<DoctorPatient> DoctorPatients { get; set; }
+        
         public HospitalManagementSystemDbContext(DbContextOptions options) : base(options)
         {
 
@@ -50,6 +52,10 @@ namespace FinalProject.Data
 
             modelBuilder.Entity<PatientHistoryMedicalAnalysis>()
                 .HasKey(p => new { p.PatientHistoryId, p.MedicalAnaylsisId });
+
+              modelBuilder.Entity<DoctorPatient>()
+                .HasKey(p => new { p.DoctorId, p.PatientId });
+            
 
             modelBuilder.Entity<PatientHistoryMedicalAnalysis>()
                 .HasOne(p => p.MedicalAnaylsis)
@@ -77,9 +83,24 @@ namespace FinalProject.Data
 
 
             modelBuilder.Entity<Patient>().Property(e => e.BloodGroup).IsRequired(false);
+            modelBuilder.Entity<BookedAppointment>()
+          .HasOne(ba => ba.Patient)
+          .WithMany(p => p.BookedAppointments)
+          .HasForeignKey(ba => ba.PatientId)
+          .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PatientHistory>().Property(e => e.BloodPressure).IsRequired(false);
+            modelBuilder.Entity<PatientHistory>().Property(e => e.Note).IsRequired(false);
+            
+            modelBuilder.Entity<DoctorPatient>()
+                .HasOne(e => e.Patient)
+                .WithMany(e => e.DoctorPatients)
+
+                .OnDelete(DeleteBehavior.Restrict);
+             
 
         }
-        public DbSet<FinalProject.ViewModels.AllPatientsAppointmentViewModel> AllPatientsAppointmentViewModel { get; set; } = default!;
-       
+        public DbSet<FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel> PrescreptionDetailsViewModel { get; set; } = default!;
+
     }
 }

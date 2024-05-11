@@ -9,6 +9,10 @@ namespace FinalProject.IRepositry
         public void Delete(int id);
         public PatientHistory Get(int id);
         public List<PatientHistory> GetAll();
+        public PatientHistory FindByPatientIdAndDate(DateTime createdAt,int patientId);
+        public List<PatientHistory> FindePatinetByDoctor(int doctorId);
+
+        public PatientHistory Find_Patinet_UsrById(int id);
 
     }
 }

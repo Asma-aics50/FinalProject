@@ -11,5 +11,7 @@ namespace FinalProject.IRepositry
         public Prescription GetById(int patient_id , int drug_id);
         public List<Prescription> GetAll();
 
+        public List<Prescription> GetAll_DrugByPatientHistoryId(int patientHistoyId);
+
     }
 }

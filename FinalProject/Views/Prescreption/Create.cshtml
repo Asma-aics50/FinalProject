@@ -1,0 +1,191 @@
+﻿@model FinalProject.ViewModels.Prescreption.CreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_DoctorLayout";
+
+    SelectList PatientsList = new SelectList(ViewBag.Patients, "Id", "Name");
+    SelectList DrugsList = new SelectList(ViewBag.Drugs, "Id", "Name");
+    SelectList AnalysisList = new SelectList(ViewBag.Analysis, "Id", "Name");
+
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Prescreption">Prescreption</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add new Prescreption</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group" >
+                <label asp-for="PatientId" class="form-label mt-4"></label>
+
+                    <select asp-for="PatientId" class="form-select"  asp-items="PatientsList"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="Problem" class="col-form-label col-form-label-lg mt-4 "></label>
+                    <input asp-for="Problem" class="form-select" />
+                <span asp-validation-for="Problem" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReExaminatoinDate" class="control-label form-label mt-4"></label>
+                <input asp-for="ReExaminatoinDate" class="form-select" />
+                <span asp-validation-for="ReExaminatoinDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label form-label mt-4"></label>
+                <input asp-for="Weight" class="form-select" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label form-label mt-4"></label>
+                <input asp-for="Height" class="form-select" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodPressure" class="control-label form-label mt-4"></label>
+                <input asp-for="BloodPressure" class="form-select" />
+                <span asp-validation-for="BloodPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label form-label mt-4"></label>
+                <input asp-for="Note" class="form-select" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+             <div id="fieldsContainer">
+                 </div>
+           <button type="button" class="btn btn-primary mt-4" id="addDrugFieldsBtn">Add new Drug</button>
+
+                 <div id="analysisContainer"></div>
+            <button type="button" class="btn btn-primary mt-4" id="addAnalysisBtn">Add New Analysis</button>
+            <div class="form-group">
+
+                <input type="submit" value="Create" class="btn btn-primary mt-4" />
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+         <script>
+  
+         function addDrugSelectList() {
+                var DrugsList = @Json.Serialize(@ViewBag.Drugs);
+                console.log(DrugsList);
+
+                var drugContainer = document.getElementById('fieldsContainer');
+                // Create a new div for the select list and its label
+                var newDiv = document.createElement('div');
+                newDiv.classList.add('form-group');
+                                // Create the label for the select list
+                var label = document.createElement('label');
+                label.textContent = 'Drugs';
+                newDiv.appendChild(label);
+                 // Create the select list
+                var DrugsSelectList = document.createElement('select');
+                DrugsSelectList.classList.add('form-select');
+            DrugsSelectList.setAttribute('name', 'drugSelectList[]'); 
+                DrugsSelectList.setAttribute('asp-items', "AnalysisList")
+
+                 DrugsList.forEach(function (item) {
+                     var option = document.createElement('option');
+                     option.value = item.id;
+                     option.textContent = item.name;
+                     console.log(option);
+                    DrugsSelectList.appendChild(option);
+
+                 });
+
+            //instructionLabel
+                var instructionLabel = document.createElement('label');
+                instructionLabel.textContent = 'Drug Instructions';
+            //instructionInput
+
+                var instructionInput = document.createElement('input');
+                instructionInput.setAttribute('name', "instructions[]")
+                instructionInput.classList.add('form-select');
+                
+                 
+                newDiv.appendChild(instructionLabel);
+                newDiv.appendChild(instructionInput);
+             newDiv.appendChild(label);
+                newDiv.appendChild(DrugsSelectList);
+
+
+                 // add button
+                 var button = document.createElement("button");
+                // Set button attributes
+                button.setAttribute("type", "button");
+                button.setAttribute("class", "btn btn-danger mt-4");
+                button.textContent = "Remove drug Fields";
+                // Add onclick event listener to remove its parent element
+                button.onclick = function() {
+                  this.parentElement.remove(); // Removes the parent element of the button
+                };
+                newDiv.appendChild(button); // Append the new div to the container 
+                drugContainer.appendChild(newDiv); // Append the new div to the container
+          }
+        // Add event listener to the "Add New Analysis" button
+        document.getElementById('addDrugFieldsBtn').addEventListener('click', addDrugSelectList);
+  
+            // -----------------------------------------------------------------
+   
+              // Function to create and append analysis select list
+        
+
+       function addAnalysisSelectList() {
+            var AnalysisList = @Json.Serialize(@ViewBag.Analysis);
+            console.log(AnalysisList);
+        
+           var analysisContainer = document.getElementById('analysisContainer');
+            // Create a new div for the select list and its label
+            var newDiv = document.createElement('div');
+            newDiv.classList.add('form-group');
+
+            // Create the label for the select list
+            var label = document.createElement('label');
+            label.textContent = 'Analysis';
+            newDiv.appendChild(label);
+            // Create the select list
+            var selectList = document.createElement('select');
+            selectList.classList.add('form-select');
+            selectList.setAttribute('name', 'medicalAnalysisList[]');
+            
+            AnalysisList.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.name;
+                console.log(option);
+                selectList.appendChild(option);
+            });
+            newDiv.appendChild(selectList); // Append the select list to the new div
+            // add button
+             var button = document.createElement("button");
+            // Set button attributes
+            button.setAttribute("type", "button");
+            button.setAttribute("class", "btn btn-danger mt-4");
+            button.textContent = "Remove Analysis Fields";
+            // Add onclick event listener to remove its parent element
+            button.onclick = function() {
+              this.parentElement.remove(); // Removes the parent element of the button
+            };
+            newDiv.appendChild(button); // Append the new div to the container    
+            analysisContainer.appendChild(newDiv); // Append the new div to the container
+
+        }
+
+        // Add event listener to the "Add New Analysis" button
+        document.getElementById('addAnalysisBtn').addEventListener('click', addAnalysisSelectList);
+    </script>
+    }

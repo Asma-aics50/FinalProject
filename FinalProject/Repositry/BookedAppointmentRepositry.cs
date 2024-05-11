@@ -52,9 +52,18 @@ namespace FinalProject.Repositry
         }
         public List<BookedAppointment> GetAllAppointments_Patient_Doctor()
         {
-            return context.BookedAppointments.Include(e=>e.Doctor).Include(e=>e.Patient).ToList();
+            return context.BookedAppointments.Include(e=>e.Doctor.User).Include(e=>e.Patient.User).ToList();
+
+        }
+        public List<BookedAppointment> GetAllAppointmentsByDoctorId_Patient_Doctor(int doctorid)
+        {
+            return context.BookedAppointments.Include(e=>e.Doctor.User).Include(e=>e.Patient.User).Where(e=>e.DoctorId==doctorid).ToList();
 
         }
 
+       BookedAppointment IBookedAppointmentsRepositry.GetOne_Doctor_Patient(int id)
+        {
+            return context.BookedAppointments.Include(e => e.Patient).Include(e => e.Doctor).Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }

@@ -1,0 +1,93 @@
+﻿@using FinalProject.ViewModels.PatientHistory
+@model List< PatientHistoryViewModel>
+@{
+    ViewData["Title"] = "DoctorCaseStudies";
+    Layout = "_DoctorLayout";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Case studies</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-end mb-3">
+    <div>
+        <a class="btn btn-success btn-lg" role="button" asp-action="Create" asp-controller="Prescreption">
+            <i class="bi bi-person-add"></i>
+            Add new Case study
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="row">Id</th>
+            <td>Patient Name</td>
+            <td> Patient Email</td>
+            <td>Complaint</td>
+            <td>Action</td>
+
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Problem)
+                </td>
+               @*  <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentStatus)
+                </td> *@
+
+                <td>
+
+                    <a asp-action="PrescreptionDetails" asp-controller="Prescreption" asp-route-id="@item.Id">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    <a asp-action="EditPrescreption" asp-controller="Prescreption" asp-route-id="@item.Id">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" id="close-modal-1" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this appointment ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-danger confirm-delete" id="Delete" data-dismiss="modal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -164,6 +164,10 @@ namespace FinalProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
                     b.ToTable("BookedAppointments");
                 });
 
@@ -231,9 +235,6 @@ namespace FinalProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Salary")
                         .HasColumnType("float");
 
@@ -255,11 +256,27 @@ namespace FinalProject.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("PatientId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.DoctorPatient", b =>
+                {
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DoctorId", "PatientId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("DoctorPatients");
                 });
 
             modelBuilder.Entity("FinalProject.Models.Drug", b =>
@@ -370,11 +387,20 @@ namespace FinalProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<string>("BloodPressure")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
+
+                    b.Property<double?>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -382,6 +408,12 @@ namespace FinalProject.Migrations
                     b.Property<string>("Problem")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReExaminatoinDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -404,7 +436,6 @@ namespace FinalProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Result")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PatientHistoryId", "MedicalAnaylsisId");
@@ -422,15 +453,9 @@ namespace FinalProject.Migrations
                     b.Property<int>("PatientHistoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Duration")
+                    b.Property<string>("DrugInstruction")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NoOfTimes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.HasKey("DrugId", "PatientHistoryId");
 
@@ -626,6 +651,25 @@ namespace FinalProject.Migrations
                     b.Navigation("Service");
                 });
 
+            modelBuilder.Entity("FinalProject.Models.BookedAppointment", b =>
+                {
+                    b.HasOne("FinalProject.Models.Doctor", "Doctor")
+                        .WithMany("BookedAppointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Models.Patient", "Patient")
+                        .WithMany("BookedAppointments")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("FinalProject.Models.Doctor", b =>
                 {
                     b.HasOne("FinalProject.Models.Department", "Department")
@@ -633,10 +677,6 @@ namespace FinalProject.Migrations
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("FinalProject.Models.Patient", null)
-                        .WithMany("Doctors")
-                        .HasForeignKey("PatientId");
 
                     b.HasOne("FinalProject.Models.ApplicationUser", "User")
                         .WithMany()
@@ -647,6 +687,25 @@ namespace FinalProject.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.DoctorPatient", b =>
+                {
+                    b.HasOne("FinalProject.Models.Doctor", "Doctor")
+                        .WithMany("DoctorPatients")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Models.Patient", "Patient")
+                        .WithMany("DoctorPatients")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("FinalProject.Models.Drug", b =>
@@ -693,7 +752,7 @@ namespace FinalProject.Migrations
             modelBuilder.Entity("FinalProject.Models.PatientHistory", b =>
                 {
                     b.HasOne("FinalProject.Models.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("PatientHistories")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -810,6 +869,15 @@ namespace FinalProject.Migrations
                     b.Navigation("Employees");
                 });
 
+            modelBuilder.Entity("FinalProject.Models.Doctor", b =>
+                {
+                    b.Navigation("BookedAppointments");
+
+                    b.Navigation("DoctorPatients");
+
+                    b.Navigation("PatientHistories");
+                });
+
             modelBuilder.Entity("FinalProject.Models.Drug", b =>
                 {
                     b.Navigation("Prescriptions");
@@ -824,7 +892,9 @@ namespace FinalProject.Migrations
                 {
                     b.Navigation("Bills");
 
-                    b.Navigation("Doctors");
+                    b.Navigation("BookedAppointments");
+
+                    b.Navigation("DoctorPatients");
 
                     b.Navigation("PatientHistory");
                 });

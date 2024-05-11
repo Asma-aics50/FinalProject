@@ -21,6 +21,12 @@ builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
 builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
 builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepositry>();
 builder.Services.AddScoped<IBookedAppointmentsRepositry, BookedAppointmentRepositry>();
+builder.Services.AddScoped<IPatientHistoryRepositry, PatientHistoryRepositry>();
+builder.Services.AddScoped<IDrugRepositry, DrugRepositry>();
+builder.Services.AddScoped<IPrescriptionRepositry, PrescriptionRepository>();
+builder.Services.AddScoped<IMedicalAnalysisRepositry, MedicalAnalysisRepositry>();
+builder.Services.AddScoped<IPatientHistoryMedicalAnalysisRepository, PatientHistoryMedicalAnalysisRepositry>();
+builder.Services.AddScoped<IDoctorPatientRepositry, DoctorPatientRepositry>();
 
 var app = builder.Build();
 

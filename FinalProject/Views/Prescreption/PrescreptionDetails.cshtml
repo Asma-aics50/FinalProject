@@ -1,0 +1,175 @@
+﻿@using FinalProject.ViewModels
+@model FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Prescreption Details";
+    Layout = "_DoctorLayout";
+}
+
+<div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
+    
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="DoctorIndex" asp-controller="Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a asp-action="DoctorCaseStudies" asp-controller="Prescreption">Prescreptions</a></li>
+        <li class="breadcrumb-item"><a>Details</a></li>
+    </ol>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th colspan="2">Patient Personal Details</th>  
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <th>Name</th>
+                
+            <td>@Model.PatientName </td>
+                
+        </tr>
+        <tr>
+
+              <th>Phone Number</th>
+                <td>
+                    @Model.PhoneNumber
+                </td>
+        </tr>
+
+        <tr>
+
+            <th>Email</th>
+
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+
+            <td>@Model.CreatedAt</td>
+        </tr>
+        <tr>
+            <th>BirthDate</th>
+
+            <td>@Model.BirthDate</td>
+        </tr>
+
+
+    </tbody>
+</table>
+              
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th colspan="2">Patient Case Study </th>  
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <th>Id</th>
+                
+            <td>@Model.PatientHistoryId </td>
+                
+        </tr><tr>
+
+            <th>Complaint</th>
+                
+            <td>@Model.Problem </td>
+                
+        </tr>
+        <tr>
+
+            <th>Height</th>
+                <td>
+                    @Model.Height
+                </td>
+        </tr>
+
+        <tr>
+            <th>Weight</th>
+
+            <td>@Model.Weight</td>
+        </tr>
+        <tr>
+            <th>ReExaminatoinDate</th>
+
+            <td>@Model.ReExaminatoinDate</td>
+        </tr>
+        <tr>
+            <th>Blood Pressure</th>
+
+            <td>@Model.BloodPressure</td>
+        </tr>
+        <tr>
+            <th>Note</th>
+
+            <td>@Model.Note</td>
+        </tr>
+  
+    </tbody>
+</table>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th colspan="2">Drugs </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <th>Drug Name</th>
+
+            <th>Instructions </th>
+
+        </tr>
+
+        @foreach (var Drug in (List<DrugViewModel>)ViewData["Drugs"])
+        {
+            <tr>
+
+                <th>@Drug.Name</th>
+                <td>@Drug.Instructions </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th colspan="2">Analysis </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            
+            <th>Analysis</th>
+
+            <th>Result </th>
+
+        </tr>
+
+        @foreach (var analysis in (List<AnalysisViewModel>)ViewData["Analysis"])
+        {
+            <tr>
+
+                <th>@analysis.Name</th>
+                <th>@analysis.Result</th>
+                
+            </tr>
+        }
+
+    </tbody>
+</table>

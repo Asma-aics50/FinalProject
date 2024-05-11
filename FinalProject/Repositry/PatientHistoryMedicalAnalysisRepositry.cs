@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -31,6 +32,10 @@ namespace FinalProject.Repositry
         public List<PatientHistoryMedicalAnalysis> GetAll()
         {
             return context.PatientHistoryMedicalAnalyses.ToList();
+        }
+        public List<PatientHistoryMedicalAnalysis> GetAll_AnalysisByPatientHistoryId(int patientHistoryId)
+        {
+            return context.PatientHistoryMedicalAnalyses.Include(e=>e.MedicalAnaylsis).Where(e=>e.PatientHistoryId==patientHistoryId).ToList();
         }
 
         public PatientHistoryMedicalAnalysis GetById(int id)

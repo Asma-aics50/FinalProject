@@ -26,11 +26,15 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-            public IActionResult AllDoctors()
+        [Authorize(Roles = "Admin, Doctor")]
+        public IActionResult AllDoctors()
         {
 
             List<AllDoctorsViewModel> doctorsVM = doctorRepositry.GetAll_Departments_User().Select(MapRepositry.MapToAllDoctorVM).ToList();
+            if (User.IsInRole("Doctor"))
+                ViewBag.Layout = "_DoctorLayout";
+            else if (User.IsInRole("Admin"))
+                ViewBag.Layout = "_AdminLayout";
 
 
             return View(doctorsVM);
