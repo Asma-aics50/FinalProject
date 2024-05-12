@@ -27,6 +27,7 @@ builder.Services.AddScoped<IPrescriptionRepositry, PrescriptionRepository>();
 builder.Services.AddScoped<IMedicalAnalysisRepositry, MedicalAnalysisRepositry>();
 builder.Services.AddScoped<IPatientHistoryMedicalAnalysisRepository, PatientHistoryMedicalAnalysisRepositry>();
 builder.Services.AddScoped<IDoctorPatientRepositry, DoctorPatientRepositry>();
+builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
 
 var app = builder.Build();
 

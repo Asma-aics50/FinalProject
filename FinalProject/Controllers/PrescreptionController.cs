@@ -161,7 +161,6 @@ namespace FinalProject.Controllers
 
             }
 
-
                 ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
             
             return View();
@@ -171,6 +170,7 @@ namespace FinalProject.Controllers
       
         public IActionResult DoctorCaseStudies()
         {
+
             string doctorUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             
             int doctorId = doctorRepositry.FindByUserId(doctorUserId).Id;
