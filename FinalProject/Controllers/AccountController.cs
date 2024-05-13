@@ -19,22 +19,26 @@ namespace FinalProject.Controllers
             IPatientRepositry patientRepositry;
             IDoctorRepositry doctorRepositry;
             IEmployeeRepositry employeeRepositry;
-        HospitalManagementSystemDbContext context;
+        IDepartmentRepositry departmentRepositry;
+
 
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signIn,
                 IPatientRepositry patientRepositry,
                 IDoctorRepositry doctorRepositry,
                 IEmployeeRepositry employeeRepositry,
-            HospitalManagementSystemDbContext context
+
+        IDepartmentRepositry departmentRepositry
+            //HospitalManagementSystemDbContext context
              )
             {
-            this.context = context;
+            //this.context = context;
                 this.userManager = userManager;
                 this.signIn = signIn;
                 this.patientRepositry= patientRepositry;
             this.doctorRepositry = doctorRepositry;
             this.employeeRepositry= employeeRepositry;
+            this.departmentRepositry = departmentRepositry;
             }
 
 
@@ -78,7 +82,11 @@ namespace FinalProject.Controllers
                     return RedirectToAction("Index", "Home");
 
                 }
-                return View();
+                // If creation failed, add model errors
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
 
             return View();
@@ -104,7 +112,6 @@ namespace FinalProject.Controllers
 
                 ApplicationUser user = new ApplicationUser()
                 {
-
                     UserName = userVM.UserName,
                     Email = userVM.Email, //Allow null
                     PasswordHash = userVM.Password,
@@ -117,16 +124,19 @@ namespace FinalProject.Controllers
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
 
-
-
-                    await userManager.AddToRoleAsync(user,"Patient");
+                await userManager.AddToRoleAsync(user,"Patient");
                 if (result.Succeeded)
                 {
                         Patient patient = new Patient() { UserId = user.Id };
                         patientRepositry.Create(patient);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("AdminIndex", "Dashboard"); // change to dashboord
+
                 }
-                return View();
+                // If creation failed, add model errors
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
             
 
@@ -138,7 +148,7 @@ namespace FinalProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateEmployeeAccount()
         {
-            ViewData["Departments"] = context.Departments.ToList();
+            ViewBag.Departments = departmentRepositry.GetAll();
 
             return View();
         }
@@ -165,10 +175,7 @@ namespace FinalProject.Controllers
                     PhoneNumber = userVM.Phone
                     
                 };
-
                 var result = await userManager.CreateAsync(user, userVM.Password);
-
-
 
                 await userManager.AddToRoleAsync(user,userVM.Role);
 
@@ -177,13 +184,19 @@ namespace FinalProject.Controllers
 
                     Employee employee = new Employee() { UserId = user.Id,DepartmentId=userVM.DeptId,Salary=userVM.Salary, Specialization=userVM.Specialization };
                     employeeRepositry.Create(employee);
-                    return RedirectToAction("Index", "Doctor"); // change to dashboord
+                    return RedirectToAction("AdminIndex", "Dashboard"); // change to dashboord
                 }
-                return View();
-            }
-            ViewData["Departments"] = context.Departments.ToList();
 
+                // If creation failed, add model errors
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            ViewBag.Departments = departmentRepositry.GetAll();
             return View();
+
         }
 
 
@@ -191,10 +204,10 @@ namespace FinalProject.Controllers
         
         [HttpGet]
 
-        [Authorize(Roles = "Admin,Doctor")]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateDoctorAccount()
         {
-            ViewData["Departments"] = context.Departments.ToList();
+            ViewBag.Departments = departmentRepositry.GetAll();
             return View();
         }
 
@@ -202,7 +215,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        [Authorize(Roles = "Admin,Doctor")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateDoctorAccount(CreateDoctorAccountViewModel userVM)
         {
             if (ModelState.IsValid)
@@ -238,12 +251,15 @@ namespace FinalProject.Controllers
                         Medical_License_no=userVM.Medical_License_no
                     };
                     doctorRepositry.Create(doctor);
-                    return RedirectToAction("Index", "Doctor"); // change to dashboord
+                    return RedirectToAction("AdminIndex", "Dashboard"); // change to dashboord
                 }
-                return View();
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
 
-
+            ViewBag.Departments = departmentRepositry.GetAll();
             return View();
         }
 
@@ -273,7 +289,13 @@ namespace FinalProject.Controllers
 
                         if (User.IsInRole("Admin"))
                         {
-                            return RedirectToAction("Index", "Doctor");
+                            return RedirectToAction("AdminIndex", "Dashboard");
+                        }
+                        else if(User.IsInRole("Doctor"))
+
+                        {
+                        
+                        return RedirectToAction("DoctorIndex","Dashboard" );
                         }
 
                         return RedirectToAction("Index","Home" );
