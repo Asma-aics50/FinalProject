@@ -20,8 +20,9 @@ namespace FinalProject.Models
         public List<DoctorPatient> DoctorPatients { get; set; }
         public List<BookedAppointment> BookedAppointments { get; set; }
 
-
-
-
+        internal Doctor Include()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FinalProject.IRepositry;
+using FinalProject.Models;
 using FinalProject.Services;
 using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -39,5 +40,33 @@ namespace FinalProject.Controllers
 
             return View(doctorsVM);
         }
+        public IActionResult DoctorDetails(int id)
+        {
+            var doctor = doctorRepositry._GetByIdUser(id);
+            if (doctor == null || doctor.User == null)
+            {
+                return NotFound(); 
+            }
+
+            DoctorDetailsViewModel doctorDetailsViewModel = new DoctorDetailsViewModel()
+            {
+                Name = $"{doctor.User.FirstName} {doctor.User.LastName}",
+                PhoneNumber = doctor.User.PhoneNumber,
+                Email = doctor.User.Email,
+                ShiftStartTime = doctor.ShiftStartTime,
+                ShiftEndTime = doctor.ShiftEndTime,
+                DepartmentId = doctor.DepartmentId,
+                Gender = doctor.User.Gender,
+                Salary = doctor.Salary,
+                Specialist = doctor.Specialization,
+                BirthDate = doctor.User.BirthDate,
+                Department = doctor.Department.Name,
+            };
+
+            return View(doctorDetailsViewModel);
+        }
+
+
+
     }
 }

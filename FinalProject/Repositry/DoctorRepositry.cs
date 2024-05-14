@@ -44,6 +44,11 @@ namespace FinalProject.Repositry
             return context.Doctors.Find(id);
            
         }
+        public Doctor _GetByIdUser(int id)
+        {
+            return context.Doctors.Include(e => e.User).Include(e=>e.Department).Where(e=>e.Id == id).FirstOrDefault();
+
+        }
 
         public void Update(Doctor _doctor)
         {
