@@ -3,6 +3,7 @@ using FinalProject.IRepositry;
 using FinalProject.Models;
 using FinalProject.Repositry;
 using FinalProject.Services;
+using FinalProject.ViewModels;
 using FinalProject.ViewModels.PatientHistory;
 using FinalProject.ViewModels.Prescreption;
 using Microsoft.AspNetCore.Authorization;
@@ -80,6 +81,7 @@ namespace FinalProject.Controllers
 
             return await userManager.GetUserIdAsync(user);
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
             //public IActionResult Create(CreateViewModel prescreptionVM,/*string[] instructionInput,int [] drugSelect*/)
             public IActionResult Create(CreateViewModel prescreptionVM, int[] drugSelectList,string[] instructions,int[] medicalAnalysisList)
@@ -180,7 +182,6 @@ namespace FinalProject.Controllers
             return View(patientHistorVMs);
 
         }
-    
 
         public IActionResult PrescreptionDetails(int id)
         {
@@ -211,5 +212,128 @@ namespace FinalProject.Controllers
 
 
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            
+            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+         
+            ViewBag.Drugs= drugRepositry.GetAll().Select(MapRepositry.MapToDrugVM).ToList();
+
+            ViewBag.Analysis = medicalAnalysisRepositry.GetAll().Select(MapRepositry.MapToAnalysisVM).ToList();
+
+
+            //PAtientHistoryDetail-Drugs,Analysis
+
+            CreateViewModel createVM = MapRepositry.MapToCreateVM(patientHistoryRepositry.Get(id));
+
+            
+            ViewBag.SelectedAnalysisList = patientHistoryMedicalAnalysisrRepositry.GetAll_AnalysisByPatientHistoryId(id).Select(MapRepositry.MapToEditPHAnalysisAction).ToList();
+
+            ViewBag.SelectedDrugsList = prescriptionRepository.GetAll_DrugByPatientHistoryId(id).Select(MapRepositry.MapToDrugVM).ToList();
+
+
+            return View(createVM);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        //public IActionResult Create(CreateViewModel prescreptionVM,/*string[] instructionInput,int [] drugSelect*/)
+        public IActionResult Edit(CreateViewModel prescreptionVM, int[] drugSelectList, string[] instructions, int[] medicalAnalysisList)
+        {
+            if (ModelState.IsValid)
+            {
+
+                prescreptionVM.DoctorId = doctorRepositry.FindByUserId(GetCurrentUserIdAsync().Result).Id;
+
+
+                //1-Update patient history
+
+                // map
+                PatientHistory patientHistory = MapRepositry.MapToEditPatientHistory(prescreptionVM);
+
+                //update patientHistory
+
+                patientHistoryRepositry.Update(patientHistory);
+
+
+                ////2- Edit  prescreption
+
+                List<Prescription> currentPrescreptions = prescriptionRepository.GetAll_DrugByPatientHistoryId(prescreptionVM.Id);
+
+
+                //Delected un selected drugs
+                foreach (var item in currentPrescreptions)
+                {
+                    if (!drugSelectList.Contains(item.DrugId))
+                    {
+                        prescriptionRepository.Delete(prescreptionVM.Id, item.DrugId);
+                    }
+                }
+
+                for (int i = 0; i < drugSelectList.Length; i++)
+                {
+
+                    var check = prescriptionRepository.GetById(prescreptionVM.Id, drugSelectList[i]);
+
+                    if (check == null)
+                    {
+                        // not Existed => Create it
+                        prescriptionRepository.Create(new Prescription() { PatientHistoryId = prescreptionVM.Id, DrugId = drugSelectList[i], DrugInstruction = instructions[i] });
+                    }
+                    else
+                    {
+                        //Found =>may update instruction
+
+                        if (check.DrugInstruction != instructions[i])
+                        {
+                            prescriptionRepository.Update(new Prescription() { PatientHistoryId = prescreptionVM.Id, DrugId = drugSelectList[i], DrugInstruction = instructions[i] });
+                        }
+                    }
+                }
+
+
+
+
+                //Edit analysis
+
+                List<PatientHistoryMedicalAnalysis> currentAnalysis = patientHistoryMedicalAnalysisrRepositry.GetAll_AnalysisByPatientHistoryId(prescreptionVM.Id);
+                //Delected un selected analysis
+
+                foreach (var item in currentAnalysis)
+                {
+                    if (!medicalAnalysisList.Contains(item.MedicalAnaylsisId))
+                    {
+                        patientHistoryMedicalAnalysisrRepositry.Delete(prescreptionVM.Id, item.MedicalAnaylsisId);
+                    }
+
+                }
+                foreach (var item in medicalAnalysisList)
+                {
+
+                    PatientHistoryMedicalAnalysis patientHistoryMedicalAnalysisItem = new PatientHistoryMedicalAnalysis()
+                    {
+                        PatientHistoryId = prescreptionVM.Id,
+                        MedicalAnaylsisId = item
+
+                    };
+                    patientHistoryMedicalAnalysisrRepositry.Create(patientHistoryMedicalAnalysisItem);
+
+                }
+
+
+                ////5- redirect
+                return RedirectToAction("PrescreptionDetails", new { id = prescreptionVM.Id });
+            }
+
+            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+            
+            return View();
+        }
+
     }
+
+
 }

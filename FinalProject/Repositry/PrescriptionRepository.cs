@@ -39,9 +39,10 @@ namespace FinalProject.Repositry
         {
             return context.Prescriptions.ToList();
         }
-        public List<Prescription> GetAll_DrugByPatientHistoryId(int patientHistoyId)
+
+        public List<Prescription> GetAll_DrugByPatientHistoryId(int patientHistoryId)
         {
-            return context.Prescriptions.Include(e=>e.Drug).Where(e=>e.PatientHistoryId==patientHistoyId).ToList();
+            return context.Prescriptions.Include(e=>e.Drug).Where(e=>e.PatientHistoryId==patientHistoryId).ToList();
         }
 
         public Prescription GetById(int patient_id, int drug_id)
@@ -51,12 +52,12 @@ namespace FinalProject.Repositry
 
         public void Update(Prescription prescription)
         {
-        //    var pres = GetById (prescription.PatientHistoryId,prescription.DrugId);
-        //    if (pres != null)
-        //    {
-        //        pres.
-        //    }
-        //
+            var pres = GetById(prescription.PatientHistoryId, prescription.DrugId);
+            if (pres != null)
+            {
+                pres.DrugInstruction=prescription.DrugInstruction;
+            }
+
         }
     }
 }

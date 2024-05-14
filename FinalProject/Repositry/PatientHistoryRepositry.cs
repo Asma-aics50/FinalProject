@@ -64,7 +64,13 @@ namespace FinalProject.Repositry
             if(patienthistory != null)
             {
                 patienthistory.Problem = _patientHistory.Problem;
-                patienthistory.CreatedAt = _patientHistory.CreatedAt;
+                patienthistory.Height = _patientHistory.Height;
+                patienthistory.Weight = _patientHistory.Weight;
+               
+                patienthistory.Note = _patientHistory.Note;
+                patienthistory.ReExaminatoinDate = _patientHistory.ReExaminatoinDate;
+                patienthistory.BloodPressure = _patientHistory.BloodPressure;
+
                 patienthistory.DoctorId = _patientHistory.DoctorId;
                 patienthistory.PatientId = _patientHistory.PatientId;
                 context.SaveChanges();

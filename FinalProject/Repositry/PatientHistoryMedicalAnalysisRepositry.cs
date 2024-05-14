@@ -15,13 +15,21 @@ namespace FinalProject.Repositry
 
         public void Create(PatientHistoryMedicalAnalysis patientHistoryMedicalAnalysis)
         {
-            context.Add(patientHistoryMedicalAnalysis);
-            context.SaveChanges();
+
+
+            var phma = GetById(patientHistoryMedicalAnalysis.PatientHistoryId, patientHistoryMedicalAnalysis.MedicalAnaylsisId);
+            if (phma == null)
+            {
+
+                context.Add(patientHistoryMedicalAnalysis);
+                context.SaveChanges();
+
+            }
         }
 
-        public void Delete(int id)
+        public void Delete(int patientHistoryId, int analysisId)
         {
-            var phma = GetById(id);
+            var phma = GetById(patientHistoryId,  analysisId);
             if (phma != null) 
             { 
                 context.Remove(phma);
@@ -38,14 +46,19 @@ namespace FinalProject.Repositry
             return context.PatientHistoryMedicalAnalyses.Include(e=>e.MedicalAnaylsis).Where(e=>e.PatientHistoryId==patientHistoryId).ToList();
         }
 
-        public PatientHistoryMedicalAnalysis GetById(int id)
+        public PatientHistoryMedicalAnalysis GetById(int patientHistoryId, int analysisId)
         {
-            return context.PatientHistoryMedicalAnalyses.Find(id);
+
+            return context.PatientHistoryMedicalAnalyses.FirstOrDefault(e=>e.PatientHistoryId==patientHistoryId && e.MedicalAnaylsisId==analysisId);
         }
 
         public void Update(PatientHistoryMedicalAnalysis _patientHistoryMedicalAnalysis)
         {
-            //var phma = GetById(_patientHistoryMedicalAnalysis.id);
+            var phma = GetById(_patientHistoryMedicalAnalysis.PatientHistoryId, _patientHistoryMedicalAnalysis.MedicalAnaylsisId);
+            if (phma != null)
+            {
+                phma.Result = _patientHistoryMedicalAnalysis.Result;
+            }
         }
     }
 }
