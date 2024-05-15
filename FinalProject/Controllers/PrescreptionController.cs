@@ -168,17 +168,14 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Doctor")]
-      
+        [Authorize(Roles = "Doctor")]      
         public IActionResult DoctorCaseStudies()
         {
-
             string doctorUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             
             int doctorId = doctorRepositry.FindByUserId(doctorUserId).Id;
 
             List<PatientHistoryViewModel> patientHistorVMs = patientHistoryRepositry.FindePatinetByDoctor(doctorId).Select(MapRepositry.MapToPatientHistoryVM).ToList();
-
             return View(patientHistorVMs);
 
         }

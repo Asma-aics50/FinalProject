@@ -182,6 +182,7 @@ namespace FinalProject.Services
                 DoctorId=patienthistory.DoctorId,
                 PatientId=patienthistory.PatientId,
                 PatientEmail=patienthistory.Patient.User.Email,
+                CreatedAt = patienthistory.CreatedAt,
                 PatientName=$"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
              };
 
@@ -206,6 +207,26 @@ namespace FinalProject.Services
                 ReExaminatoinDate=patienthistory.ReExaminatoinDate,
                 CreatedAt=patienthistory.CreatedAt,
                 Note=patienthistory.Note
+                
+
+            };
+
+        }
+         public static FullPatientHistoryViewModel MapToFullPatientHistoryVM(PatientHistory patienthistory)
+        {
+            return new FullPatientHistoryViewModel()
+            {
+                //patient
+
+                PatientId = patienthistory.PatientId,
+                PatientEmail = patienthistory.Patient.User.Email,
+                PatientName = $"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+                PhoneNumber = patienthistory.Patient.User.PhoneNumber,
+                BirthDate=patienthistory.Patient.User.BirthDate,            
+                //Problem
+                Problem = patienthistory.Problem,
+                CreatedAt=patienthistory.CreatedAt,
+                Id=patienthistory.Id
                 
 
             };

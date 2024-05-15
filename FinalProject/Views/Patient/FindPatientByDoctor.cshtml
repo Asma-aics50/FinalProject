@@ -34,7 +34,6 @@
             <td>Phone Number</td>
             <td>Email</td>
             <td>Actions</td>
-
         </tr>
     </thead>
 
@@ -59,7 +58,7 @@
                 </td>
                 <td>
 
-                    <a asp-action="PatientDetails" asp-controller="Admin" asp-route-id="@patient.Id">
+                    <a asp-action="AllPatientHistory" asp-controller="PatientHistory" asp-route-id="@patient.Id">
                         <i class="bi bi-eye"></i>
                     </a>
                 </td>
