@@ -9,6 +9,9 @@ namespace FinalProject.IRepositry
         public Employee GetById(int id);
         public List<Employee> GetAll();
         public void Delete(int id);
+        public List<Employee> GetAll_Departments_User();
+        public Employee _GetByIdUser(int id);
+
 
     }
 }

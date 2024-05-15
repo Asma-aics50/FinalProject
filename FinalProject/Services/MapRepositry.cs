@@ -25,7 +25,19 @@ namespace FinalProject.Services
                 Id = doctor.Id
             };
         }
-
+        static public AllEmployeesViewModel MapToAllEmployeeVM(Employee employee) 
+        {
+            return new AllEmployeesViewModel
+            {
+                Department = employee.Department.Name,
+                Name = $"{employee.User.FirstName} {employee.User.LastName}",
+                Email = employee.User.Email,
+                PhoneNumber = employee.User.PhoneNumber,
+                Salary = employee.Salary,
+                Specialization = employee.Specialization,
+                Id= employee.Id
+            };
+        }
         public static AllPatientViewModel MapToAllPatientsVM(Patient patient)
         {
             return new AllPatientViewModel

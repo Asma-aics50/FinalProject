@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
@@ -42,12 +43,35 @@ namespace FinalProject.Repositry
         {
             return context.Patients.Find(id);
         }
-
-        public void Update(Patient patient)
+        public Patient _GetByIdUser(int id)
         {
-            throw new NotImplementedException();
+            return context.Patients.Include(e=>e.User).Where(e => e.Id == id).FirstOrDefault();
         }
 
+        public void Update(Patient _patient)
+        {
+            var patient = GetById(_patient.Id);
+            if(patient != null)
+            {
+                patient.BloodGroup = _patient.BloodGroup;
+                context.SaveChanges();
+               
+            }
+        }
+
+        public void UpdateUserPatient(PatientDetailsViewModel patientDetails)
+        {
+            var patients = _GetByIdUser(patientDetails.Id);
+            if(patients != null)
+            {
+                patients.User.FirstName = patientDetails.Name;
+                patients.User.Email = patientDetails.Email;
+                patients.User.Gender = patientDetails.Gender;
+                patients.User.BirthDate = patientDetails.BirthDate;
+                patients.User.PhoneNumber = patientDetails.PhoneNumber;
+                context.SaveChanges();
+            }
+        }
         public List<Patient> GetAll_Patients_User()
         {
             return context.Patients.Include(e=>e.User).ToList();
