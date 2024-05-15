@@ -4,6 +4,7 @@ using FinalProject.Models;
 using FinalProject.Repositry;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IMedicalAnalysisRepositry, MedicalAnalysisRepositry>(
 builder.Services.AddScoped<IPatientHistoryMedicalAnalysisRepository, PatientHistoryMedicalAnalysisRepositry>();
 builder.Services.AddScoped<IDoctorPatientRepositry, DoctorPatientRepositry>();
 builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
+
 
 var app = builder.Build();
 

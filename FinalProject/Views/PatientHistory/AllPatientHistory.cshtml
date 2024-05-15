@@ -1,5 +1,5 @@
 ﻿@using FinalProject.ViewModels.PatientHistory
-@model List< PatientHistoryViewModel>
+@model List< FullPatientHistoryViewModel>
 @{
     ViewData["Title"] = "DoctorCaseStudies";
     Layout = "_DoctorLayout";
@@ -8,7 +8,9 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="Index" asp-controller="Admin">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Case studies</li>
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="FindPatientByDoctor" asp-controller="Patient">Patients</a></li>
+       
+        <li class="breadcrumb-item active" aria-current="page">Full Patient Case Study</li>
     </ol>
 </nav>
 
@@ -24,41 +26,88 @@
 <table class="table table-hover">
     <thead>
         <tr class="table-primary">
+            <th colspan="2">Patient Personal Details</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <th>PatientId</th>
+
+            <td>@Model[0].PatientId</td>
+
+        </tr>
+        <tr>
+
+            <th>Name</th>
+
+            <td>@Model[0].PatientName</td>
+
+        </tr>
+        <tr>
+
+            <th>Phone Number</th>
+            <td>
+                @Model[0].PhoneNumber
+            </td>
+        </tr>
+
+        <tr>
+
+            <th>Email</th>
+
+            <td>@Model[0].PatientEmail</td>
+        </tr>
+       
+        <tr>
+            <th>BirthDate</th>
+
+            <td>@Model[0].BirthDate</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th colspan="4">Patient Previous Visits </th>
+        </tr>
+    </thead>
+
+    <tr class="table-primary">
             <th scope="row">Id</th>
-            <td>Date</td>
-            <td>Patient Name</td>
-            <td> Patient Email</td>
+           
+            <td> Date</td>
             <td>Complaint</td>
-            <td>Action</td>
+            <td>Actions</td>
 
 
 
         </tr>
-    </thead>
 
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-
                 <td scope="row">
+
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                <td>
+
+
+                <td scope="row">
                     @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientEmail)
-                </td>
+                </td> 
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Problem)
                 </td>
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.AppointmentStatus)
-                </td> *@
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.AppointmentStatus)
+            </td> *@
 
                 <td>
 

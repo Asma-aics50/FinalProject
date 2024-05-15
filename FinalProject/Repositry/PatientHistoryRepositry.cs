@@ -45,6 +45,12 @@ namespace FinalProject.Repositry
             return context.PatientHistories.Include(e=>e.Patient).Include(e=>e.Patient.User).Where(e => e.DoctorId == doctorId).ToList();
         
         }
+       List< PatientHistory>IPatientHistoryRepositry.FindePatinetHistoriesByDoctorAndPatientIds(int doctorId,int patientId)
+        {
+
+            return context.PatientHistories.Include(e=>e.Patient.User).Where(e => e.DoctorId == doctorId&&e.PatientId==patientId).ToList();
+        
+        }
          public  PatientHistory Find_Patinet_UsrById(int id)
         {
 
@@ -64,7 +70,13 @@ namespace FinalProject.Repositry
             if(patienthistory != null)
             {
                 patienthistory.Problem = _patientHistory.Problem;
-                patienthistory.CreatedAt = _patientHistory.CreatedAt;
+                patienthistory.Height = _patientHistory.Height;
+                patienthistory.Weight = _patientHistory.Weight;
+               
+                patienthistory.Note = _patientHistory.Note;
+                patienthistory.ReExaminatoinDate = _patientHistory.ReExaminatoinDate;
+                patienthistory.BloodPressure = _patientHistory.BloodPressure;
+
                 patienthistory.DoctorId = _patientHistory.DoctorId;
                 patienthistory.PatientId = _patientHistory.PatientId;
                 context.SaveChanges();

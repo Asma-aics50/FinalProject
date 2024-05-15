@@ -148,6 +148,43 @@ namespace FinalProject.Services
                       };
 
         }
+        public static CreateViewModel MapToCreateVM(PatientHistory Patienthistory)
+        {
+            return new CreateViewModel()
+                      {
+                          Id=Patienthistory.Id,
+                          PatientId = Patienthistory.PatientId,
+                          Problem = Patienthistory.Problem,
+                          ReExaminatoinDate = Patienthistory.ReExaminatoinDate,
+                          Height = Patienthistory.Height,
+                          Weight = Patienthistory.Weight,
+                          BloodPressure = Patienthistory.BloodPressure,
+                          Note = Patienthistory.Note,
+                          CreatedAt = Patienthistory.CreatedAt,
+                          DoctorId = Patienthistory.DoctorId
+
+                      };
+
+        }
+        public static PatientHistory MapToEditPatientHistory(CreateViewModel createPrVM)
+        {
+            return new PatientHistory()
+                      {
+                          Id= createPrVM.Id,
+                          PatientId = createPrVM.PatientId,
+                          Problem = createPrVM.Problem,
+                        
+                ReExaminatoinDate = createPrVM.ReExaminatoinDate,
+                          Height = createPrVM.Height,
+                          Weight = createPrVM.Weight,
+                
+                BloodPressure = createPrVM.BloodPressure,
+                          Note = createPrVM.Note,
+                          DoctorId = createPrVM.DoctorId,
+                          
+                      };
+
+        }
         public static PatientHistoryViewModel MapToPatientHistoryVM(PatientHistory patienthistory)
         {
             return new PatientHistoryViewModel()
@@ -157,6 +194,7 @@ namespace FinalProject.Services
                 DoctorId=patienthistory.DoctorId,
                 PatientId=patienthistory.PatientId,
                 PatientEmail=patienthistory.Patient.User.Email,
+                CreatedAt = patienthistory.CreatedAt,
                 PatientName=$"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
              };
 
@@ -186,6 +224,26 @@ namespace FinalProject.Services
             };
 
         }
+         public static FullPatientHistoryViewModel MapToFullPatientHistoryVM(PatientHistory patienthistory)
+        {
+            return new FullPatientHistoryViewModel()
+            {
+                //patient
+
+                PatientId = patienthistory.PatientId,
+                PatientEmail = patienthistory.Patient.User.Email,
+                PatientName = $"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
+                PhoneNumber = patienthistory.Patient.User.PhoneNumber,
+                BirthDate=patienthistory.Patient.User.BirthDate,            
+                //Problem
+                Problem = patienthistory.Problem,
+                CreatedAt=patienthistory.CreatedAt,
+                Id=patienthistory.Id
+                
+
+            };
+
+        }
 
         public static AnalysisViewModel MapToAnalysisVM(PatientHistoryMedicalAnalysis patientHistoryAnalysis)
         {
@@ -198,6 +256,26 @@ namespace FinalProject.Services
             };
 
         }
+        public static AnalysisViewModel MapToAnalysisVM(MedicalAnaylsis anaylsis)
+        {
+            return new AnalysisViewModel()
+            {
+                Id=anaylsis.Id,
+                Name= anaylsis.Name,
+            };
+
+        }
+
+        public static AnalysisViewModel MapToEditPHAnalysisAction(PatientHistoryMedicalAnalysis anaylsis)
+        {
+            return new AnalysisViewModel()
+            {
+                Id=anaylsis.MedicalAnaylsisId,
+                Name= anaylsis.MedicalAnaylsis.Name,
+                Result=anaylsis.Result
+            };
+
+        }
         public static DrugViewModel MapToDrugVM(Prescription prescription)
         {
             return new DrugViewModel()
@@ -205,6 +283,15 @@ namespace FinalProject.Services
                 Id=prescription.Drug.Id,
                 Name=prescription.Drug.Name,
                 Instructions=prescription.DrugInstruction
+                
+            };
+
+        }public static DrugViewModel MapToDrugVM(Drug drug)
+        {
+            return new DrugViewModel()
+            {
+                Id=drug.Id,
+                Name=drug.Name,
                 
             };
 
