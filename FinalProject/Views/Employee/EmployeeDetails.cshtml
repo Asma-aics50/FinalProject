@@ -1,0 +1,85 @@
+﻿@model EmployeeDetailsViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+<div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
+
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Dashboard/AdminIndex">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/Employee/AllEmployee">Employee List</a></li>
+        <li class="breadcrumb-item"><a href="#">Employee Info</a></li>
+
+    </ol>
+</div>
+
+<div class="card text-center mx-auto" style="max-width: 600px;">
+    <div class="card-body">
+        <h3 class="card-title mb-4  text-primary">Employee Info</h3>
+        <hr />
+        <div class="doc-info-body">
+            <div class="doc-info-item">
+                <ul class="list-unstyled d-grid gap-10">
+
+                    <li class="d-sm-flex">
+                        <i class="fas fa-user-md me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Name</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Name</span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-phone-alt me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">PhoneNumber</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.PhoneNumber</span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-envelope me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Email</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Email</span>
+                    </li>
+                    
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-venus-mars me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Gender</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Gender </span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-birthday-cake me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">BirthDate</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.BirthDate </span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-building me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Salary</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Salary </span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-stethoscope me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Specialization</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Speciatization </span>
+                    </li>
+                    <br />
+                    <li class="d-sm-flex">
+                        <i class="fas fa-stethoscope me-2 text-primary"></i>
+                        <span class="fw-bold doc-info-title">Department</span>
+                        <span class="fw-bold d-inline-block me-10"> : </span>
+                        <span class="fs-base">@Model?.Department </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

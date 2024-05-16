@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -44,6 +45,11 @@ namespace FinalProject.Repositry
             return context.Employees.Find(id);
 
         }
+        public Employee _GetByIdUser(int id)
+        {
+            return context.Employees.Include(e => e.User).Include(e => e.Department).Where(e => e.Id == id).FirstOrDefault(); 
+
+        }
 
         public void Update(Employee _employee)
         {
@@ -60,6 +66,12 @@ namespace FinalProject.Repositry
 
 
         }
+
+        List<Employee> IEmployeeRepositry.GetAll_Departments_User()
+        { 
+            return context.Employees.Include(e => e.User).Include(e => e.Department).ToList();
+        }
+
 
     }
 }
