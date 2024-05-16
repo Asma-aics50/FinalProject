@@ -5,24 +5,19 @@
     Layout = "_DoctorLayout";
 }
 
-
-<a class="btn btn-success btn-lg" role="button" asp-action="CreatePatientAccount" asp-controller="Account">
-    <i class="bi bi-person-add"></i>
-    Add new Patient
-
-</a>
-
 <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
 
+    
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="DoctorIndex" asp-controller="Dashboard">Dashboard</a></li>
+
+        <li class="breadcrumb-item">Patients List</li>
+
+    </ol>
     <div class="card-body">
         <h2 class="card-title">All Patients</h2>
 
     </div>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="#">Patients List</a></li>
-
-    </ol>
 </div>
 
 
