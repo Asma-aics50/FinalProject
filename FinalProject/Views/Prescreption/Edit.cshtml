@@ -65,14 +65,12 @@
             </div>
 
             <div id="fieldsContainer">
+                <h1>Drugs</h1>
                 @foreach (var item in @ViewBag.SelectedDrugsList)
-               { 
-                   <div class="form-group">
-                    <label>Drug Instructions</label>
-                        <input name="instructions[]" class="form-select" value="@item.Instructions">
-                    <label>Drugs</label>
-
-                    <select class="form-select" name="drugSelectList[]">
+               {
+                    <div class="form-group myflex">
+                      
+                        <select class="form-select selectDrSt" name="drugSelectList[]">
                          @foreach (var drug in ViewBag.Drugs)
                         {
                             if(drug.Id == item.Id)
@@ -83,8 +81,10 @@
                             <option value="@drug.Id">@drug.Name</option>
                         }
                     </select>
-                        <button type="button" class="btn btn-danger mt-4" onclick="removeParent(this)">
-                            Remove drug Fields
+                        <input name="instructions[]" class="form-select DrIn" value="@item.Instructions">
+
+                        <button type="button" class="btn btn-danger  Drbtn" onclick="removeParent(this)">
+                            Remove 
                         </button>
                 </div>
                }
@@ -93,15 +93,14 @@
             </div>
             <button type="button" class="btn btn-primary mt-4" id="addDrugFieldsBtn">Add new Drug</button>
 
-            <div id="analysisContainer">
-
+            <div id="analysisContainer" style="margin-top:10px">
+                <h1> Analysis</h1>
                 @foreach (var item in @ViewBag.SelectedAnalysisList)
                 {
 
-                    <div class="form-group">                        
-                        <label>Analysis</label>
+                    <div class="form-group myflex">
 
-                        <select class="form-select" name="medicalAnalysisList[]">
+                        <select class="form-select selextANSt" name="medicalAnalysisList[]">
                             @foreach (var analysis in ViewBag.Analysis)
                             {
                                 if (analysis.Id == item.Id)
@@ -112,7 +111,7 @@
                                 <option value="@analysis.Id">@analysis.Name</option>
                             }
                         </select>
-                        <button type="button" class="btn btn-danger mt-4" onclick="removeParent(this)">Remove Analysis Fields</button>
+                        <button type="button" class="btn btn-danger Anbtn" onclick="removeParent(this)">Remove</button>
                     </div>
                 }
 
@@ -125,6 +124,36 @@
         </form>
     </div>
 </div>
+
+<style>
+    .myflex {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+    }
+
+    .selextANSt {
+        width: 88%;
+    }
+
+    .Anbtn {
+        width: 10%;
+    }
+    /* Drugs */
+    .selectDrSt {
+        width: 43%;
+    }
+
+    .DrIn {
+        width: 43%;
+    }
+
+    .Drbtn {
+        width: 10%;
+    }
+
+</style>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -138,13 +167,13 @@
             // Create a new div for the select list and its label
             var newDiv = document.createElement('div');
             newDiv.classList.add('form-group');
-            // Create the label for the select list
-            var label = document.createElement('label');
-            label.textContent = 'Drugs';
-            newDiv.appendChild(label);
+            newDiv.classList.add('myflex');
+
+            
             // Create the select list
             var DrugsSelectList = document.createElement('select');
             DrugsSelectList.classList.add('form-select');
+            DrugsSelectList.classList.add('selectDrSt');
             DrugsSelectList.setAttribute('name', 'drugSelectList[]');
             DrugsSelectList.setAttribute('asp-items', "AnalysisList")
 
@@ -152,7 +181,6 @@
                 var option = document.createElement('option');
                 option.value = item.id;
                 option.textContent = item.name;
-                console.log(option);
                 DrugsSelectList.appendChild(option);
 
             });
@@ -164,21 +192,22 @@
 
             var instructionInput = document.createElement('input');
             instructionInput.setAttribute('name', "instructions[]")
+            instructionInput.classList.add('DrIn');
             instructionInput.classList.add('form-select');
 
 
-            newDiv.appendChild(instructionLabel);
-            newDiv.appendChild(instructionInput);
-            newDiv.appendChild(label);
             newDiv.appendChild(DrugsSelectList);
+            newDiv.appendChild(instructionInput);
+           
 
 
             // add button
             var button = document.createElement("button");
             // Set button attributes
             button.setAttribute("type", "button");
-            button.setAttribute("class", "btn btn-danger mt-4");
-            button.textContent = "Remove drug Fields";
+            button.setAttribute("class", "btn btn-danger");
+            button.classList.add('Drbtn');
+            button.textContent = "Remove";
             // Add onclick event listener to remove its parent element
             button.onclick = function () {
                 this.parentElement.remove(); // Removes the parent element of the button
@@ -204,14 +233,12 @@
             // Create a new div for the select list and its label
             var newDiv = document.createElement('div');
             newDiv.classList.add('form-group');
+            newDiv.classList.add('myflex');
 
-            // Create the label for the select list
-            var label = document.createElement('label');
-            label.textContent = 'Analysis';
-            newDiv.appendChild(label);
-            // Create the select list
+             // Create the select list
             var selectList = document.createElement('select');
             selectList.classList.add('form-select');
+            selectList.classList.add('selextANSt');
             selectList.setAttribute('name', 'medicalAnalysisList[]');
 
             AnalysisList.forEach(function (item) {
@@ -226,8 +253,9 @@
             var button = document.createElement("button");
             // Set button attributes
             button.setAttribute("type", "button");
-            button.setAttribute("class", "btn btn-danger mt-4");
-            button.textContent = "Remove Analysis Fields";
+            button.setAttribute("class", "btn btn-danger");
+            button.classList.add('Anbtn');
+            button.textContent = "Remove";
             // Add onclick event listener to remove its parent element
             button.onclick = function () {
                 this.parentElement.remove(); // Removes the parent element of the button

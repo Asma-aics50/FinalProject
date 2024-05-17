@@ -6,12 +6,22 @@
     // Layout = "_AdminLayout";
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @if(ViewBag.Layout=="_DoctorLayout")
+        {
+            <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="DoctorIndex" asp-controller="Dashboard">Dashboard</a></li>
+       
+        }
+        else
+        {
+            <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AdminIndex" asp-controller="Dashboard">Dashboard</a></li>
 
-<a class ="btn btn-success btn-lg" role="button"  asp-action="CreateDoctorAccount" asp-controller="Account">
-    <i class="bi bi-person-add"></i>
-    Add new doctor
-
-</a>
+        }
+        
+        <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+    </ol>
+</nav>
 
 
 
