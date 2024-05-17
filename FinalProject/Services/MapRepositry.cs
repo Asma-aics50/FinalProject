@@ -38,6 +38,16 @@ namespace FinalProject.Services
                 Id= employee.Id
             };
         }
+        static public AllServicesViewModel MapToAllServicesVM(Service service) 
+        {
+            return new AllServicesViewModel
+            {
+                Id = service.Id,
+                Name = service.Name,    
+                Price = service.Price
+            };
+        }
+
         public static AllPatientViewModel MapToAllPatientsVM(Patient patient)
         {
             return new AllPatientViewModel

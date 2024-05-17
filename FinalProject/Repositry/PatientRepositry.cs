@@ -59,19 +59,21 @@ namespace FinalProject.Repositry
             }
         }
 
-        public void UpdateUserPatient(PatientDetailsViewModel patientDetails)
+        public void UpdateUserPatient(EditPatientViewModel patientDetails)
         {
             var patients = _GetByIdUser(patientDetails.Id);
             if(patients != null)
             {
-                patients.User.FirstName = patientDetails.Name;
-                patients.User.Email = patientDetails.Email;
+                patients.User.FirstName = patientDetails.FirstName;
+                patients.User.LastName = patientDetails.LastName;
+                
                 patients.User.Gender = patientDetails.Gender;
                 patients.User.BirthDate = patientDetails.BirthDate;
                 patients.User.PhoneNumber = patientDetails.PhoneNumber;
                 context.SaveChanges();
             }
         }
+        
         public List<Patient> GetAll_Patients_User()
         {
             return context.Patients.Include(e=>e.User).ToList();

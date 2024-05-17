@@ -74,10 +74,10 @@ namespace FinalProject.Controllers
         public IActionResult EditPatient(int id)
         {
             var editpatient = patientRepositry._GetByIdUser(id);
-            PatientDetailsViewModel patientDetailsViewModel = new PatientDetailsViewModel()
+            EditPatientViewModel patientDetailsViewModel = new EditPatientViewModel()
             {
-                Name = $"{editpatient.User.FirstName}{editpatient.User.LastName}",
-                Email = editpatient.User.Email,
+                FirstName = editpatient.User.FirstName ,
+                LastName = editpatient.User.LastName ,
                 Gender = editpatient.User.Gender,
                 PhoneNumber = editpatient.User.PhoneNumber,
                 BirthDate = editpatient.User.BirthDate
@@ -87,11 +87,11 @@ namespace FinalProject.Controllers
             {
                 return RedirectToAction("AllPatients");
             }
-            return View(editpatient);  
+            return View(patientDetailsViewModel);  
         }
 
         [HttpPost]
-        public IActionResult EditPatient(PatientDetailsViewModel patientDetails)
+        public IActionResult EditPatient(EditPatientViewModel patientDetails)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace FinalProject.Controllers
             }
 
             
-            patientDetails.Name = $"{patientDetails.User.FirstName} {patientDetails.User.LastName}";
+            //patientDetails.Name = $"{patientDetails.User.FirstName} {patientDetails.User.LastName}";
 
             return View(patientDetails);
         }

@@ -14,6 +14,7 @@ namespace FinalProject.IRepositry
         public List<Patient> GetAll();
         public void Delete(int id);
         public List<Patient> GetAll_Patients_User();
-        public void UpdateUserPatient(PatientDetailsViewModel patientDetails);
+        public void UpdateUserPatient(EditPatientViewModel patientDetails);
+        
     }
 }

@@ -102,6 +102,7 @@ namespace FinalProject.Data
         }
         public DbSet<FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel> PrescreptionDetailsViewModel { get; set; } = default!;
         public DbSet<FinalProject.ViewModels.PatientDetailsViewModel> PatientDetailsViewModel { get; set; } = default!;
+        public DbSet<FinalProject.ViewModels.CreateServiceViewModel> CreateServiceViewModel { get; set; } = default!;
 
     }
 }

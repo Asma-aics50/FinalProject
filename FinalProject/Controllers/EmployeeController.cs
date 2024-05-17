@@ -18,6 +18,7 @@ namespace FinalProject.Controllers
         {
             return View();
         }
+
         public IActionResult AllEmployee()
         {
             List<AllEmployeesViewModel> employeesViewModels = employeeRepositry.GetAll_Departments_User().Select(MapRepositry.MapToAllEmployeeVM).ToList();
