@@ -84,6 +84,17 @@ namespace FinalProject.Services
 
             };
         }
+        public static PatientAppointmentsViewModel MapToPatientsAppointmentVM(BookedAppointment appointment)
+        {
+            return new PatientAppointmentsViewModel
+            {
+               Id=appointment.Id,
+               DoctorName = $"{appointment.Doctor.User.FirstName} {appointment.Doctor.User.LastName}",            
+                DateTime=appointment.DateTime,
+               AppointmentStatus = (AppointmentStatues)appointment.AppointmentStatues,
+
+            };
+        }
         public static ForDoctorsListViewModel MapToCreateAppointmentDoctors(Doctor doctor)
         {
             return new ForDoctorsListViewModel

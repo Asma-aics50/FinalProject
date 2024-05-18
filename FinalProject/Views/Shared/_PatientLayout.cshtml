@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+@* 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ *@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <body>
@@ -42,56 +47,24 @@
     <div class="d-flex">
 
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width:25%; height: 100vh;">
-
+       
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
-                <span class="fs-4">Clinics</span>
+                <span class="fs-4">Sidebar</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
 
-
                 <li class="nav-item">
-                    <a asp-action="DoctorIndex" asp-controller="Dashboard" class="nav-link active" aria-current="page">
+                    <a asp-action="PatientIndex" asp-controller="Dashboard" class="nav-link active" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#" /></svg>
                         Dashboard
                     </a>
-                </li>
-
-
-                @* Doctor Patients *@
-
-                <li>
-                    <a asp-action="FindPatientByDoctor" asp-controller="Patient" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                        Patients
-                    </a>
-                </li>
-                <li>
-                    <a asp-action="AllDoctors" asp-controller="Doctor" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                        Doctors
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-action="FindAppointmentsByDoctor" asp-controller="Appointment" class="nav-link link-body-emphasis">
+                </li> 
+               
+                <a asp-action="PatientAppointments" asp-controller="Appointment" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                        schedule
-                    </a>
-                </li>
-                <li>
-
-                    <a asp-action="" asp-controller="" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                        Drugs
-                    </a>
-                </li>
-                <li>
-
-                    <a asp-action="DoctorCaseStudies" asp-controller="Prescreption" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                        Prescreptions
+                    Patient Appointment
                     </a>
                 </li>
 
@@ -113,9 +86,17 @@
         </div>
 
 
+    @*  <div class="flex-grow-1">
+
+            <div  style="margin:5%;margin-top:2%;">
+               
+            @RenderBody()
+               </div>
+    </div>
+ *@
         <div class="flex-grow-1">
 
-            <div style="margin:5%;margin-top:2%;">
+            <div style="margin:5%;margin-top:5%;">
 
                 @RenderBody()
             </div>
@@ -127,7 +108,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
+    
 </body>
 </html>
 
