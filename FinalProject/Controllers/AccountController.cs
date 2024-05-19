@@ -124,9 +124,9 @@ namespace FinalProject.Controllers
 
                 var result = await userManager.CreateAsync(user, userVM.Password);
 
-                await userManager.AddToRoleAsync(user,"Patient");
                 if (result.Succeeded)
                 {
+                await userManager.AddToRoleAsync(user,"Patient");
                         Patient patient = new Patient() { UserId = user.Id };
                         patientRepositry.Create(patient);
                         return RedirectToAction("AdminIndex", "Dashboard"); // change to dashboord
@@ -177,10 +177,10 @@ namespace FinalProject.Controllers
                 };
                 var result = await userManager.CreateAsync(user, userVM.Password);
 
-                await userManager.AddToRoleAsync(user,userVM.Role);
 
                 if (result.Succeeded)
                 {
+                await userManager.AddToRoleAsync(user,userVM.Role);
 
                     Employee employee = new Employee() { UserId = user.Id,DepartmentId=userVM.DeptId,Salary=userVM.Salary, Specialization=userVM.Specialization };
                     employeeRepositry.Create(employee);
@@ -233,14 +233,14 @@ namespace FinalProject.Controllers
                     PhoneNumber = userVM.Phone
                 };
 
+
+
                 var result = await userManager.CreateAsync(user, userVM.Password);
 
 
-
-                await userManager.AddToRoleAsync(user, "Doctor");
-
                 if (result.Succeeded)
                 {
+                            await userManager.AddToRoleAsync(user, "Doctor");
 
                     Doctor doctor = new Doctor() { UserId = user.Id,
                         DepartmentId = userVM.DeptId,

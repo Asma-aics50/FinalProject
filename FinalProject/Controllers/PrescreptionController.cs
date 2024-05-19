@@ -199,7 +199,6 @@ namespace FinalProject.Controllers
 
             PrescreptionDetailsViewModel prescreptionDetailsVM=MapRepositry.MapToPrescreptionDetailsVM(patientHistory);
 
-
             ViewData["Analysis"] = analysis.Select(MapRepositry.MapToAnalysisVM).ToList();
             ViewData["Drugs"]=prescriptions.Select(MapRepositry.MapToDrugVM).ToList();
 

@@ -84,6 +84,17 @@ namespace FinalProject.Services
 
             };
         }
+        public static PatientAppointmentsViewModel MapToPatientsAppointmentVM(BookedAppointment appointment)
+        {
+            return new PatientAppointmentsViewModel
+            {
+               Id=appointment.Id,
+               DoctorName = $"{appointment.Doctor.User.FirstName} {appointment.Doctor.User.LastName}",            
+                DateTime=appointment.DateTime,
+               AppointmentStatus = (AppointmentStatues)appointment.AppointmentStatues,
+
+            };
+        }
         public static ForDoctorsListViewModel MapToCreateAppointmentDoctors(Doctor doctor)
         {
             return new ForDoctorsListViewModel
@@ -207,6 +218,18 @@ namespace FinalProject.Services
                 CreatedAt = patienthistory.CreatedAt,
                 PatientName=$"{patienthistory.Patient.User.FirstName} {patienthistory.Patient.User.LastName}",
              };
+
+        }
+        public static PatientHistoriesViewModel MapToPatientHistoriesVM(PatientHistory patienthistory)
+        {
+            return new PatientHistoriesViewModel()
+             {
+                Id=patienthistory.Id,
+                Problem=patienthistory.Problem,
+                DoctorName = $"{patienthistory.Doctor.User.FirstName} {patienthistory.Doctor.User.LastName}",
+                DoctorSpecialization=patienthistory.Doctor.Specialization,
+                CreatedAt = patienthistory.CreatedAt,
+            };
 
         }
         public static PrescreptionDetailsViewModel MapToPrescreptionDetailsVM(PatientHistory patienthistory)

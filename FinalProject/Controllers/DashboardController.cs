@@ -36,5 +36,10 @@ namespace FinalProject.Controllers
                 ViewData["PatientsNum"] = patientRepositry.GetAll().ToList().Count();
                 return View();
             }
+        public IActionResult PatientIndex()
+            {
+                
+                return View();
+            }
         }
     }
