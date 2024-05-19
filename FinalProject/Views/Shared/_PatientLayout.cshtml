@@ -56,77 +56,28 @@
             <ul class="nav nav-pills flex-column mb-auto">
 
                 <li class="nav-item">
-                    <a asp-action="AdminIndex" asp-controller="Dashboard" class="nav-link active" aria-current="page">
+                    <a asp-action="PatientIndex" asp-controller="Dashboard" class="nav-link active" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#" /></svg>
                         Dashboard
                     </a>
                 </li> 
                
                 <li>
-                    <a asp-action ="AllDoctors" asp-controller="Doctor" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                        Doctors
-                    </a>
-                </li>
 
-                <li>
-                    <a  asp-action ="AllPatients" asp-controller="Patient" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                        Patients
-                    </a>
-                </li>
-               
-
-                <li>
-                    <a asp-action ="AllEmployee" asp-controller="Employee" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                        Employee
-                    </a>
-                </li>
-                <a asp-action="AllPatientsAppointment" asp-controller="Appointment" class="nav-link link-body-emphasis">
+                <a asp-action="PatientAppointments" asp-controller="Appointment" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
                     Patient Appointment
                     </a>
                 </li>
-                </li>
-                <a asp-action="" asp-controller="" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-
-                        Drug
-                    </a>
-                </li>  </li>
-                <a asp-action="" asp-controller="" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-
-                        company
-                    </a>
-                </li>
-               
-                <li>                
-                <a asp-action="" asp-controller="" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-
-                        Medical Analysis
-                    </a>
-                </li>
-                <li>
-                    <a asp-action="AllServices" asp-controller="Servise" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-
-                        Services
-                    </a>
-                </li>
                 
-
-
-              @*
-                  <li>
                 <li>
-                    <a href="#" class="nav-link link-body-emphasis">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle" /></svg>
-                        Customers
+
+                    <a asp-action="PatientHistories" asp-controller="PatientHistory" class="nav-link link-body-emphasis">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
+                    Previous Prescreptions
                     </a>
-                </li> *@
+                </li>
+
             </ul>
             <hr>
             <div class="dropdown">

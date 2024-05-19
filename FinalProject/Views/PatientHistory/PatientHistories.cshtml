@@ -1,0 +1,64 @@
+﻿@using FinalProject.ViewModels.PatientHistory
+@model List<PatientHistoriesViewModel>
+@{
+    ViewData["Title"] = "Previous Prescreptions";
+    Layout = "_PatientLayout";
+}
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="PatientIndex" asp-controller="Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> previous Prescreptions</li>
+    </ol>
+</nav>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="row">Id</th>
+            <td>Doctor </td>
+            <td> Doctor Specialization</td>
+            <td>Date</td>
+            <td>Complaint</td>
+            <td>Action</td>
+
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorSpecialization)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Problem)
+                </td>
+               
+                <td>
+
+                    <a asp-action="PrescreptionDetails" asp-controller="Prescreption" asp-route-id="@item.Id">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -47,6 +47,10 @@ namespace FinalProject.Repositry
         {
             return context.Patients.Include(e=>e.User).Where(e => e.Id == id).FirstOrDefault();
         }
+        public Patient _GetByUserId(string userId)
+        {
+            return context.Patients.Where(e => e.UserId == userId).FirstOrDefault();
+        }
 
         public void Update(Patient _patient)
         {
