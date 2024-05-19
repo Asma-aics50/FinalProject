@@ -47,7 +47,16 @@ namespace FinalProject.Services
                 Price = service.Price
             };
         }
-
+        static public AllDrugViewModel MapRoAllDrugVM(Drug drug)
+        {
+            return new AllDrugViewModel
+            {
+                Id = drug.Id,
+                Name = drug.Name,
+                Cost = drug.Cost,
+                CompanyName = drug.Company.Name
+            };
+        }
         public static AllPatientViewModel MapToAllPatientsVM(Patient patient)
         {
             return new AllPatientViewModel

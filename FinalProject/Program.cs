@@ -30,6 +30,7 @@ builder.Services.AddScoped<IPatientHistoryMedicalAnalysisRepository, PatientHist
 builder.Services.AddScoped<IDoctorPatientRepositry, DoctorPatientRepositry>();
 builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
 builder.Services.AddScoped<IServiceRepositry,ServicesRepositry>();
+builder.Services.AddScoped<ICompanyRepositry, CompanyRepositry>();
 
 
 var app = builder.Build();
