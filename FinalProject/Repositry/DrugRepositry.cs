@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
 {
@@ -30,7 +31,7 @@ namespace FinalProject.Repositry
 
         public List<Drug> GetAll()
         {
-            return context.Drugs.ToList();
+            return context.Drugs.Include(x=>x.Company).ToList();
         }
 
         public Drug GetById(int id)
