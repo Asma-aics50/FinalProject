@@ -123,5 +123,23 @@ namespace FinalProject.Controllers
             bookedAppointmentsRepositry.Delete(id);
             return RedirectToAction("AllPatientsAppointment");
         }
+
+
+        [HttpGet]
+        public IActionResult PatientAppointments()
+        {
+            
+            string patienttUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int patientId = patientRepositry._GetByUserId(patienttUserId).Id;
+
+            List<PatientAppointmentsViewModel> AllPatientAppointmentsVM = bookedAppointmentsRepositry.GetAllAppointmentsByPateintId_Patient_Doctor(patientId).
+          Select(MapRepositry.MapToPatientsAppointmentVM).ToList();
+
+            return View(AllPatientAppointmentsVM);
+
+
+
+
+        }
     }
 }

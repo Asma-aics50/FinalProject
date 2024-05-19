@@ -1,10 +1,9 @@
 ﻿@using FinalProject.ViewModels
 @model FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel
 
-@{
-    ViewData["Title"] = "Prescreption Details";
+@if (User.IsInRole("Doctor"))
+{    ViewData["Title"] = "Prescreption Details";
     Layout = "_DoctorLayout";
-}
 
 <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
     
@@ -13,7 +12,24 @@
         <li class="breadcrumb-item"><a asp-action="DoctorCaseStudies" asp-controller="Prescreption">Prescreptions</a></li>
         <li class="breadcrumb-item"><a>Details</a></li>
     </ol>
-</div>
+    </div>
+}
+
+else if (User.IsInRole("Patient"))
+
+{
+    ViewData["Title"] = "Prescreption Details";
+    Layout = "_PatientLayout";
+
+    <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="PatientIndex" asp-controller="Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="PatientHistories" asp-controller="PatientHistory">previous Prescreptions</a></li>
+            <li class="breadcrumb-item"><a>Details</a></li>
+        </ol>
+    </div>
+}
 
 <table class="table table-hover">
     <thead>
