@@ -66,5 +66,19 @@ namespace FinalProject.Controllers
 
         }
 
+        [Authorize(Roles = "Patient")]
+
+        public IActionResult PatientHistories()
+        {
+            string patientUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            int patientId = patientRepositry._GetByUserId(patientUserId).Id;
+
+            List<PatientHistoriesViewModel> patientHistoriesVMs = patientHistoryRepositry.Find_All_ByPatientId(patientId).Select(MapRepositry.MapToPatientHistoriesVM).ToList();
+            return View(patientHistoriesVMs);
+
+        }
+
+
     }
 }

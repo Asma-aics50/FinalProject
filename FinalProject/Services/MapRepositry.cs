@@ -220,6 +220,18 @@ namespace FinalProject.Services
              };
 
         }
+        public static PatientHistoriesViewModel MapToPatientHistoriesVM(PatientHistory patienthistory)
+        {
+            return new PatientHistoriesViewModel()
+             {
+                Id=patienthistory.Id,
+                Problem=patienthistory.Problem,
+                DoctorName = $"{patienthistory.Doctor.User.FirstName} {patienthistory.Doctor.User.LastName}",
+                DoctorSpecialization=patienthistory.Doctor.Specialization,
+                CreatedAt = patienthistory.CreatedAt,
+            };
+
+        }
         public static PrescreptionDetailsViewModel MapToPrescreptionDetailsVM(PatientHistory patienthistory)
         {
             return new PrescreptionDetailsViewModel()
