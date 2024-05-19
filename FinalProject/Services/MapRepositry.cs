@@ -25,16 +25,6 @@ namespace FinalProject.Services
                 Id = doctor.Id
             };
         }
-        static public AllDrugViewModel MapRoAllDrugVM(Drug drug) 
-        {
-            return new AllDrugViewModel 
-            { 
-                Id = drug.Id,
-                Name = drug.Name,
-                Cost = drug.Cost,
-                CompanyName =drug.Company.Name
-            };
-        }
         static public AllEmployeesViewModel MapToAllEmployeeVM(Employee employee) 
         {
             return new AllEmployeesViewModel
