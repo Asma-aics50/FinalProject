@@ -13,6 +13,8 @@ namespace FinalProject.IRepositry
         public List<PatientHistory> FindePatinetByDoctor(int doctorId);
         public List<PatientHistory> FindePatinetHistoriesByDoctorAndPatientIds(int doctorId, int patientId);
         public PatientHistory Find_Patinet_UsrById(int id);
+        List<PatientHistory> Find_All_ByPatientId(int patientId);
+
 
     }
 }
