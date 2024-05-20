@@ -57,6 +57,16 @@ namespace FinalProject.Services
                 CompanyName = drug.Company.Name
             };
         }
+        static public AllCompanyViewModel MapToAllCompanyVM(Company company) 
+        {
+            return new AllCompanyViewModel 
+            {
+                Id = company.Id,
+                Name = company.Name,
+                Specialization = company.Specialization,
+                ZipCode = company.ZipCode
+            };
+        }
         public static AllPatientViewModel MapToAllPatientsVM(Patient patient)
         {
             return new AllPatientViewModel
