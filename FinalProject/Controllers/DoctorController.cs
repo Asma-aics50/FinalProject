@@ -66,6 +66,16 @@ namespace FinalProject.Controllers
             return View(doctorDetailsViewModel);
         }
 
+        [Authorize]
+        public IActionResult Doctors()
+        {
+
+            List<DoctorsViewModel> doctorsVM = doctorRepositry.GetAll_Departments_User().Select(MapRepositry.MapToDoctorsVM).ToList();
+           
+
+            return View(doctorsVM);
+        }
+
 
 
     }

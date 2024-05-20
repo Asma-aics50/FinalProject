@@ -338,6 +338,16 @@ namespace FinalProject.Services
             };
 
         }
+        public static DoctorsViewModel MapToDoctorsVM(Doctor doctor)
+        {
+            return new DoctorsViewModel()
+            {
+                Id=doctor.Id,
+                Name =$"{doctor.User.FirstName} {doctor.User.LastName}",
+                Department=doctor.Department.Name,
+            };
+
+        }
 
     }
 }
