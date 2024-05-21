@@ -25,7 +25,7 @@
                     <p class="card-text">Departmnet : @item.Department"</p>
                 </div>
 
-                <a class="btn btn-primary">Book Appointment</a>
+                    <a asp-action="BookAppointment" asp-controller="Appointment" asp-route-id="@item.Id" class="btn btn-primary">Book Appointment</a>
             </div>
         </div>
 

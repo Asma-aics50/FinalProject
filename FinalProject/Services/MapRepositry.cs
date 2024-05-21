@@ -133,6 +133,17 @@ namespace FinalProject.Services
                 AppointmentStatues=appointmentVM.AppointmentStatues              
             };
         }
+
+        public static BookedAppointment MapToBookedAppointmentFoPatient(BookAppointmentViewModel appointmentVM,int patientId, AppointmentStatues status)
+        {
+            return new BookedAppointment
+            {
+                DoctorId=appointmentVM.DoctorId,
+                PatientId=patientId,
+                DateTime=appointmentVM.DateTime,
+                AppointmentStatues=status              
+            };
+        }
         public static BookedAppointment MapToAutoBookedAppointment(CreateViewModel prescreptionVM)
         {
             return new BookedAppointment
