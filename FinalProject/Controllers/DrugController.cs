@@ -45,7 +45,7 @@ namespace FinalProject.Controllers
             {
                 Drug drug = new Drug() { Id = createDrugView.Id, Name = createDrugView.Name, Description = createDrugView.Description, Cost = createDrugView.Cost, CompanyId = createDrugView.CompanyId };
                 drugRepositry.Create(drug);
-                //ViewBag.Drug = companyRepositry.GetAll();
+               
                 return RedirectToAction("AllDrug");
             }
             return View();

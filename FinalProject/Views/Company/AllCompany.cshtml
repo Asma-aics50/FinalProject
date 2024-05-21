@@ -1,0 +1,132 @@
+﻿@model IEnumerable<FinalProject.ViewModels.AllCompanyViewModel>
+
+@{
+    ViewData["Title"] = "AllCompany";
+    Layout = "_AdminLayout";
+}
+
+
+<a class="btn btn-success btn-lg" role="button" asp-action="CreateCompany" asp-controller="Company">
+    <i class="bi bi-person-add"></i>
+    Add new Company
+
+</a>
+
+<div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
+
+    <div class="card-body">
+        <h2 class="card-title">All Companies</h2>
+
+    </div>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#">Company List</a></li>
+
+    </ol>
+</div>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="row">Id</th>
+            <td>Name</td>
+            <td>Specalization</td>
+            <td>ZipCode</td>
+            <td>Action</td>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialization)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZipCode)
+                </td>
+
+                <td>
+                    <a asp-action="CompanyDetails" asp-controller="Company" asp-route-id="@item.Id">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    <a asp-action="EditCompany" asp-controller="Company" asp-route-id="@item.Id">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="#" class="delete-item" data-id="@item.Id ">
+                       
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" id="close-modal-1" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the Company ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-danger confirm-delete" id="Delete" data-dismiss="modal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    // Select all elements with the class containing "delete" (assuming your class name includes "delete")
+    const deleteLinks = document.querySelectorAll('.delete-item');
+    deleteLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default navigation
+            // Get item ID from the data-id attribute
+            const itemId = this.dataset.id;
+            // Logic to show the modal with the captured ID
+            console.log(itemId);
+            console.log(itemId)
+            $("#itemId").val(itemId);
+            $("#deleteModal").data("itemId", itemId); // Set ID as data attribute on modal button
+            $("#deleteModal").modal("show");      //     Show the modal
+            document.getElementById("Delete").href = "/Appointment/Delete?id=" + itemId;
+        });
+    });
+    // Close modal using close buttons
+    const closeButtons = document.querySelectorAll('.close, .btn-secondary'); // Select both close buttons
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.classList.remove('show'); // Hide the modal using Bootstrap class
+        });
+    });
+</script>
