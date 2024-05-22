@@ -5,25 +5,36 @@
     Layout = @ViewBag.Layout;
     // Layout = "_AdminLayout";
 }
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        @if(ViewBag.Layout=="_DoctorLayout")
-        {
+@if(ViewBag.Layout=="_DoctorLayout")
+{
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="DoctorIndex" asp-controller="Dashboard">Dashboard</a></li>
-       
+            <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+        </ol>
+    </nav>
+
+
         }
+
         else
         {
-            <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AdminIndex" asp-controller="Dashboard">Dashboard</a></li>
+            <a class="btn btn-success btn-lg mb-2" role="button" asp-action="CreateDoctorAccount" asp-controller="Account">
+                <i class="bi bi-person-add"></i>
+                Add new Doctor
+
+            </a>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+
+                    <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AdminIndex" asp-controller="Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+        </ol>
+    </nav>
 
         }
         
-        <li class="breadcrumb-item active" aria-current="page">Doctors</li>
-    </ol>
-</nav>
-
-
 
 
 <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">

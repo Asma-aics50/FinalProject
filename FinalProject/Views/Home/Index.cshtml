@@ -20,9 +20,65 @@
 
     </div>
 
-    <div style="width:2110px;height:400px; background-color:#f0f5f5; display:flex; justify-content:center;align-items:center">
+ @*    <div style="width:2110px;height:400px; background-color:#f0f5f5; display:flex; justify-content:center;align-items:center">
 
         <h1 style="color:#158cba"> The best healthcare for you  </h1>
     </div>
-
+    <div class="scroll-container">
+        <button class="prev" onclick="scrollLeft()">←</button>
+        <div class="scroll-items" id="scrollItems">
+            @foreach (var item in ViewBag.Doctors)
+            {
+                <div class="item">@item.Name</div>
+            }
+        </div>
+        <button class="next" onclick="scrollRight()">→</button>
+    </div>
+ *@
 </div>
+@* <style>
+    .scroll-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .scroll-items {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        width: 80%;
+        gap: 10px;
+    }
+
+    .item {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 150px;
+        background-color: #eee;
+        text-align: center;
+        line-height: 150px;
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function scrollLeft() {
+        document.querySelector('.scroll-items').scrollBy({
+            left: -200,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollRight() {
+        document.querySelector('.scroll-items').scrollBy({
+            left: 200,
+            behavior: 'smooth'
+        });
+    }
+</script> *@
