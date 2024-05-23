@@ -99,9 +99,6 @@ namespace FinalProject.Controllers
                 return RedirectToAction("AllPatients");
             }
 
-            
-            //patientDetails.Name = $"{patientDetails.User.FirstName} {patientDetails.User.LastName}";
-
             return View(patientDetails);
         }
 

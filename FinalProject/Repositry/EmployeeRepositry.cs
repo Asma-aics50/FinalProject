@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
@@ -71,7 +72,20 @@ namespace FinalProject.Repositry
         { 
             return context.Employees.Include(e => e.User).Include(e => e.Department).ToList();
         }
-
+        public void UpdateeEiteEmployee(EditEmployeeViewModel editEmployeeView) 
+        {
+            var emp = _GetByIdUser(editEmployeeView.Id);
+            if (emp != null)
+            {
+                emp.User.FirstName = editEmployeeView.FirstName;
+                emp.User.LastName = editEmployeeView.LastName;  
+                emp.User.BirthDate= editEmployeeView.BirthDate;
+                emp.Salary = editEmployeeView.Salary;
+                emp.User.Gender = editEmployeeView.Gender;  
+                emp.User.Email = editEmployeeView.Email;
+                context.SaveChanges();
+            }
+        }
 
     }
 }

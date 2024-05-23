@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.IRepositry
 {
@@ -12,6 +13,6 @@ namespace FinalProject.IRepositry
         public List<Employee> GetAll_Departments_User();
         public Employee _GetByIdUser(int id);
 
-
+        public void UpdateeEiteEmployee(EditEmployeeViewModel editEmployeeView);
     }
 }
