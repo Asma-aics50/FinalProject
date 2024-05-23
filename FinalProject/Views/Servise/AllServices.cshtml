@@ -32,6 +32,7 @@
             <th scope="row">Id</th>
             <td>Name</td>
             <td>Price</td>
+            <td>Action</td>
 
         </tr>
     </thead>
@@ -54,10 +55,10 @@
                 </td>
                 
                 <td>
-                    <a asp-action="PatientDetails" asp-controller="Patient" asp-route-id="@item.Id">
+                    <a asp-action="ServisesDetails" asp-controller="Servise" asp-route-id="@item.Id">
                         <i class="bi bi-eye"></i>
                     </a>
-                    <a asp-action="EditPatient" asp-controller="Patient" asp-route-id="@item.Id">
+                    <a asp-action="EditServices" asp-controller="Servise" asp-route-id="@item.Id">
                         <i class="bi bi-pencil-square"></i>
                     </a>
                     <a href="#" class="delete-item" data-id="@item.Id ">
@@ -84,7 +85,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete the Patient ?</p>
+                <p>Are you sure you want to delete the Services ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,5 +1,6 @@
 ﻿using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.Repositry;
 using FinalProject.Services;
 using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -52,5 +53,36 @@ namespace FinalProject.Controllers
 
             return View(services);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditServices(int id ) 
+        {
+            var editserv = serviceRepositry.GetById(id);    
+            EditServicesViewModel editServicesView = new EditServicesViewModel() 
+            {
+                Id = editserv.Id,
+                Name = editserv.Name,
+                Price = editserv.Price
+            };   
+            return View(editServicesView);
+        }
+        public IActionResult EditServices(EditServicesViewModel editServicesView) 
+        {
+            if (ModelState.IsValid)
+            {
+                serviceRepositry.UpdateEditServices(editServicesView);
+                return RedirectToAction("AllServices");
+            }
+
+            return View(editServicesView);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteDrug(int id)
+        {
+            serviceRepositry.Delete(id);
+            return RedirectToAction("AllServices");
+        }
+
     }
 }

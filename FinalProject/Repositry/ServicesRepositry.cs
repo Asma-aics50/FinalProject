@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Repositry
 {
@@ -45,6 +46,17 @@ namespace FinalProject.Repositry
             {
                 service.Price = _service.Price;
                 service.Name = _service.Name;
+
+                context.SaveChanges();
+            }
+        }
+        public void UpdateEditServices(EditServicesViewModel editServicesView)
+        {
+            var service = GetById(editServicesView.Id);
+            if (service != null)
+            {
+                service.Price = editServicesView.Price;
+                service.Name = editServicesView.Name;
 
                 context.SaveChanges();
             }
