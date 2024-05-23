@@ -1,4 +1,6 @@
-﻿using FinalProject.Models;
+﻿using FinalProject.IRepositry;
+using FinalProject.Models;
+using FinalProject.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,13 +10,19 @@ namespace FinalProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        IDoctorRepositry doctorRepositry;
+
+        public HomeController(ILogger<HomeController> logger,
+        IDoctorRepositry doctorRepositry)
         {
             _logger = logger;
+            this.doctorRepositry = doctorRepositry;
         }
 
         public IActionResult Index()
         {
+           ViewBag.doctors = doctorRepositry.GetAll_Departments_User().Select(MapRepositry.MapToDoctorsVM).ToList();
+
             return View();
         }
 

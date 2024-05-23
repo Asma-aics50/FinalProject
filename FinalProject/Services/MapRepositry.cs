@@ -151,6 +151,17 @@ namespace FinalProject.Services
                 AppointmentStatues=appointmentVM.AppointmentStatues              
             };
         }
+
+        public static BookedAppointment MapToBookedAppointmentFoPatient(BookAppointmentViewModel appointmentVM,int patientId, AppointmentStatues status)
+        {
+            return new BookedAppointment
+            {
+                DoctorId=appointmentVM.DoctorId,
+                PatientId=patientId,
+                DateTime=appointmentVM.DateTime,
+                AppointmentStatues=status              
+            };
+        }
         public static BookedAppointment MapToAutoBookedAppointment(CreateViewModel prescreptionVM)
         {
             return new BookedAppointment
@@ -353,6 +364,16 @@ namespace FinalProject.Services
                 Id=drug.Id,
                 Name=drug.Name,
                 
+            };
+
+        }
+        public static DoctorsViewModel MapToDoctorsVM(Doctor doctor)
+        {
+            return new DoctorsViewModel()
+            {
+                Id=doctor.Id,
+                Name =$"{doctor.User.FirstName} {doctor.User.LastName}",
+                Department=doctor.Department.Name,
             };
 
         }

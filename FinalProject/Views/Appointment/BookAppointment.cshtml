@@ -1,0 +1,91 @@
+﻿@model BookAppointmentViewModel
+
+<div class="card mt-4">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="/images/doctor1.jpg" class="img-fluid rounded-start m-2" alt="Doctor">
+            <div class="card-body">
+                <p class="card-text"><b> @ViewBag.Doctor.Name </b></p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">  <b>@ViewBag.Doctor.Department Departmnet</b></p>
+            </div>
+        </div>
+
+        <div class="col-md-5 m-3">
+
+            <div class="row">
+                <div class="col-md-8">
+
+            <form asp-action="BookAppointment">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input hidden name="doctorId"  value="@ViewBag.Doctor.Id"/>
+            <div class="form-group">
+            <label asp-for="DateTime" class="form-label mt-4">
+                Choose the appropriate date
+
+            </label>
+                <input asp-for="DateTime" class="form-select" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+                <input type="submit" value="Book Appointment" class="btn btn-primary mt-2" />
+
+            </div>
+        </form>
+    </div>
+                <p> Note:your Application is <b>pending </b>yet .We will contact You soon To confirm it.</p>
+
+            </div>
+
+        </div>
+
+
+</div>
+    </div>
+
+
+@* ----------------------- *@
+@* 
+<div style="width:100%; height: 100%;">
+    <div class="col-md-4 mt-4" style="width:30%;">
+        <div class="card">
+
+            <img src="/images/doctor1.jpg" class="card-img-top" alt="doctor image">
+
+            <div class="card-body">
+                <b> <p class="card-text">@ViewBag.Doctor.Name</p></b>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Departmnet : @ViewBag.Doctor.Department"</p>
+            </div>
+        </div>
+    </div>
+
+
+<div class="row"
+    <div class="col-md-2">
+        <form asp-action="BookAppointment">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input hidden name="doctorId"  value="@ViewBag.Doctor.Id"/> 
+            <div class="form-group">
+                <label asp-for="DateTime" class="form-label mt-4"></label>
+                <input asp-for="DateTime" class="form-select" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+                <input type="submit" value="Book Appointment" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+ *@
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

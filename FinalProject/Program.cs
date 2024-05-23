@@ -31,6 +31,7 @@ builder.Services.AddScoped<IDoctorPatientRepositry, DoctorPatientRepositry>();
 builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
 builder.Services.AddScoped<IServiceRepositry,ServicesRepositry>();
 builder.Services.AddScoped<ICompanyRepositry, CompanyRepositry>();
+builder.Services.AddScoped<IBillRepositry, BillRepositry>();
 
 
 var app = builder.Build();

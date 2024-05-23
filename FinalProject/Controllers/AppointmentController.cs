@@ -1,4 +1,5 @@
-﻿using FinalProject.IRepositry;
+﻿using FinalProject.Data.Enum;
+using FinalProject.IRepositry;
 using FinalProject.Models;
 using FinalProject.Services;
 using FinalProject.ViewModels;
@@ -139,6 +140,38 @@ namespace FinalProject.Controllers
 
 
 
+
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult BookAppointment(int id)
+        {
+            string patienttUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int patientId = patientRepositry._GetByUserId(patienttUserId).Id;
+
+            DoctorsViewModel doctorVM =MapRepositry.MapToDoctorsVM( doctorRepositry._GetByIdUser(id));
+
+            ViewBag.doctor = doctorVM;
+    
+            BookAppointmentViewModel bookAppointmentViewModel=new BookAppointmentViewModel();
+            return View(bookAppointmentViewModel);
+
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult BookAppointment(BookAppointmentViewModel DataVM)
+        {
+            string patienttUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int patientId = patientRepositry._GetByUserId(patienttUserId).Id;
+
+
+
+            BookedAppointment bookedAppointment=  MapRepositry.MapToBookedAppointmentFoPatient(DataVM, patientId, AppointmentStatues.Pending);
+
+            bookedAppointmentsRepositry.Create(bookedAppointment);
+
+            return RedirectToAction("PatientAppointments");
 
         }
     }
