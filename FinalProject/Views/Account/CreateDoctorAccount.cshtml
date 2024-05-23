@@ -12,18 +12,32 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateDoctorAccount">
+        <form asp-action="CreateDoctorAccount" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+         <div style="display:flex;justify-content:space-between ">
+             <div>
+                 <div class="form-group">
+                <label asp-for="FirstName" class="control-label mt-1 form-select"></label>
+                <input asp-for="FirstName" class="form-control mt-1 " />
+                <span asp-validation-for="FirstName" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
+
+                <div>
+                <img id="imagePreview" src="/images/doctors/avatarImg.jpeg" alt="Image Preview" style=" max-width: 500px; max-height: 500px; margin-top: 20px;">
+
+                @* <img src="" /> *@
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" id="imageUpload" />
+                <span asp-validation-for="Image"></span>
+         </div>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -102,5 +116,20 @@
 
 
             @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+             <script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+    }
     

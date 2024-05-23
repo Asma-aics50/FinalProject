@@ -29,10 +29,11 @@
         <div class="scroll-items" id="scrollItems" >
             @foreach (var item in ViewBag.Doctors)
             {
-                     string image = "/images/Doctors/_" + item.Id + ".jpg";
+
                     <div class="item" style="margin:0 10px; text-align:center; width:30%">
 
-                        <img src="@image" alt="doctor image" class="mt-2" style="width:200px; height:250px; object-fit:cover; border-radius:50%;">
+                        <img src="~/Uploads/@item.Image" alt="doctor image" class="mt-2" style="width:200px; height:250px; object-fit:cover; border-radius:50%;">
+                        
                         <b> <div>Dr / @item.Name</div> </b>
                         <a class="btn btn-success btn-lg  " role="button" asp-action="BookAppointment" asp-controller="Appointment" asp-route-id="@item.Id">
                             <i class="bi bi-person-add"></i>

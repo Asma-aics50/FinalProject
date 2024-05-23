@@ -91,6 +91,7 @@ namespace FinalProject.Data
 
             modelBuilder.Entity<PatientHistory>().Property(e => e.BloodPressure).IsRequired(false);
             modelBuilder.Entity<PatientHistory>().Property(e => e.Note).IsRequired(false);
+            modelBuilder.Entity<ApplicationUser>().Property(e => e.Image).IsRequired(false);
             
             modelBuilder.Entity<DoctorPatient>()
                 .HasOne(e => e.Patient)
@@ -100,10 +101,6 @@ namespace FinalProject.Data
              
 
         }
-        public DbSet<FinalProject.ViewModels.Prescreption.PrescreptionDetailsViewModel> PrescreptionDetailsViewModel { get; set; } = default!;
-        public DbSet<FinalProject.ViewModels.PatientDetailsViewModel> PatientDetailsViewModel { get; set; } = default!;
-        public DbSet<FinalProject.ViewModels.CreateServiceViewModel> CreateServiceViewModel { get; set; } = default!;
-        public DbSet<FinalProject.ViewModels.CreateCompanyViewModel> CreateCompanyViewModel { get; set; } = default!;
-
+      
     }
 }

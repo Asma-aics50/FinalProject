@@ -50,6 +50,7 @@ namespace FinalProject.ViewModels
         public int ShiftEndTime { get; set; }
         [Display(Name = "Medical License Number")]
         public string Medical_License_no { get; set; }
-
+        [Required]
+        public IFormFile Image { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace FinalProject.Controllers
 {
     public class AccountController : Controller
     {
+
         
             UserManager<ApplicationUser> userManager;
             SignInManager<ApplicationUser> signIn;
@@ -20,6 +21,7 @@ namespace FinalProject.Controllers
             IDoctorRepositry doctorRepositry;
             IEmployeeRepositry employeeRepositry;
         IDepartmentRepositry departmentRepositry;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
 
@@ -27,6 +29,7 @@ namespace FinalProject.Controllers
                 IPatientRepositry patientRepositry,
                 IDoctorRepositry doctorRepositry,
                 IEmployeeRepositry employeeRepositry,
+                 IWebHostEnvironment _webHostEnvironment,
 
         IDepartmentRepositry departmentRepositry
             //HospitalManagementSystemDbContext context
@@ -39,7 +42,8 @@ namespace FinalProject.Controllers
             this.doctorRepositry = doctorRepositry;
             this.employeeRepositry= employeeRepositry;
             this.departmentRepositry = departmentRepositry;
-            }
+            this._webHostEnvironment = _webHostEnvironment;    
+        }
 
 
         
@@ -220,6 +224,17 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                Directory.CreateDirectory(uploadsFolder);
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + userVM.Image.FileName;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await userVM.Image.CopyToAsync(fileStream);
+                }
+
                 ApplicationUser user = new ApplicationUser()
                 {
 
@@ -230,7 +245,8 @@ namespace FinalProject.Controllers
                     LastName = userVM.LastName,
                     Gender = userVM.Gender.ToString(),
                     BirthDate = userVM.BirthDate,
-                    PhoneNumber = userVM.Phone
+                    PhoneNumber = userVM.Phone,
+                    Image= uniqueFileName
                 };
 
 
@@ -240,7 +256,9 @@ namespace FinalProject.Controllers
 
                 if (result.Succeeded)
                 {
-                            await userManager.AddToRoleAsync(user, "Doctor");
+                  
+                    //---------------
+                    await userManager.AddToRoleAsync(user, "Doctor");
 
                     Doctor doctor = new Doctor() { UserId = user.Id,
                         DepartmentId = userVM.DeptId,

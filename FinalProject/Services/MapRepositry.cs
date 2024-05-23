@@ -366,6 +366,7 @@ namespace FinalProject.Services
                 Id=doctor.Id,
                 Name =$"{doctor.User.FirstName} {doctor.User.LastName}",
                 Department=doctor.Department.Name,
+                Image=doctor.User.Image
             };
 
         }
