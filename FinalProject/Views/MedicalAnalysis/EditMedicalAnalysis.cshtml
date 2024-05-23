@@ -1,30 +1,26 @@
-﻿@model FinalProject.ViewModels.EditServicesViewModel
+﻿@model FinalProject.ViewModels.EditMedicalAnalysisViewModel
 
 @{
-    ViewData["Title"] = "EditServices";
+    ViewData["Title"] = "EditMedicalAnalysis";
     Layout = "_AdminLayout";
 }
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AdminIndex" asp-controller="Dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AllServices" asp-controller="servise">Services</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit Services Info</li>
+        <li class="breadcrumb-item"><a style="text-decoration:none" asp-action="AllMedicalAnalysis" asp-controller="MedicalAnalysis">Medical Analysis</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit MedicalAnalysis Info</li>
     </ol>
 </nav>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditServices">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="EditMedicalAnalysis">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

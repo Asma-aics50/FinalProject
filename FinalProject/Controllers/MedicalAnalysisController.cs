@@ -1,5 +1,6 @@
 ﻿using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.Repositry;
 using FinalProject.Services;
 using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -47,6 +48,35 @@ namespace FinalProject.Controllers
             List<AllMedicalAnalysis> medicalAnalyses=medicalAnalysisRepositry.GetAll().Select(MapRepositry.MapToAllMedicalAnalysisVM).ToList();
             return View(medicalAnalyses);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditMedicalAnalysis(int id )
+        {
+            var editMedical = medicalAnalysisRepositry.GetById(id);
+            EditMedicalAnalysisViewModel edit = new EditMedicalAnalysisViewModel() 
+            { 
+                Id = editMedical.Id,    
+                Name = editMedical.Name
 
+            };
+            return View(edit);
+        }
+        [HttpPost]
+        public IActionResult EditMedicalAnalysis(EditMedicalAnalysisViewModel editMedicalAnalysis) 
+        {
+            if (ModelState.IsValid)
+            {
+                medicalAnalysisRepositry.UpdateEdit(editMedicalAnalysis);
+                return RedirectToAction("AllMedicalAnalysis");
+            }
+            return View(editMedicalAnalysis);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int id)
+        {
+            medicalAnalysisRepositry.Delete(id);
+            return RedirectToAction("AllMedicalAnalysis");
+        }
     }
 }

@@ -19,7 +19,7 @@
 
     </div>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/Dashboard/AdminIndex">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="#">MedicalAnalysis List</a></li>
 
     </ol>
@@ -109,7 +109,7 @@
             $("#itemId").val(itemId);
             $("#deleteModal").data("itemId", itemId); // Set ID as data attribute on modal button
             $("#deleteModal").modal("show");      //     Show the modal
-            document.getElementById("Delete").href = "/Appointment/Delete?id=" + itemId;
+            document.getElementById("Delete").href = "/MedicalAnalysis/Delete?id=" + itemId;
         });
     });
     // Close modal using close buttons

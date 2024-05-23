@@ -78,7 +78,7 @@ namespace FinalProject.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult DeleteDrug(int id)
+        public IActionResult Delete(int id)
         {
             serviceRepositry.Delete(id);
             return RedirectToAction("AllServices");

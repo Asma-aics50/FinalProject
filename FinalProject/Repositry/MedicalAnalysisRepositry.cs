@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Repositry
 {
@@ -44,6 +45,16 @@ namespace FinalProject.Repositry
             if (medical != null) 
             {
                 medical.Name = _medicalAnaylsis.Name;
+                context.SaveChanges();
+
+            }
+        }
+        public void UpdateEdit(EditMedicalAnalysisViewModel editMedicalAnalysis)
+        {
+            var medical = GetById(editMedicalAnalysis.Id);
+            if (medical != null)
+            {
+                medical.Name = editMedicalAnalysis.Name;
                 context.SaveChanges();
 
             }
