@@ -106,6 +106,7 @@ namespace FinalProject.Data
         public DbSet<FinalProject.ViewModels.CreateCompanyViewModel> CreateCompanyViewModel { get; set; } = default!;
         public DbSet<FinalProject.ViewModels.CreateMedicalAnalysisViewModel> CreateMedicalAnalysisViewModel { get; set; } = default!;
         public DbSet<FinalProject.ViewModels.EditEmployeeViewModel> EditEmployeeViewModel { get; set; } = default!;
+        public DbSet<FinalProject.ViewModels.EditDrugViewModel> EditDrugViewModel { get; set; } = default!;
 
     }
 }

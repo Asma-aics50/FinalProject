@@ -63,7 +63,7 @@
                     <a asp-action="DrugDetails" asp-controller="Drug" asp-route-id="@item.Id">
                         <i class="bi bi-eye"></i>
                     </a>
-                    <a asp-action="EditDrug" asp-controller="Patient" asp-route-id="@item.Id">
+                    <a asp-action="EditDrug" asp-controller="Drug" asp-route-id="@item.Id">
                         <i class="bi bi-pencil-square"></i>
                     </a>
                     <a href="#" class="delete-item" data-id="@item.Id ">
@@ -90,7 +90,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete the Patient ?</p>
+                <p>Are you sure you want to delete the Drug ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>
