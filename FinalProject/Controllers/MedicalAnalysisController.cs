@@ -40,7 +40,7 @@ namespace FinalProject.Controllers
         {
             MedicalAnaylsis medicalAnaylsis = new MedicalAnaylsis() {Id = createMedicalAnalysisView.Id,Name = createMedicalAnalysisView.Name };
             medicalAnalysisRepositry.Create(medicalAnaylsis);
-            return View("AllMedicalAnalysis");
+            return RedirectToAction("AllMedicalAnalysis");
         }
         public IActionResult AllMedicalAnalysis() 
         {
