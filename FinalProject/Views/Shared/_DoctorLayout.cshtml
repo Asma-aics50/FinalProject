@@ -1,6 +1,4 @@
 ﻿<!DOCTYPE html>
-<a href="c:\users\yassm\source\repos\hospitalms\finalproject\views\shared\_doctorlayout.cshtml">c:\users\yassm\source\repos\hospitalms\finalproject\views\shared\_doctorlayout.cshtml</a>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -42,8 +40,7 @@
 
     <div class="d-flex">
 
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width:25%; height: 100vh;">
-
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width:25%; height: 100%;position: fixed;  top: 0;left: 0;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
                 <span class="fs-4">Clinics</span>
@@ -114,13 +111,10 @@
         </div>
 
 
-        <div class="flex-grow-1">
-
-            <div style="margin:5%;margin-top:2%;">
-
-                @RenderBody()
-            </div>
+        <div class="content flex-grow-1" style="margin-left: 25%; padding: 25px;">
+            @RenderBody()
         </div>
+
 
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
