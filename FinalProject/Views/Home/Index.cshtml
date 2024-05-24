@@ -25,16 +25,20 @@
     
         <div style="width:60%;display:flex; align-items:center; justify-content:center ;">
         
-            <button class="prev" onclick="scrollLeft()">←</button>
+            <button class="prev" onclick="scrollLeft()"><i class="bi bi-caret-left"></i></button>
         <div class="scroll-items" id="scrollItems" >
             @foreach (var item in ViewBag.Doctors)
             {
-
                     <div class="item" style="margin:0 10px; text-align:center; width:30%">
-
-                        <img src="~/Uploads/@item.Image" alt="doctor image" class="mt-2" style="width:200px; height:250px; object-fit:cover; border-radius:50%;">
-                        
-                        <b> <div>Dr / @item.Name</div> </b>
+                        @if (item.Image == null)
+                        {
+                            <img src="~/images/Doctors/avatarImg.jpeg" alt="doctor image" class="doctor-image">
+                        }
+                        else
+                        {
+                            <img src="~/Uploads/@item.Image" alt="doctor image" class="mt-2" style="width:200px; height:250px; object-fit:cover; border-radius:50%;">
+                        }
+                        <div><b>Dr / @item.Name </b></div>
                         <a class="btn btn-success btn-lg  " role="button" asp-action="BookAppointment" asp-controller="Appointment" asp-route-id="@item.Id">
                             <i class="bi bi-person-add"></i>
                             Book Appointment Now
@@ -43,7 +47,7 @@
                     </div>
             }
         </div>
-        <button class="next" onclick="scrollRight()">→</button>
+            <button class="next" onclick="scrollRight()"><i class="bi bi-caret-right"></i></button>
 
         </div>
     </div>

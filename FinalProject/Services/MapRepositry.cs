@@ -3,6 +3,7 @@ using FinalProject.Models;
 using FinalProject.Repositry;
 using FinalProject.ViewModels;
 using FinalProject.ViewModels.Appointment;
+using FinalProject.ViewModels.Department;
 using FinalProject.ViewModels.PatientHistory;
 using FinalProject.ViewModels.Prescreption;
 using System.Numerics;
@@ -363,6 +364,16 @@ namespace FinalProject.Services
             {
                 Id=drug.Id,
                 Name=drug.Name,
+                
+            };
+
+        }
+        public static DepartmentViewModel  MapToDeptVM(Department depatrment)
+        {
+            return new DepartmentViewModel()
+            {
+                Id= depatrment.Id,
+                Name= depatrment.Name,
                 
             };
 
