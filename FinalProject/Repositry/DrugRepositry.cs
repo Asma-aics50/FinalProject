@@ -59,6 +59,9 @@ namespace FinalProject.Repositry
             {
                 drug.Cost = editDrugView.Cost;
                 drug.Name = editDrugView.Name;
+                drug.Description = editDrugView.Description;
+                drug.CompanyId = editDrugView.CompanyId;
+
                 context.SaveChanges();
             }
         }

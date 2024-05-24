@@ -67,10 +67,12 @@ namespace FinalProject.Controllers
                 Id = editDrug.Id,
                 Name = editDrug.Name,
                 Cost = editDrug.Cost,
+                Description = editDrug.Description,
+                CompanyId = editDrug.CompanyId
                 
             };
-          
-            
+            ViewBag.Company = companyRepositry.GetAll();
+
             return View(editDrugView);
         }
         [HttpPost]
