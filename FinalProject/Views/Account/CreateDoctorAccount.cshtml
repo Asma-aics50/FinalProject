@@ -11,110 +11,121 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDoctorAccount" enctype="multipart/form-data">
+    <div class="col-md-10">
+        <form asp-action="CreateDoctorAccount"  enctype="multipart/form-data">
+            
             <div asp-validation-summary="All" class="text-danger"></div>
-         <div style="display:flex;justify-content:space-between ">
-             <div>
+            <div style="display:flex;justify-content:space-between; flex-wrap:wrap" >
+
+            <div class="w-100 d-flex justify-content-between " >
+                <div class="w d-flex flex-column justify-content-between">
                  <div class="form-group">
-                <label asp-for="FirstName" class="control-label mt-1 form-select"></label>
+                <label asp-for="FirstName" class="control-label mt-1"></label>
                 <input asp-for="FirstName" class="form-control mt-1 " />
                 <span asp-validation-for="FirstName" class="text-danger mt-1"></span>
             </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
+                <div class="form-group ">
+                            <label asp-for="LastName" class="control-label mt-1"></label>
+                            <input asp-for="LastName" class="form-control mt-1" />
+                            <span asp-validation-for="LastName" class="text-danger mt-1"></span>
                 </div>
-            </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label mt-1"></label>
+                            <input asp-for="Email" class="form-control mt-1" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group ">
+                            <label asp-for="UserName" class="control-label mt-1"></label>
+                            <input asp-for="UserName" class="form-control mt-1" />
+                            <span asp-validation-for="UserName" class="text-danger mt-1"></span>
+                        </div>
+                    </div>
 
-                <div>
-                <img id="imagePreview" src="/images/doctors/avatarImg.jpeg" alt="Image Preview" style=" max-width: 500px; max-height: 500px; margin-top: 20px;">
+                <div class="w">
+                <img id="imagePreview" src="/images/doctors/avatarImg.jpeg" alt="Image Preview" style=" width:300px; border-radius:50%; display:block; margin-top: 20px;">
 
                 @* <img src="" /> *@
                 <label asp-for="Image"></label>
                 <input asp-for="Image" type="file" id="imageUpload" />
                 <span asp-validation-for="Image"></span>
-         </div>
+        </div>
+      
             </div>
 
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="form-group w ">
+                    <label asp-for="Password" class="control-label mt-1 "></label>
+                    <input asp-for="Password" class="form-control mt-1" />
+                    <span asp-validation-for="Password" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="ConfirmPassword" class="control-label mt-1"></label>
+                    <input asp-for="ConfirmPassword" class="form-control mt-1" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <select asp-for="Gender" class="form-control">
+                <div class="form-group w">
+                    <label asp-for="Gender" class="control-label mt-1"></label>
+                    <select asp-for="Gender" class="form-control form-select mt-1">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                    <span asp-validation-for="Gender" class="text-danger mt-1"></span>
+            </div >
+            <div class="form-group w">
+                    <label asp-for="BirthDate" class="control-label mt-1"></label>
+                    <input asp-for="BirthDate" class="form-control mt-1" type="date" />
+                    <span asp-validation-for="BirthDate" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" type="date" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="Phone" class="control-label mt-1"></label>
+                    <input asp-for="Phone" class="form-control mt-1" />
+                    <span asp-validation-for="Phone" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="Specialization" class="control-label mt-1"></label>
+                    <input asp-for="Specialization" class="form-control mt-1" />
+                    <span asp-validation-for="Specialization" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Specialization" class="control-label"></label>
-                <input asp-for="Specialization" class="form-control" />
-                <span asp-validation-for="Specialization" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeptId"></label>
-                <select asp-for="DeptId" class="form-control" asp-items="DeprtmentsList" placeholder="Enter Department "></select>
-                <span asp-validation-for="DeptId" class="text-danger"></span>
+                <div class="form-group w mt-1">
+                    <label asp-for="DeptId" class="mt-1"></label>
+                    <select asp-for="DeptId" class="form-control mt-1 form-select" asp-items="DeprtmentsList" ></select>
+                    <span asp-validation-for="DeptId" class="text-danger mt-1"></span>
 
             </div>
-            <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="Salary" class="control-label mt-1"></label>
+                    <input asp-for="Salary" class="form-control mt-1" />
+                    <span asp-validation-for="Salary" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ShiftStartTime" class="control-label"></label>
-                <input asp-for="ShiftStartTime" class="form-control" min="0" max="23" />
-                <span asp-validation-for="ShiftStartTime" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="ShiftStartTime" class="control-label mt-1"></label>
+                    <input asp-for="ShiftStartTime" class="form-control mt-1" min="0" max="23" />
+                    <span asp-validation-for="ShiftStartTime" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ShiftEndTime" class="control-label"></label>
-                <input asp-for="ShiftEndTime" class="form-control" min="0" max="23" />
-                <span asp-validation-for="ShiftEndTime" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="ShiftEndTime" class="control-label mt-1"></label>
+                    <input asp-for="ShiftEndTime" class="form-control mt-1" min="0" max="23" />
+                    <span asp-validation-for="ShiftEndTime" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Medical_License_no" class="control-label"></label>
-                <input asp-for="Medical_License_no" class="form-control" />
-                <span asp-validation-for="Medical_License_no" class="text-danger"></span>
+                <div class="form-group w">
+                    <label asp-for="Medical_License_no" class="control-label mt-1"></label>
+                    <input asp-for="Medical_License_no" class="form-control mt-1 " />
+                    <span asp-validation-for="Medical_License_no" class="text-danger mt-1"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+                <div class="form-group w-100 mt-2">
+                <input type="submit" value="Create  Account " class="btn btn-primary" />
             </div>
-        </form>
+         </form>
     </div>
 </div>
 
+<style>
 
+ .w{
+     width:46%
+    }
+</style>
             @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
              <script>
