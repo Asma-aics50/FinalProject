@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Repositry
@@ -48,6 +49,16 @@ namespace FinalProject.Repositry
                 drug.Name = _drug.Name;
                 drug.Description = _drug.Description;
                 drug.CompanyId = _drug.CompanyId;
+                context.SaveChanges();
+            }
+        }
+        public void UpdateEditDrug(EditDrugViewModel editDrugView)
+        {
+            var drug = GetById(editDrugView.Id);
+            if (drug != null)
+            {
+                drug.Cost = editDrugView.Cost;
+                drug.Name = editDrugView.Name;
                 context.SaveChanges();
             }
         }

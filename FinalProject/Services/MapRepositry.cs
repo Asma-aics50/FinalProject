@@ -67,6 +67,14 @@ namespace FinalProject.Services
                 ZipCode = company.ZipCode
             };
         }
+        static public AllMedicalAnalysis MapToAllMedicalAnalysisVM(MedicalAnaylsis medicalAnaylsis) 
+        {
+            return new AllMedicalAnalysis
+            {
+                    Id=medicalAnaylsis.Id,
+                    Name =medicalAnaylsis.Name
+            };
+        }
         public static AllPatientViewModel MapToAllPatientsVM(Patient patient)
         {
             return new AllPatientViewModel

@@ -1,30 +1,26 @@
-﻿@model IEnumerable<FinalProject.ViewModels.AllEmployeesViewModel>
+﻿@model IEnumerable<FinalProject.ViewModels.AllMedicalAnalysis>
 
 @{
-    ViewData["Title"] = "AllEmployees";
-   
+    ViewData["Title"] = "AllMedicalAnalysis";
     Layout = "_AdminLayout";
 }
 
 
-<a class="btn btn-success btn-lg" role="button" asp-action="CreateEmployeeAccount" asp-controller="Account">
+<a class="btn btn-success btn-lg" role="button" asp-action="CreateMedicalAnalysis" asp-controller="MedicalAnalysis">
     <i class="bi bi-person-add"></i>
-    Add new Employee
+    Add new Medical Analysis
 
 </a>
-
-
-
 
 <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
 
     <div class="card-body">
-        <h2 class="card-title">All Employees</h2>
+        <h2 class="card-title">All MedicalAnalysis</h2>
 
     </div>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Dashboard/AdminIndex">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="#">Employees List</a></li>
+        <li class="breadcrumb-item"><a href="#">MedicalAnalysis List</a></li>
 
     </ol>
 </div>
@@ -34,13 +30,9 @@
     <thead>
         <tr class="table-primary">
             <th scope="row">Id</th>
-            <td> Name</td>
-            <td>Phone Number</td>
-            <td>Email</td>
-            <td>Salary</td>
-            <td>Specialization</td>
-            <td>Department</td>
-            <td>Actions</td>
+            <td>Name</td>
+            <td>Action</td>
+
 
         </tr>
     </thead>
@@ -59,29 +51,14 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Specialization)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td>
-                    <a asp-action="EmployeeDetails" asp-controller="Employee" asp-route-id="@item.Id">
+                    <a asp-action="MedicalAnalysisDetails" asp-controller="MedicalAnalysis" asp-route-id="@item.Id">
                         <i class="bi bi-eye"></i>
                     </a>
-                    <a asp-action="EditEmployee" asp-controller="Employee" asp-route-id="@item.Id">
+                    <a asp-action="EditMedicalAnalysis" asp-controller="MedicalAnalysis" asp-route-id="@item.Id">
                         <i class="bi bi-pencil-square"></i>
                     </a>
                     <a href="#" class="delete-item" data-id="@item.Id ">
-                        @*  <a asp-action="DeletePatient" asp-controller="patient" asp-route-id="@patient.Id"> *@
+
                         <i class="bi bi-trash"></i>
                     </a>
                 </td>
@@ -104,7 +81,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete the Employee ?</p>
+                <p>Are you sure you want to delete Medical Analysis ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="close-modal-2" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -121,29 +98,22 @@
 <script>
     // Select all elements with the class containing "delete" (assuming your class name includes "delete")
     const deleteLinks = document.querySelectorAll('.delete-item');
-
     deleteLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default navigation
-
             // Get item ID from the data-id attribute
             const itemId = this.dataset.id;
-
             // Logic to show the modal with the captured ID
             console.log(itemId);
             console.log(itemId)
             $("#itemId").val(itemId);
             $("#deleteModal").data("itemId", itemId); // Set ID as data attribute on modal button
             $("#deleteModal").modal("show");      //     Show the modal
-
-            document.getElementById("Delete").href = "/Employee/DeleteEmployee?id=" + itemId;
-
+            document.getElementById("Delete").href = "/MedicalAnalysis/Delete?id=" + itemId;
         });
     });
-
     // Close modal using close buttons
     const closeButtons = document.querySelectorAll('.close, .btn-secondary'); // Select both close buttons
-
     closeButtons.forEach(button => {
         button.addEventListener('click', function () {
             const deleteModal = document.getElementById('deleteModal');
@@ -151,4 +121,3 @@
         });
     });
 </script>
-

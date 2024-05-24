@@ -3,7 +3,9 @@ using FinalProject.Models;
 using FinalProject.Repositry;
 using FinalProject.Services;
 using FinalProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace FinalProject.Controllers
 {
@@ -42,7 +44,47 @@ namespace FinalProject.Controllers
              };
             return View(employeeDetailsView);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditEmployee(int id)
+        {
+            var editemployee = employeeRepositry._GetByIdUser(id);
+            EditEmployeeViewModel editEmployeeView = new EditEmployeeViewModel() 
+            {
+                FirstName = editemployee.User.FirstName,
+                LastName = editemployee.User.LastName,
+                Email = editemployee.User.Email,
+                UserName = editemployee.User.UserName,
+                BirthDate = editemployee.User.BirthDate,
+                Salary = editemployee.Salary,
+                Gender = editemployee.User.Gender
+            };
+            if (editemployee == null) 
+            {
+                return RedirectToAction("AllEmployee");
+            }
+            return View(editEmployeeView);
+        }
+       
+        [HttpPost]
 
+        public IActionResult EditEmployee(EditEmployeeViewModel editEmployeeView) 
+        {
+            if (ModelState.IsValid)
+            {
+                employeeRepositry.UpdateeEiteEmployee(editEmployeeView);      
+                return RedirectToAction("AllEmployee");
+            }
+            return View(editEmployeeView);  
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteEmployee(int id)
+        {
+            employeeRepositry.Delete(id);
+            return RedirectToAction("AllEmployee");
+        }
 
     }
-    }
+
+}

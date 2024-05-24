@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.IRepositry
 {
@@ -9,5 +10,6 @@ namespace FinalProject.IRepositry
         public void Delete(int id);
         public Drug GetById(int id);
         public List<Drug> GetAll();
+        public void UpdateEditDrug(EditDrugViewModel editDrugView);
     }
 }

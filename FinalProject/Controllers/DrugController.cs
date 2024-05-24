@@ -1,5 +1,6 @@
 ﻿using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.Repositry;
 using FinalProject.Services;
 using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -56,6 +57,42 @@ namespace FinalProject.Controllers
             List<AllDrugViewModel> Drug = drugRepositry.GetAll().Select(MapRepositry.MapRoAllDrugVM).ToList();
             return View(Drug);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditDrug(int id) 
+        {
+            var editDrug = drugRepositry.GetById(id);
+            EditDrugViewModel editDrugView = new EditDrugViewModel()
+            {
+                Id = editDrug.Id,
+                Name = editDrug.Name,
+                Cost = editDrug.Cost,
+                
+            };
+          
+            
+            return View(editDrugView);
+        }
+        [HttpPost]
+        public IActionResult EditDrug(EditDrugViewModel editDrugView) 
+        {
+            if (ModelState.IsValid)
+            {
+                drugRepositry.UpdateEditDrug(editDrugView);
+                return RedirectToAction("AllDrug");
+            }
+
+            return View(editDrugView);
+            
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteDrug(int id)
+        {
+            drugRepositry.Delete(id);
+            return RedirectToAction("AllDrug");
+        }
+
 
     }
 }
