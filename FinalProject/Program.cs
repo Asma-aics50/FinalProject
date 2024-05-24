@@ -32,6 +32,7 @@ builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
 builder.Services.AddScoped<IServiceRepositry,ServicesRepositry>();
 builder.Services.AddScoped<ICompanyRepositry, CompanyRepositry>();
 builder.Services.AddScoped<IBillRepositry, BillRepositry>();
+builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
 
 
 var app = builder.Build();

@@ -1,0 +1,116 @@
+﻿@using FinalProject.ViewModels.Department;
+@model List<DepartmentViewModel>
+
+<div>
+    @foreach (var department in Model)
+    {
+        <div class="department-container">
+            <h1 class="department-name">@department.Name</h1>
+            <div class="scroll-container">
+                <button class="prev" onclick="scrollLeft()"><i class="bi bi-caret-left"></i></button>
+                <div class="scroll-items" id="scrollItems">
+           
+                    @foreach (var item in (List<DoctorsViewModel>)ViewBag.Doctors)
+                    {
+                        if (item.Department == department.Name)
+                        {
+                            <div class="item">
+                                @if (item.Image == null)
+                                {
+                                    <img src="~/images/Doctors/avatarImg.jpeg" alt="doctor image" class="doctor-image">
+                                }
+                                else
+                                {
+                                    <img src="~/Uploads/@item.Image" alt="doctor image" class="doctor-image">
+                                }
+                                <div><b>Dr / @item.Name</b></div>
+                                <a class="btn btn-success btn-lg" role="button" asp-action="BookAppointment" asp-controller="Appointment" asp-route-id="@item.Id">
+                                    <i class="bi bi-person-add"></i>
+                                    Book Appointment Now
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="next" onclick="scrollRight()"><i class="bi bi-caret-right"></i></button>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .department-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .department-name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+        font-size: 24px;
+    }
+
+    .scroll-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-top: 50px; /* Adjust this value based on the height of your header */
+    }
+
+    .scroll-items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scroll-items {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        width: 100%;
+        gap: 10px;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .item {
+        flex: 0 0 auto;
+        width: 350px;
+        text-align: center;
+        line-height: 60px;
+        margin: 0 10px;
+    }
+
+    .doctor-image {
+        width: 200px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function scrollLeft() {
+        document.querySelector('.scroll-items').scrollBy({
+            left: -400,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollRight() {
+        document.querySelector('.scroll-items').scrollBy({
+            left: 400,
+            behavior: 'smooth'
+        });
+    }
+</script>

@@ -8,7 +8,8 @@ namespace FinalProject.Models
         public string LastName { get; set;}
         public string Gender { get; set;}
         public DateOnly BirthDate { get; set;}
-        
+        public string Image { get; set; }
+
 
     }
 }
