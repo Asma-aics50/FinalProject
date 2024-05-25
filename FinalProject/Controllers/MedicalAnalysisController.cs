@@ -78,5 +78,11 @@ namespace FinalProject.Controllers
             medicalAnalysisRepositry.Delete(id);
             return RedirectToAction("AllMedicalAnalysis");
         }
+        public IActionResult MedicalAnalysisDetalis(int id)
+        {
+            var details = medicalAnalysisRepositry.GetById(id);
+
+            return View();
+        }
     }
 }

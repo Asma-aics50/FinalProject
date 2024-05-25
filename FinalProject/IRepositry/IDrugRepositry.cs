@@ -11,5 +11,6 @@ namespace FinalProject.IRepositry
         public Drug GetById(int id);
         public List<Drug> GetAll();
         public void UpdateEditDrug(EditDrugViewModel editDrugView);
+        public Drug _GetByIdUser(int id);
     }
 }

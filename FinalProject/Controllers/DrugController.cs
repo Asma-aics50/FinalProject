@@ -94,5 +94,19 @@ namespace FinalProject.Controllers
             drugRepositry.Delete(id);
             return RedirectToAction("AllDrug");
         }
+        public IActionResult DrugDetalis(int id)
+        {
+            var detalis = drugRepositry._GetByIdUser(id);
+            DrugDetailsViewModel drugDetailsViewModel = new DrugDetailsViewModel()
+            {
+                Id = id,
+                Name = detalis.Name,
+                Cost = detalis.Cost,
+                Description = detalis.Description,
+                Company = detalis.Company.Name
+            };
+           
+            return View(drugDetailsViewModel);
+        }
     }
 }

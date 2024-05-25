@@ -65,5 +65,10 @@ namespace FinalProject.Repositry
                 context.SaveChanges();
             }
         }
+        public Drug _GetByIdUser(int id)
+        {
+            return context.Drugs.Include(e => e.Company).Where(e => e.Id == id).FirstOrDefault();
+
+        }
     }
 }
