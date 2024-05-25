@@ -84,5 +84,16 @@ namespace FinalProject.Controllers
             return RedirectToAction("AllServices");
         }
 
+        public IActionResult ServicesDetails(int id)
+        {
+            var details =  serviceRepositry.GetById(id);
+            ServicesDetailsViewModel detailsViewModel = new ServicesDetailsViewModel()
+            { 
+                Id=details.Id,
+                Name=details.Name,
+                Price=details.Price,
+            };
+            return View(detailsViewModel);
+        }
     }
 }
