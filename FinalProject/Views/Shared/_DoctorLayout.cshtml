@@ -115,7 +115,7 @@
                     <li><a class="dropdown-item" href="#">Settings</a></li>
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" asp-action="LogOut" asp-controller="Account">Sign out</a></li>
+                    <li><a class="dropdown-item" id="signOutLink" asp-action="LogOut" asp-controller="Account">Sign out</a></li>
                 </ul>
             </div>
         </div>
@@ -137,3 +137,43 @@
 </html>
 
 
+
+
+<!-- Add this modal at the end of your <body> section -->
+<div class="modal fade" id="confirmLogoutModal" tabindex="-1" aria-labelledby="confirmLogoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmLogoutModalLabel">Confirm Sign Out</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to sign out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <a id="confirmLogoutBtn" class="btn btn-danger" href="/Account/LogOut">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Your existing HTML code -->
+<!-- The dropdown menu item for signing out -->
+<!-- JavaScript to handle modal display -->
+<script>
+    // Wait for the document to be fully loaded
+    $(document).ready(function () {
+        // Show modal when sign out link is clicked
+        $('#signOutLink').click(function (e) {
+            e.preventDefault(); // Prevent the link from navigating immediately
+            $('#confirmLogoutModal').modal('show');
+        });
+
+        // Handle sign out confirmation
+        $('#confirmLogoutBtn').click(function (e) {
+            // Redirect to the sign-out action
+            window.location.href = $(this).attr('href');
+        });
+    });
+</script>
