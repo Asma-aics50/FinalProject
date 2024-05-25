@@ -101,6 +101,7 @@ namespace FinalProject.Data
              
 
         }
+        public DbSet<FinalProject.ViewModels.EditCompanyViewModel> EditCompanyViewModel { get; set; } = default!;
       
     }
 }

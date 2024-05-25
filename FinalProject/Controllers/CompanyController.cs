@@ -50,5 +50,42 @@ namespace FinalProject.Controllers
 
             return View(allCompanies);  
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditCompany(int id) 
+        {
+            var editcompany = companyRepositry.GetById(id);
+            EditCompanyViewModel editCompanyView = new EditCompanyViewModel() 
+            {
+                Id =  editcompany.Id,
+                Name = editcompany.Name,
+                Specialization = editcompany.Specialization,
+                ZipCode = editcompany.ZipCode,
+                Street = editcompany.Street,
+                City = editcompany.City
+
+            };
+
+            return View(editCompanyView);
+        }
+        [HttpPost]
+        public IActionResult EditCompany(EditCompanyViewModel editCompanyView) 
+        {
+            if(ModelState.IsValid) 
+            {
+                companyRepositry.UpdateEditCompany(editCompanyView);
+                return RedirectToAction("AllCompany");
+            }
+            return View(editCompanyView);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteCompany(int id)
+        {
+            companyRepositry.Delete(id);
+            return RedirectToAction("AllCompany");
+        }
+
+
     }
 }

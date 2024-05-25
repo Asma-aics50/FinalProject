@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.IRepositry
 {
@@ -9,5 +10,6 @@ namespace FinalProject.IRepositry
         public Company GetById(int id);
         public List<Company> GetAll();
         public void Delete(int id);
+        public void UpdateEditCompany(EditCompanyViewModel editCompanyView);
     }
 }

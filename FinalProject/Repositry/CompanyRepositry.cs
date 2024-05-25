@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Repositry
 {
@@ -49,6 +50,19 @@ namespace FinalProject.Repositry
                 company.City = _company.City;
                 company.Specialization = _company.Specialization;
                 company.ZipCode = _company.ZipCode;
+                context.SaveChanges();
+            }
+        }
+        public void UpdateEditCompany(EditCompanyViewModel editCompanyView)
+        {
+            var company = GetById(editCompanyView.Id);
+            if (company != null)
+            {
+                company.Name = editCompanyView.Name;
+                company.Street = editCompanyView.Street;
+                company.City = editCompanyView.City;
+                company.Specialization = editCompanyView.Specialization;
+                company.ZipCode = editCompanyView.ZipCode;
                 context.SaveChanges();
             }
         }
