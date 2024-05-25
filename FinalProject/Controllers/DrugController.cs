@@ -94,7 +94,5 @@ namespace FinalProject.Controllers
             drugRepositry.Delete(id);
             return RedirectToAction("AllDrug");
         }
-
-
     }
 }

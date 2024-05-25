@@ -86,6 +86,20 @@ namespace FinalProject.Controllers
             return RedirectToAction("AllCompany");
         }
 
+        public IActionResult DetailsCompany(int id ) 
+        {
+            var details = companyRepositry.GetById(id);
+            DetailsCompanyViewModel detailsCompanyView = new DetailsCompanyViewModel() 
+            {
+                Id = id,
+                Name = details.Name,
+                Specialization = details.Specialization,
+                ZipCode = details.ZipCode,
+                Street = details.Street,
+                City = details.City
 
+            };
+            return View(detailsCompanyView);
+        }
     }
 }
