@@ -81,8 +81,12 @@ namespace FinalProject.Controllers
         public IActionResult MedicalAnalysisDetalis(int id)
         {
             var details = medicalAnalysisRepositry.GetById(id);
-
-            return View();
+            MedicalAnalysisDetailsViewModel detailsViewModel = new MedicalAnalysisDetailsViewModel()
+            { 
+                Id = details.Id,
+                Name = details.Name,
+            };
+            return View(detailsViewModel);
         }
     }
 }
