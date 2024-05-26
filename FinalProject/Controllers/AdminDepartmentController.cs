@@ -54,6 +54,45 @@ namespace FinalProject.Controllers
 
             return View(dept);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult EditDepartment(int id)
+        {
+            var editdept = departmentRepositry.GetById(id);
+            EditDepartmentViewModel editDeptView = new EditDepartmentViewModel()
+            {
+                Id = editdept.Id,
+                Name = editdept.Name,
+               
+            };
+            return View(editDeptView);
+        }
+        public IActionResult EditDepartment(EditDepartmentViewModel editDeptView)
+        {
+            if (ModelState.IsValid)
+            {
+                departmentRepositry.UpdateEditDept(editDeptView);
+                return RedirectToAction("AllDepartments");
+            }
 
+            return View(editDeptView);
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int id)
+        {
+            departmentRepositry.Delete(id);
+            return RedirectToAction("AllDepartments");
+        }
+        public IActionResult DepartmentDetails(int id)
+        {
+            var details = departmentRepositry.GetById(id);
+            DepartmentDetailsViewModel detailsViewModel = new DepartmentDetailsViewModel()
+            {
+                Id = details.Id,
+                Name = details.Name,
+               
+            };
+            return View(detailsViewModel);
+        }
     }
 }

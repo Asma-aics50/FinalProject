@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data;
 using FinalProject.IRepositry;
 using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Repositry
 {
@@ -44,6 +45,15 @@ namespace FinalProject.Repositry
             if(dept != null)
             {
                 dept.Name = _department.Name;
+                context.SaveChanges();
+            }
+        }
+        public void UpdateEditDept(EditDepartmentViewModel editDepartmentViewModel)
+        {
+            var dept = GetById(editDepartmentViewModel.Id);
+            if (dept != null)
+            {
+                dept.Name = editDepartmentViewModel.Name;
                 context.SaveChanges();
             }
         }

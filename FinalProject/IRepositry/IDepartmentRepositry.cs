@@ -1,4 +1,5 @@
 ﻿using FinalProject.Models;
+using FinalProject.ViewModels;
 
 namespace FinalProject.IRepositry
 {
@@ -9,6 +10,7 @@ namespace FinalProject.IRepositry
         public Department GetById(int id);
         public List<Department> GetAll();
         public void Delete(int id);
+        public void UpdateEditDept(EditDepartmentViewModel editDepartmentViewModel);
 
     }
 }

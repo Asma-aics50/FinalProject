@@ -1,4 +1,4 @@
-﻿@model ServicesDetailsViewModel
+﻿@model DepartmentDetailsViewModel
 
 @{
     Layout = "_AdminLayout";
@@ -9,15 +9,15 @@
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Dashboard/AdminIndex">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="/Servise/AllServices">Services List</a></li>
-        <li class="breadcrumb-item"><a href="#">Services Info</a></li>
+        <li class="breadcrumb-item"><a href="/AdminDepartment/AllDepartments">Departments List</a></li>
+        <li class="breadcrumb-item"><a href="#">Departments Info</a></li>
 
     </ol>
 </div>
 
 <div class="card text-center mx-auto" style="max-width: 600px;">
     <div class="card-body">
-        <h3 class="card-title mb-4  text-primary"> Services Info</h3>
+        <h3 class="card-title mb-4  text-primary"> Departments Info</h3>
         <hr />
         <div class="doc-info-body">
             <div class="doc-info-item">
@@ -28,13 +28,7 @@
                         <span class="fw-bold d-inline-block me-10"> : </span>
                         <span class="fs-base">@Model?.Name</span>
                     </li>
-                    <li class="d-sm-flex">
-                        <i class="fas fa-tag me-2 text-primary"></i>
-                        <span class="fw-bold doc-info-title">Price</span>
-                        <span class="fw-bold d-inline-block me-10"> : </span>
-                        <span class="fs-base">@Model?.Price</span>
-                    </li>
-
+                    
 
 
 
