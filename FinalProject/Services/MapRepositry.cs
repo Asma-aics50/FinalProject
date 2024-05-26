@@ -48,6 +48,15 @@ namespace FinalProject.Services
                 Price = service.Price
             };
         }
+        static public AllDepartmentViewModel MapToAllDepartmentVM(Department department)
+        {
+            return new AllDepartmentViewModel
+            {
+                Id = department.Id,
+                Name = department.Name
+             
+            };
+        }
         static public AllDrugViewModel MapRoAllDrugVM(Drug drug)
         {
             return new AllDrugViewModel
