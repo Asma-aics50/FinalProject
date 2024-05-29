@@ -38,6 +38,11 @@ namespace FinalProject.Repositry
         {
             return context.Services.Find(id);
         }
+        public Service GetByName(string name)
+        {
+            return context.Services.FirstOrDefault(m => m.Name == name);
+        }
+
 
         public void Update(Service _service)
         {
