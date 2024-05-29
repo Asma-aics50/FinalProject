@@ -11,6 +11,11 @@
     Add new Services
 
 </a>
+<a class="btn btn-success btn-lg" role="button" asp-action="ListOfBills" asp-controller="Servise">
+    <i class="bi bi-person-add"></i>
+    List Of Bills
+
+</a>
 
 <div class="card border-primary mb-3" style="width:100%; max-height: 20rem; border:none">
 
@@ -33,6 +38,8 @@
             <td>Name</td>
             <td>Price</td>
             <td>Action</td>
+            <td>AddToBill</td>
+
 
         </tr>
     </thead>
@@ -65,8 +72,13 @@
                        
                         <i class="bi bi-trash"></i>
                     </a>
+                   
                 </td>
-
+                <td>
+                    <a asp-action="ListOfBills" asp-controller="Servise" asp-route-id="@item.Id">
+                        <i class="bi bi-receipt"></i>
+                    </a>
+                </td>
             </tr>
 
         }

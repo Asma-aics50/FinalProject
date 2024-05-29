@@ -1,0 +1,104 @@
+﻿@model AllServicesViewModel
+@{
+    var listOfBills = ViewData["listOfBills"] as Dictionary<string, double>;
+    var totalPrice = ViewData["totalPrice"];
+}
+
+<h1 class="text-center">List Of Bills</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (listOfBills != null)
+        {
+            foreach (var item in listOfBills)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>$@item.Value</td>
+                </tr>
+            }
+            <tr>
+                <th>Total Price</th>
+                <td>$@totalPrice</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No items in the list</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Servise/AllServices" class="btn btn-outline-success" role="button">Add More Items</a>
+
+@* <h1 class="text-center">List Of Bills</h1>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th scope="col">Service</th>
+            <th scope="col">Price</th>
+           
+    </thead>
+    <tbody>
+
+        @foreach (var item in ViewData["listOfBills"] as Dictionary<string, double>)
+        {
+            <tr>
+
+                <td>@item.Key </td>
+                <td>shdkshuihdsu </td>
+                <td>$@item.Value</td>
+               
+            </tr>
+        }
+        <tr>
+            <th>
+
+            <th>Total Price</th>
+            <td>  $@ViewData["totalPrice"]</td>
+
+            </th>
+        </tr>
+
+
+    </tbody>
+
+</table>
+<a href="/Servise/AllServices" class="btn btn-outline-success" role="button">AddMoreItems</a>
+ *@
+
+
+
+ @* @model Dictionary<string, double>
+
+<h1 class="text-center">List Of Bills</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Key</td>
+                <td>$@item.Value</td>
+            </tr>
+        }
+        <tr>
+            <th>Total Price</th>
+            <td>$@ViewData["totalPrice"]</td>
+        </tr>
+    </tbody>
+</table>
+<a href="/Servise/AllServices" class="btn btn-outline-success" role="button">Add More Items</a>
+ *@

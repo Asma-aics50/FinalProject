@@ -11,5 +11,6 @@ namespace FinalProject.IRepositry
         public Service GetById(int id);
         public List<Service> GetAll();
         public void UpdateEditServices(EditServicesViewModel editServicesView);
+        public Service GetByName(string name);
     }
 }

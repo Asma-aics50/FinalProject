@@ -6,6 +6,8 @@ using FinalProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace FinalProject.Controllers
 {
@@ -95,5 +97,59 @@ namespace FinalProject.Controllers
             };
             return View(detailsViewModel);
         }
+
+        static Dictionary<string, double> cartItems = new Dictionary<string, double>();
+        public IActionResult AddToBill(string name, double price)
+        {
+            if (string.IsNullOrEmpty(name) || price <= 0)
+            {
+                // تعامل مع الحالات غير الصالحة هنا
+                return BadRequest("Invalid item name or price.");
+            }
+
+            var bill = serviceRepositry.GetByName(name);
+            if (bill == null)
+            {
+                return NotFound();
+            }
+
+            cartItems[name] = bill.Price;
+
+            if (cartItems.Count > 0)
+            {
+                var listOfServices = JsonSerializer.Serialize(cartItems);
+                Response.Cookies.Append("listOfBills", listOfServices);
+            }
+
+            return RedirectToAction("AllServices");
+        }
+
+        public IActionResult ListOfBills()
+        {
+            var result = Request.Cookies["listOfBills"];
+
+            Dictionary<string, double> cartItems = new Dictionary<string, double>();
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                try
+                {
+                    cartItems = JsonSerializer.Deserialize<Dictionary<string, double>>(result);
+                }
+                catch (JsonException)
+                {
+                    // التعامل مع الخطأ هنا، مثل إعادة تعيين `cartItems` أو تسجيل الخطأ
+                    cartItems = new Dictionary<string, double>();
+                }
+            }
+
+            double totalPrice = cartItems.Sum(item => item.Value);
+
+            ViewData["listOfBills"] = cartItems;
+            ViewData["totalPrice"] = totalPrice;
+
+            return View();
+        }
+
     }
 }
