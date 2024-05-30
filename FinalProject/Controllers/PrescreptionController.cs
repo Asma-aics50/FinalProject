@@ -159,11 +159,11 @@ namespace FinalProject.Controllers
                 }
 
                 //5- redirect
-                return RedirectToAction("Index");
-
+                //return RedirectToAction("Index");
+                return RedirectToAction("PrescreptionDetails", new { id = patienthistoryId });
             }
 
-                ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
+            ViewBag.Patients = patientRepositry.GetAll_Patients_User().Select(MapRepositry.MapToCreateAppointmentPatients).ToList();
             
             return View();
         }
