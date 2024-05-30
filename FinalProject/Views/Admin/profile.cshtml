@@ -1,0 +1,61 @@
+﻿@model FinalProject.ViewModels.ProfileViewModel
+<head>
+    <!-- Other head content -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMHUgQhYB+5XTV7U/fQZ5aFUIHujCw1r2TjyZ6j" crossorigin="anonymous">
+</head>
+<div class="profile-container">
+    <h1>Profile</h1>
+    <hr>
+    <div class="profile-item">
+        <label><i class="fas fa-user"></i> Username:</label>
+        <span>@Model.UserName</span>
+    </div>
+    <div class="profile-item">
+        <label><i class="fas fa-key"></i> Password:</label>
+        <span>@Model.Password</span>
+    </div>
+    <div class="profile-item">
+        <label><i class="fas fa-envelope"></i> Email:</label>
+        <span>@Model.Email</span>
+    </div>
+    <div class="profile-item">
+        <label><i class="fas fa-phone"></i> PhoneNumber:</label>
+        <span>@Model.PhoneNumber</span>
+    </div>
+</div>
+
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+        .profile-container h1 {
+            text-align: center;
+        }
+
+        .profile-container .profile-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .profile-container label {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            min-width: 150px; 
+        }
+
+            .profile-container label i {
+                margin-right: 10px;
+            }
+
+        .profile-container span {
+            margin-left: 10px;
+        }
+</style>

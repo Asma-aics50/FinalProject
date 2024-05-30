@@ -1,4 +1,5 @@
 ﻿using FinalProject.IRepositry;
+using FinalProject.Repositry;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Controllers
@@ -12,13 +13,24 @@ namespace FinalProject.Controllers
         IEmployeeRepositry employeeRepositry;
         IPatientHistoryRepositry PatientHistoryRepositry;
         IBillRepositry BillRepositry;
-            public DashboardController(
-                  IPatientRepositry patientRepositry,
-                  IDoctorRepositry doctorRepositry,
-                  IBookedAppointmentsRepositry bookedAppointmentsRepositry,
-                  IEmployeeRepositry employeeRepositry,
-                  IPatientHistoryRepositry patientHistoryRepositry,
-                  IBillRepositry BillRepositry
+        IDrugRepositry DrugRepositry;
+        ICompanyRepositry CompanyRepositry;
+        IMedicalAnalysisRepositry MedicalAnalysisRepositry;
+        IServiceRepositry ServiceRepositry;
+        IDepartmentRepositry DepartmentRepositry;
+        public DashboardController(
+              IPatientRepositry patientRepositry,
+              IDoctorRepositry doctorRepositry,
+              IBookedAppointmentsRepositry bookedAppointmentsRepositry,
+              IEmployeeRepositry employeeRepositry,
+              IPatientHistoryRepositry patientHistoryRepositry,
+              IBillRepositry BillRepositry,
+              IDepartmentRepositry departmentRepositry,
+              IDrugRepositry drugRepositry,
+              IServiceRepositry serviceRepositry,
+              IMedicalAnalysisRepositry medicalAnalysisRepositry,
+              ICompanyRepositry companyRepositry
+
 
                )
             {
@@ -27,7 +39,13 @@ namespace FinalProject.Controllers
                 this.bookedAppointmentsRepositry = bookedAppointmentsRepositry;
                 this.employeeRepositry = employeeRepositry;
                 this.PatientHistoryRepositry = patientHistoryRepositry;
-            this.BillRepositry = BillRepositry;
+                this.BillRepositry = BillRepositry;
+                this.DrugRepositry = drugRepositry;
+            this.CompanyRepositry = companyRepositry;
+            this.MedicalAnalysisRepositry = medicalAnalysisRepositry;
+            this.ServiceRepositry = serviceRepositry;
+            this.DepartmentRepositry = departmentRepositry;
+
             }
 
             public IActionResult AdminIndex()
@@ -36,13 +54,13 @@ namespace FinalProject.Controllers
                 ViewData["PatientsNum"] = patientRepositry.GetAll().ToList().Count();
                 ViewData["AppointmnetsNum"] = bookedAppointmentsRepositry.GetAll().ToList().Count();
                 ViewData["employeesNum"] = employeeRepositry.GetAll().ToList().Count();
-                ViewData["CaseStudies"]=PatientHistoryRepositry.GetAll().ToList().Count();
-                 ViewData["Invoices"]=PatientHistoryRepositry.GetAll().ToList().Count();
-                
+                ViewData["DrugsNum"] = DrugRepositry.GetAll().ToList().Count();
+                ViewData["CompanyNum"] = CompanyRepositry.GetAll().ToList().Count();
+                ViewData["MedicalAnalysisNum"] = MedicalAnalysisRepositry.GetAll().ToList().Count();
+                ViewData["ServicesNum"] = ServiceRepositry.GetAll().ToList().Count();
+                ViewData["DepartmentNum"] = DepartmentRepositry.GetAll().ToList().Count();
 
-
-
-            return View();
+                return View();
 
             }
             public IActionResult DoctorIndex()

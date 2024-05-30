@@ -1,51 +1,123 @@
-﻿
+﻿@* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+ *@
 @{
     ViewData["Title"] = "AdminIndex";
     Layout = "_AdminLayout";
 }
-<div style="display:flex;justify-content:flex-start;width:1300px;flex-wrap:wrap;justify-content:space-between;">
 
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+       
+        justify-content: center;
+        gap: 20px;
+    }
 
-<div class="card border-primary mb-3" style="width: 30%;">
-    <div class="card-header">Doctors</div>
-    <div class="card-body">
-        <h4 class="card-title">@ViewBag.DoctorsNum</h4>
+    
+
+    .card {
+        flex: 0 0 calc(33.333% - 20px);
+        background: linear-gradient(to right, #e6f0ff, #ccdfff, #b3cfff);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease; 
+    }
+
+        .card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+
+        .card .card-header i {
+            margin-right: 5px;
+            color: #333; 
+        }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #003366, #0066cc, #0099ff);
+
+    .card .btn {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+   
+</style>
+
+<div class="card-container">
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-person-fill"></i> Doctors</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.DoctorsNum</h4>
+            <a href="/Doctor/AllDoctors" class="btn btn-outline-primary btn-lg">View Doctors</a>
+        </div>
     </div>
-</div>
 
-<div class="card border-primary mb-3" style="width: 30%;">
-        <div class="card-header">employees</div>
-    <div class="card-body">
-            <h4 class="card-title">@ViewBag.employeesNum</h4>
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-people-fill"></i> Employees</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.EmployeesNum</h4>
+            <a href="/Employee/AllEmployee" class="btn btn-outline-primary btn-lg">View Employees</a>
+        </div>
     </div>
-</div>
 
-    <div class="card border-primary mb-3" style="width:30%">
-        <div class="card-header">Appointmnets</div>
-    <div class="card-body">
-        <h4 class="card-title">@ViewBag.AppointmnetsNum</h4>
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-calendar-check-fill"></i> Appointments</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.AppointmentsNum</h4>
+            <a href="/Appointment/AllPatientsAppointment" class="btn btn-outline-primary btn-lg">View Appointments</a>
+        </div>
     </div>
-</div>
 
-    <div class="card border-primary mb-3" style="width: 30%">
-        <div class="card-header">Patients</div>
-    <div class="card-body">
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-person-lines-fill"></i> Patients</div>
+        <div class="card-body">
             <h4 class="card-title">@ViewBag.PatientsNum</h4>
+            <a href="/Patient/AllPatients" class="btn btn-outline-primary btn-lg">View Patients</a>
+        </div>
     </div>
-</div>
 
-    <div class="card border-primary mb-3" style="width:30% ">
-    <div class="card-header">Invoices</div>
-    <div class="card-body">
-            <h4 class="card-title">@ViewBag.Invoices</h4>
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-capsule-pill"></i> Drugs</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.DrugsNum</h4>
+            <a href="/Drug/AllDrug" class="btn btn-outline-primary btn-lg">View Drugs</a>
+        </div>
     </div>
-</div>
 
-    <div class="card border-primary mb-3" style="width: 30%;">
-        <div class="card-header">CaseStudies</div>
-    <div class="card-body">
-            <h4 class="card-title">@ViewBag.CaseStudies</h4>
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-building"></i> Company</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.CompanyNum</h4>
+            <a href="/Company/AllCompany" class="btn btn-outline-primary btn-lg">View Company</a>
+        </div>
     </div>
-</div>
 
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-graph-up"></i> Medical Analysis</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.MedicalAnalysisNum</h4>
+            <a href="/MedicalAnalysis/AllMedicalAnalysis" class="btn btn-outline-primary btn-lg">View Medical Analysis</a>
+        </div>
+    </div>
+
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-wrench"></i> Services</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.ServicesNum</h4>
+            <a href="/Servise/AllServices" class="btn btn-outline-primary btn-lg">View Services</a>
+        </div>
+    </div>
+
+    <div class="card border-primary mb-3">
+        <div class="card-header"><i class="bi bi-diagram-3-fill"></i> Departments</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.DepartmentsNum</h4>
+            <a href="/AdminDepartment/AllDepartments" class="btn btn-outline-primary btn-lg">View Departments</a>
+        </div>
+    </div>
 </div>

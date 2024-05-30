@@ -17,7 +17,7 @@ namespace FinalProject.Controllers
 
         UserManager<ApplicationUser> userManager;
         SignInManager<ApplicationUser> signIn;
-        public ServiseController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signIn, IServiceRepositry serviceRepositry) 
+        public ServiseController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signIn, IServiceRepositry serviceRepositry)
         {
             this.userManager = userManager;
             this.signIn = signIn;
@@ -42,14 +42,14 @@ namespace FinalProject.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateServices(CreateServiceViewModel createServiceView)
         {
-           
-                Service service = new Service() { Id = createServiceView.Id, Name = createServiceView.Name, Price = createServiceView.Price };
-                serviceRepositry.Create(service);
-               
-            
+
+            Service service = new Service() { Id = createServiceView.Id, Name = createServiceView.Name, Price = createServiceView.Price };
+            serviceRepositry.Create(service);
+
+
             return RedirectToAction("AllServices");
         }
-        public IActionResult AllServices() 
+        public IActionResult AllServices()
         {
             List<AllServicesViewModel> services = serviceRepositry.GetAll().Select(MapRepositry.MapToAllServicesVM).ToList();
 
@@ -57,18 +57,18 @@ namespace FinalProject.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult EditServices(int id ) 
+        public IActionResult EditServices(int id)
         {
-            var editserv = serviceRepositry.GetById(id);    
-            EditServicesViewModel editServicesView = new EditServicesViewModel() 
+            var editserv = serviceRepositry.GetById(id);
+            EditServicesViewModel editServicesView = new EditServicesViewModel()
             {
                 Id = editserv.Id,
                 Name = editserv.Name,
                 Price = editserv.Price
-            };   
+            };
             return View(editServicesView);
         }
-        public IActionResult EditServices(EditServicesViewModel editServicesView) 
+        public IActionResult EditServices(EditServicesViewModel editServicesView)
         {
             if (ModelState.IsValid)
             {
@@ -88,12 +88,12 @@ namespace FinalProject.Controllers
 
         public IActionResult ServicesDetails(int id)
         {
-            var details =  serviceRepositry.GetById(id);
+            var details = serviceRepositry.GetById(id);
             ServicesDetailsViewModel detailsViewModel = new ServicesDetailsViewModel()
-            { 
-                Id=details.Id,
-                Name=details.Name,
-                Price=details.Price,
+            {
+                Id = details.Id,
+                Name = details.Name,
+                Price = details.Price,
             };
             return View(detailsViewModel);
         }
@@ -103,9 +103,12 @@ namespace FinalProject.Controllers
         {
             if (string.IsNullOrEmpty(name) || price <= 0)
             {
-                // تعامل مع الحالات غير الصالحة هنا
+                // Handle invalid cases here
                 return BadRequest("Invalid item name or price.");
             }
+
+            // Log or check the name parameter
+            Console.WriteLine($"Received name: {name}");
 
             var bill = serviceRepositry.GetByName(name);
             if (bill == null)
@@ -138,7 +141,7 @@ namespace FinalProject.Controllers
                 }
                 catch (JsonException)
                 {
-                    // التعامل مع الخطأ هنا، مثل إعادة تعيين `cartItems` أو تسجيل الخطأ
+                    // Handle error here, such as resetting `cartItems` or logging the error
                     cartItems = new Dictionary<string, double>();
                 }
             }

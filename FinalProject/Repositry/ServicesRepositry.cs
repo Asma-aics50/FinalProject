@@ -40,8 +40,9 @@ namespace FinalProject.Repositry
         }
         public Service GetByName(string name)
         {
-            return context.Services.FirstOrDefault(m => m.Name == name);
+            return context.Services.FirstOrDefault(m => m.Name == name.Trim());
         }
+
 
 
         public void Update(Service _service)

@@ -5,6 +5,16 @@
     Layout = @ViewBag.Layout;
     // Layout = "_AdminLayout";
 }
+<style>
+    .table:hover {
+        flex: 0 0 calc(33.333% - 20px);
+        background: linear-gradient(to right, #e6f0ff, #ccdfff, #b3cfff);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease;
+    }
+</style>
 @if(ViewBag.Layout=="_DoctorLayout")
 {
         <nav aria-label="breadcrumb">
@@ -19,7 +29,7 @@
 
         else
         {
-            <a class="btn btn-success btn-lg mb-2" role="button" asp-action="CreateDoctorAccount" asp-controller="Account">
+    <a class="btn btn-primary btn-lg" role="button" asp-action="CreateDoctorAccount" asp-controller="Account">
                 <i class="bi bi-person-add"></i>
                 Add new Doctor
 

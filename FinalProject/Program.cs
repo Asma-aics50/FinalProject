@@ -4,6 +4,7 @@ using FinalProject.Models;
 using FinalProject.Repositry;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,12 +20,18 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+
+
+
+
+
 builder.Services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<HospitalManagementSystemDbContext>();
 
 
 
 
 builder.Services.AddDbContext<HospitalManagementSystemDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
 builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
 builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepositry>();
@@ -40,6 +47,7 @@ builder.Services.AddScoped<IServiceRepositry,ServicesRepositry>();
 builder.Services.AddScoped<ICompanyRepositry, CompanyRepositry>();
 builder.Services.AddScoped<IBillRepositry, BillRepositry>();
 builder.Services.AddScoped<IDepartmentRepositry , DepartmentRepositry>();
+
 
 
 var app = builder.Build();
