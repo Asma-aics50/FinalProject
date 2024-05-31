@@ -49,8 +49,11 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width:25%; height: 100vh;">
        
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
-                <span class="fs-4">Sidebar</span>
+             @*    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                <span class="fs-4">Sidebar</span> *@
+                <img src="/images/Doctors/Iconn.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
+
+                <span class="fs-4">Clinic</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -84,6 +87,26 @@
                         <i class="bi bi-plus me-2"></i> 
                     
                         Book New Appointment
+                    </a>
+
+                </li>
+                
+                <li>
+
+                    <a asp-action="Doctors" asp-controller="Doctor" class="nav-link link-body-emphasis">
+                        
+                        <i class="bi bi-people-fill me-2"></i>
+                        Doctors
+                    </a>
+
+                </li>
+                
+                <li>
+
+                    <a asp-action="Index" asp-controller="Department" class="nav-link link-body-emphasis">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
+
+                        Departments
                     </a>
 
                 </li>

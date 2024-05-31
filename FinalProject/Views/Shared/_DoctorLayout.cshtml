@@ -49,9 +49,14 @@
 
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width:25%; height: 100%;position: fixed;  top: 0;left: 0;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                <@* svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
                 <span class="fs-4">Clinics</span>
-            </a>
+        *@
+       <img src="/images/Doctors/Iconn.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
+
+                    <span class="fs-4">Clinic</span>
+
+    </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
 
@@ -119,8 +124,6 @@
                     <strong>@User.Identity.Name</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="signOutLink" asp-action="LogOut" asp-controller="Account">Sign out</a></li>

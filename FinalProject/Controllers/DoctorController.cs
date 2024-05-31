@@ -66,7 +66,6 @@ namespace FinalProject.Controllers
             return View(doctorDetailsViewModel);
         }
 
-        [Authorize]
         public IActionResult Doctors()
         {
 
